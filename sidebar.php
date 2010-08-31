@@ -1,0 +1,1 @@
+<?php /*  UnifyFramework sidebar template */ ?>
