@@ -26,4 +26,8 @@ require_once UF_LIB_PATH. "functions/uf_feed-links.php";
 require_once UF_LIB_PATH. "functions/uf_nav-menus.php";
 require_once UF_LIB_PATH. "functions/uf_title.php";
 
+/**
+ * load widget directory PHP file.
+ */
+require_once UF_LIB_PATH. "widgets/uf_widgets-register.php";
 
