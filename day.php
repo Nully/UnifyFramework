@@ -1,0 +1,1 @@
+<?php /* UnifyFramework day template. */ ?>
