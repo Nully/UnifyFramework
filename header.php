@@ -1,4 +1,4 @@
-<?php /* UnifyFramework header template */ ?>
+<?php /* UnifyFramework header template. */ ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
     <head>
