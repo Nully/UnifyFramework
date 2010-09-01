@@ -1,1 +1,1 @@
-<?php /* UnifyFramework footer sidebar template */ ?>
+<?php /* UnifyFramework footer sidebar template. */ ?>
