@@ -65,8 +65,10 @@ function uf_init_styles() {
     }
     $page = uf_get_current_page_to_string();
     wp_enqueue_style("unify_framework-core",  get_bloginfo("template_url"). "/css/unify.css", null, UF_VERSION, "all");
-    wp_enqueue_style("unify_framework-layout",  get_bloginfo("template_url"). "/css/unify.css", null, UF_VERSION, "all");
-    wp_enqueue_style("unify_framework",  get_bloginfo("template_url"). "/css/{$page}.css", null, UF_VERSION, "all");
+    wp_enqueue_style("unify_framework-layout",  get_bloginfo("template_url"). "/css/layout.css", null, UF_VERSION, "all");
+    if (file_exists(TEMPLATEPATH. "/css/{$page}.css")) {
+        wp_enqueue_style("unify_framework",  get_bloginfo("template_url"). "/css/{$page}.css", null, UF_VERSION, "all");
+    }
 }
 add_action("init", "uf_init_styles");
 
@@ -92,5 +94,16 @@ function uf_javascript() {
     wp_enqueue_script("jquery");
 
     do_action("uf_javascript");
+}
+
+
+/**
+ * check PHP script file direct access ?
+ *
+ * @param  $filename   check target file name
+ * @return Bool
+ */
+function uf_is_direct_acess($filename) {
+    return (!empty($_SERVER["SCRIPT_FILENAME"]) && $filename === $_SERVER["SCRIPT_FILENAME"]);
 }
 
