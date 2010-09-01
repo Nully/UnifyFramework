@@ -1,1 +1,1 @@
-<?php /* UnifyFramework footer template */ ?>
+<?php /* UnifyFramework footer template. */ ?>
