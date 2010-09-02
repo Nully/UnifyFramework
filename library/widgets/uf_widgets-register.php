@@ -37,3 +37,45 @@ if(function_exists("register_sidebar")) {
     ));
 }
 
+
+/**
+ * get sidebar
+ *
+ */
+function uf_get_sidebar($name) {
+    return dynamic_sidebar($name);
+}
+
+/**
+ * has right sidebar ?
+ */
+function uf_has_sidebar($name) {
+    return (dynamic_sidebar($name) === false) ? false : true;
+}
+
+/**
+ * get right sidebar
+ *
+ */
+function uf_get_right_sidebar() {
+    $sidebar = uf_get_sidebar(__("Right Sidebar"));
+    if($sidebar) {
+        return;
+    }
+    echo $sidebar;
+}
+
+
+/**
+ * get left sidebar
+ *
+ */
+function uf_get_left_sidebar() {
+    $sidebar = uf_get_sidebar(__("Left Sidebar"));
+    if($sidebar) {
+        return;
+    }
+    echo $sidebar;
+}
+
+
