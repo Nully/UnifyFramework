@@ -39,12 +39,20 @@ if(function_exists("register_nav_menus")) {
  *
  * @return String
  */
-function uf_nav_menu($args = array()) {
+function uf_nav_menu($args = array(), $show = true) {
+    $args = wp_parse_args(array("echo" => false), $args);
     if(function_exists("wp_nav_menu")) {
         $menu = wp_nav_menu($args);
     }
     else {
         $menu = wp_page_menu($args);
     }
-    return appy_filter("uf_nav_menu", $menu);
+    $menu = apply_filters("uf_nav_menu", $menu);
+
+    if($show) {
+        echo $menu;
+    }
+    else {
+        return $menu;
+    }
 }
