@@ -42,3 +42,25 @@ function uf_admin_custom_image_header() {
 <?php
 }
 
+
+/**
+ * display custom header image by setting.
+ *
+ */
+function uf_custom_header() {
+    global $post;
+
+    if(is_singular()) {
+        if(has_post_thumbnail($post->ID)) {
+            $image = wp_get_attachment_image(get_post_thumbnail_id($post->ID), "post-thumbnail");
+            if($image[1] >= HEADER_IMAGE_WIDTH) {
+                echo get_the_post_thumbnail($post->ID, "post-thumbnail");
+            }
+        }
+    }
+    else {
+?>
+<img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH ?>" height="<?php echo HEADER_IMAGE_HEIGHT ?>" alt="" />
+<?php
+    }
+}
