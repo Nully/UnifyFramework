@@ -30,10 +30,10 @@ if(function_exists("register_sidebar")) {
         "name"        => __("Footer Sidebar %s"),
         "id"          => "footer-widget",
         "description" => __("for Footer widgets"),
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'before_widget' => '<div id="%1$s" class="widget %2$s grid_4">',
 		'after_widget'  => "</div>\n",
-		'before_title'  => '<h3 class="widget-title">',
-		'after_title'   => "</h3>\n",
+		'before_title'  => '<h4 class="widget-title">',
+		'after_title'   => "</h4>\n",
     ));
 }
 
@@ -46,23 +46,24 @@ function uf_get_sidebar($name) {
     return dynamic_sidebar($name);
 }
 
+
 /**
  * has right sidebar ?
  */
 function uf_has_sidebar($name) {
-    return (dynamic_sidebar($name) === false) ? false : true;
+    return is_active_sidebar($name);
 }
+
 
 /**
  * get right sidebar
  *
  */
 function uf_get_right_sidebar() {
-    $sidebar = uf_get_sidebar(__("Right Sidebar"));
-    if($sidebar) {
+    if(!uf_has_sidebar("right-sidebar")) {
         return;
     }
-    echo $sidebar;
+    dynamic_sidebar("right-sidebar");
 }
 
 
@@ -71,11 +72,9 @@ function uf_get_right_sidebar() {
  *
  */
 function uf_get_left_sidebar() {
-    $sidebar = uf_get_sidebar(__("Left Sidebar"));
-    if($sidebar) {
+    if(!uf_has_sidebar("left-sidebar")) {
         return;
     }
-    echo $sidebar;
+    dynamic_sidebar("left-sidebar");
 }
-
 
