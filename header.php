@@ -12,19 +12,66 @@
         <?php wp_head(); ?>
     </head>
     <body <?php uf_body_class(); ?>>
-        <div id="container">
-            <div id="header">
+        <div id="container" class="container_16">
+            <div id="header" class="grid_16">
                 <h1><a href="<?php bloginfo("home"); ?>"><?php bloginfo("name"); ?></a></h1>
-                <p><?php bloginfo("description"); ?></p>
+                <p id="description"><?php bloginfo("description"); ?></p>
                 <?php uf_nav_menu(array( "menu_class" => "menu-nav", "theme_location" => "primary" )); ?>
                 <div id="custom-header-image"><?php uf_custom_header(); ?></div>
             <!-- End header --></div>
+            <div class="clear"></div>
             <div id="contents">
-                <?php if(uf_has_sidebar(__("Left Sidebar"))): ?><?php uf_get_sidebar(__("Left Sidebar")); ?><?php endif; ?>
-                <div id="main-contents"></div>
-                <?php if(uf_has_sidebar(__("Right Sidebar"))): ?><?php uf_get_sidebar(__("Right Sidebar")); ?><?php endif; ?>
+                <?php if(uf_has_sidebar("left-sidebar")): ?>
+                    <div id="left-sidebar" class="grid_4"><?php uf_get_sidebar("left-sidebar"); ?></div>
+                <?php endif; ?>
+
+
+                    <?php new WP_Widget_Search(); ?>
+                <div id="main-contents" class="<?php echo uf_get_contents_class(); ?>">
+                    <?php if(have_posts()): ?><?php while(have_posts()): the_post(); ?>
+                    <div id="post-<?php the_ID(); ?>" class="post">
+                        <div id="post-header-meta-<?php the_ID(); ?>" class="post_header_meta clearfix">
+                            <p class="author_name"><?php the_author_link(); ?></p>
+                            <p class="post_date"><?php echo get_post_time("Y/m/d (D) H:i:s"); ?></p>
+                        <!-- End post-header-meta-<?php the_ID(); ?> --></div>
+                        <h2 class="post_title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                        <div id="post_content_<?php the_ID(); ?>" class="post_content">
+                            <?php the_content(get_the_title()); ?>
+                        <!-- End post_content_<?php the_ID(); ?> --></div>
+                        <div id="post-footer-meta-<?php the_ID(); ?>" class="post_footer_meta clearfix">
+                            <p class="post_comments_count">Comments: <?php echo uf_get_comment_count("total_comments"); ?></p>
+                            <?php the_tags('| <p class="post_tags">[', "][", "]</p>"); ?>
+                        <!-- End post-footer-meta-<?php the_ID(); ?> --></div>
+                    <!-- End post-<?php the_ID(); ?> --></div>
+                    <?php endwhile;?><?php endif; ?>
+                    <div id="pagenavi" class="clearfix"><?php uf_pagenavi(); ?></div>
+                <!-- End main-contents --></div>
+
+
+                <?php if(uf_has_sidebar("right-sidebar")): ?>
+                    <div id="right-sidebar" class="grid_4"><?php uf_get_sidebar("right-sidebar"); ?></div>
+                <?php endif; ?>
+                <div class="clear"></div>
             <!-- End contents --></div>
         <!-- End container --></div>
+        <div id="footer">
+            <div id="footer-in" class="container_16">
+                <?php if(is_active_sidebar("footer-widget")): ?>
+                    <?php dynamic_sidebar("footer-widget"); ?>
+                <?php endif; ?>
+                <?php if(is_active_sidebar("footer-widget-2")): ?>
+                    <?php dynamic_sidebar("footer-widget-2"); ?>
+                <?php endif; ?>
+                <?php if(is_active_sidebar("footer-widget-3")): ?>
+                    <?php dynamic_sidebar("footer-widget-3"); ?>
+                <?php endif; ?>
+                <?php if(is_active_sidebar("footer-widget-4")): ?>
+                    <?php dynamic_sidebar("footer-widget-4"); ?>
+                <?php endif; ?>
+                <address>Copyright © 2010 <a href="<?php bloginfo("home"); ?>"><?php bloginfo("name"); ?></a> - All Rights Reserved<br />
+                    Powered by WordPress & the UnifyFramework Theme by <a href="http://blog.nully.org/">Nully</a>.</address>
+            <!-- End footer_in --></div>
+        <!-- End footer --></div>
     </body>
     <?php wp_footer(); ?>
 </html>
