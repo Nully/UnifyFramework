@@ -56,6 +56,24 @@ function uf_body_class() {
 
 
 /**
+ * get contents wrapper class name
+ *
+ * @return String    grid class
+ */
+function uf_get_contents_class() {
+    $class = "grid_16";
+    if(uf_has_sidebar("left-sidebar") && uf_has_sidebar("right-sidebar")) {
+        $class = "grid_8";
+    }
+    elseif (uf_has_sidebar("left-sidebar") || uf_has_sidebar("right-sidebar")) {
+        $class = "grid_12";
+    }
+
+    return $class;
+}
+
+
+/**
  * do enqueue stylesheets.
  *
  */
@@ -105,5 +123,83 @@ function uf_javascript() {
  */
 function uf_is_direct_acess($filename) {
     return (!empty($_SERVER["SCRIPT_FILENAME"]) && $filename === $_SERVER["SCRIPT_FILENAME"]);
+}
+
+
+/**
+ * apply filter 'the_content_more_link'
+ *
+ * @param  $more    String
+ * @return String
+ */
+function uf_content_more_link($more) {
+    if(!empty($more)) {
+        $more = " &raquo; Read more ". $more;
+    }
+    return apply_filters("uf_content_more_link", $more);
+}
+add_filter("the_content_more_link", "uf_content_more_link");
+
+
+/**
+ * get post comment count
+ *
+ * @param  $field    String|Null   approved, awaiting_moderation, spam, total_comments
+ * @return Int
+ */
+function uf_get_comment_count($field = null) {
+    global $post;
+    if(!isset($post)) {
+        return 0;
+    }
+    $comments = get_comment_count($post->ID);
+    if(is_null($field)) {
+        return $comments;
+    }
+
+    return $comments[$field];
+}
+
+
+/**
+ * wp_pagenavi wrapper method.
+ * plugin installed use to wp_pagenavi.
+ *
+ * @param  $before   String|Array   page navigation prefix
+ * @param  $after    String         page navigation suffix
+ * @return Void
+ */
+function uf_pagenavi($before = '', $after = '') {
+    if(!function_exists("wp_pagenavi")) {
+        _uf_pagenavi($before);
+    }
+    else {
+        wp_pagenavi($before, $after);
+    }
+}
+
+
+/**
+ * uf_pagenavi privatemethod
+ *
+ * @access private
+ * @param  $args   Array   page navigation prefix
+ * @return Void
+ */
+function _uf_pagenavi($args = array()) {
+    $defaults = array(
+        "next_link_format"      => '<div class="next-post">%link &raquo;</div>',
+        "next_permalink_format" => '%title <span class="next-nav">'.__("Next").'</span>',
+
+        "prev_link_format"      => '<div class="prev-post">&laquo; %link</div>',
+        "prev_permalink_format" => '<span class="prev-nav">'.__("Previous").'</span> %title',
+    );
+    $args = wp_parse_args($args, $defaults);
+    if(!is_singular()) {
+    }
+    else {
+        previous_post_link($args["prev_link_format"], $args["prev_permalink_format"]);
+        next_post_link($args["next_link_format"], $args["next_permalink_format"]);
+    }
 }
 
