@@ -150,3 +150,14 @@ table > tr.show { display: table-row; }
 table > tr > td.show, table > tr > th.show { display: table-cell; }
 
 
+/* ------------------- Clearfix */
+.clearfix { zoom: 1; }
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    line-height: 0;
+    visibility: hidden;
+}
+
