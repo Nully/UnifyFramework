@@ -13,8 +13,8 @@ define("HEADER_TEXTCOLOR", "FFFFFF");
 /**
  * header image width, and height.
  */
-define( 'HEADER_IMAGE_WIDTH', apply_filters( 'uf_header_image_width', 800 ) );
-define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'uf_header_image_height', 198 ) );
+define( 'HEADER_IMAGE_WIDTH', apply_filters( 'uf_header_image_width', 940 ) );
+define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'uf_header_image_height', 200 ) );
 
 add_custom_image_header(null, "uf_admin_custom_image_header");
 if(function_exists("register_default_headers")) {
