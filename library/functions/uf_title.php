@@ -59,7 +59,7 @@ function uf_titel() {
                 break;
         }
         if($paged >= 2 || $page >= 2) {
-            $title .= sptrinf(__(" %s Page of %s", "uf"), $separator, $paged);
+            $title .= sprintf(__(" %s Page of %s", "uf"), $separator, $paged);
         }
     }
     $title .= " {$separator} ". get_bloginfo("name");
