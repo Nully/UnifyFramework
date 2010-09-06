@@ -26,7 +26,6 @@
                 <?php endif; ?>
 
 
-                    <?php new WP_Widget_Search(); ?>
                 <div id="main-contents" class="<?php echo uf_get_contents_class(); ?>">
                     <?php if(have_posts()): ?><?php while(have_posts()): the_post(); ?>
                     <div id="post-<?php the_ID(); ?>" class="post">
@@ -39,12 +38,15 @@
                             <?php the_content(get_the_title()); ?>
                         <!-- End post_content_<?php the_ID(); ?> --></div>
                         <div id="post-footer-meta-<?php the_ID(); ?>" class="post_footer_meta clearfix">
-                            <p class="post_comments_count">Comments: <?php echo uf_get_comment_count("total_comments"); ?></p>
+                            <p class="post_comments_count">Comments: <?php echo uf_get_comment_count("approved"); ?></p>
                             <?php the_tags('| <p class="post_tags">[', "][", "]</p>"); ?>
                         <!-- End post-footer-meta-<?php the_ID(); ?> --></div>
                     <!-- End post-<?php the_ID(); ?> --></div>
                     <?php endwhile;?><?php endif; ?>
-                    <div id="pagenavi" class="clearfix"><?php uf_pagenavi(); ?></div>
+                    <?php if($wp_query->max_num_pages >= 2): ?>
+                    <div id="uf-pagenavi" class="clearfix"><?php uf_pagenavi(); ?></div>
+                    <?php endif; ?>
+                    <?php comments_template(); ?>
                 <!-- End main-contents --></div>
 
 
