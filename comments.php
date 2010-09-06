@@ -12,16 +12,23 @@ endif; ?>
 
 
 <!-- You can start editing here. -->
-<?php if(have_comments()) : ?>
+<?php
+/**
+ * Display comment list.
+ *
+ */
+if(have_comments()) : ?>
     <h3 id="comment-title" class="comment-title"><?php comments_number(__('No Comments', "unify_framework"), __('1 Comment', "unify_framework"), __('% Comments', "unify_framework")); ?></h3>
 
     <ol class="commentlist">
-    <?php wp_list_comments(); ?>
+        <?php wp_list_comments(); ?>
     </ol>
-    <p id="pager">
-        <span class="previous"><?php previous_comments_link() ?></span>
-        <span class="next"><?php next_comments_link() ?></span>
-    </p>
+    <?php if($wp_query->max_num_pages >= 2): ?>
+    <div id="uf-pagenavi">
+        <span class="prev-post"><?php previous_comments_link() ?></span>
+        <span class="next-post"><?php next_comments_link() ?></span>
+    <!-- End uf-pagenavi --></div>
+    <?php endif; ?>
 <?php else: ?>
     <?php if ('open' == $post->comment_status) : ?>
 
@@ -31,7 +38,12 @@ endif; ?>
 <?php endif; ?>
 
 
-<?php if ('open' == $post->comment_status) : ?>
+<?php
+/**
+ * comment form.
+ *
+ */
+if ('open' == $post->comment_status) : ?>
 <div id="respond">
     <h3><?php comment_form_title( __('Please Comment', "unify_framework"), __("Reply to %s", "unify_framework") ); ?></h3>
     <div id="cancel-comment-reply">
@@ -39,12 +51,12 @@ endif; ?>
     <!-- End cancel-comment-reply --></div>
 
     <?php if(get_option('comment_registration') && !$user_ID): ?>
-        <p><?php sprintf(__('You must be <a href="%s/wp-login.php?redirect_to=%s">logged in</a> to post a comment.', "unifi_framework"), get_option('siteurl'), urlencode(get_permalink())); ?></p>
+        <p class="required"><?php sprintf(__('You must be <a href="%s/wp-login.php?redirect_to=%s">logged in</a> to post a comment.', "unifi_framework"), get_option('siteurl'), urlencode(get_permalink())); ?></p>
     <?php else : ?>
 
         <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
         <?php if ($user_ID) : ?>
-            <p><?php echo sprintf(__(
+            <p id="comment-meta"><?php echo sprintf(__(
                 'logged in as <a href="%s/wp-admin/profile.php">%s</a>. (<a href="%s" title="Log out of this account">logged out</a>)', "unify_framework"
             ), get_option("siteurl"), $user_identity, wp_logout_url(get_permalink()));?></p>
         <?php else : ?>
@@ -61,7 +73,7 @@ endif; ?>
 
             <p class="comment-tag"><?php _e("Valid tags are"); ?> : <?php echo allowed_tags(); ?></p>
             <p><?php comment_id_fields(); ?>
-            <textarea id="comment-content" name="comment" cols="180" rows="10" tabindex="4"></textarea></p>
+            <textarea id="comment-content" name="comment" cols="60" rows="10" tabindex="4"></textarea></p>
             <p><input name="submit" type="submit" id="submit" value="<?php _e('Submit comment'); ?>" /></p>
             <?php do_action('comment_form', $post->ID); ?>
         </form>
