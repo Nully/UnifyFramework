@@ -77,18 +77,12 @@ function uf_get_contents_class() {
  * do enqueue stylesheets.
  *
  */
-function uf_init_styles() {
+function uf_init() {
     if(is_admin ()) {
         return;
     }
-    $page = uf_get_current_page_to_string();
-    wp_enqueue_style("unify_framework-core",  get_bloginfo("template_url"). "/css/unify.css", null, UF_VERSION, "all");
-    wp_enqueue_style("unify_framework-layout",  get_bloginfo("template_url"). "/css/layout.css", null, UF_VERSION, "all");
-    if (file_exists(TEMPLATEPATH. "/css/{$page}.css")) {
-        wp_enqueue_style("unify_framework",  get_bloginfo("template_url"). "/css/{$page}.css", null, UF_VERSION, "all");
-    }
 }
-add_action("init", "uf_init_styles");
+add_action("init", "uf_init", 100);
 
 
 /**
@@ -96,9 +90,12 @@ add_action("init", "uf_init_styles");
  *
  */
 function uf_css() {
-    wp_enqueue_style("unify_framework-core");
-    wp_enqueue_style("unify_framework-layout");
-    wp_enqueue_style("unify_framework");
+    $page = uf_get_current_page_to_string();
+    wp_enqueue_style("unify_framework-core",  get_bloginfo("template_url"). "/css/unify.css", null, UF_VERSION, "all");
+    wp_enqueue_style("unify_framework-layout",  get_bloginfo("template_url"). "/css/layout.css", null, UF_VERSION, "all");
+    if (file_exists(TEMPLATEPATH. "/css/{$page}.css")) {
+        wp_enqueue_style("unify_framework",  get_bloginfo("template_url"). "/css/{$page}.css", null, UF_VERSION, "all");
+    }
 
     do_action("uf_css");
 }
@@ -110,6 +107,8 @@ function uf_css() {
  */
 function uf_javascript() {
     wp_enqueue_script("jquery");
+    wp_enqueue_script("laquu-js", get_bloginfo("template_url"). "/js/jquery.laquu-min.js", null, UF_VERSION);
+    wp_enqueue_script("unify-js", get_bloginfo("template_url"). "/js/unify.js", null, UF_VERSION);
 
     // Comment reply javascript
     if(is_singular() && get_option("thread_comments")) {
