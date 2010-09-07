@@ -16,7 +16,7 @@
             <div id="header" class="grid_16">
                 <h1><a href="<?php bloginfo("home"); ?>"><?php bloginfo("name"); ?></a></h1>
                 <p id="description"><?php bloginfo("description"); ?></p>
-                <?php uf_nav_menu(array( "menu_class" => "menu-nav", "theme_location" => "primary" )); ?>
+                <div id="navigation"><?php uf_nav_menu(array( "menu_class" => "menu-nav clearfix", "theme_location" => "primary" )); ?></div>
                 <div id="custom-header-image"><?php uf_custom_header(); ?></div>
             <!-- End header --></div>
             <div class="clear"></div>
@@ -39,7 +39,7 @@
                         <!-- End post_content_<?php the_ID(); ?> --></div>
                         <div id="post-footer-meta-<?php the_ID(); ?>" class="post_footer_meta clearfix">
                             <p class="post_comments_count">Comments: <?php echo uf_get_comment_count("approved"); ?></p>
-                            <?php the_tags('| <p class="post_tags">[', "][", "]</p>"); ?>
+                            <?php the_tags('| Tags: <p class="post_tags">[', "][", "]</p>"); ?>
                         <!-- End post-footer-meta-<?php the_ID(); ?> --></div>
                     <!-- End post-<?php the_ID(); ?> --></div>
                     <?php endwhile;?><?php endif; ?>
