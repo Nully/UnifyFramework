@@ -23,12 +23,11 @@ function uf_titel() {
         $page = uf_get_current_page_to_string();
         switch(strtolower($page)) {
             case "search":
-                $title = sprintf(__("Search result for : %s", "uf"), get_search_query());
+                $title .= sprintf(__("Search result for : %s", "uf"), get_search_query());
 
                 if($paged >= 2) {
                     $title .= sptrinf(__(" %s Page of %s", "uf"), $separator, $paged);
                 }
-                $title .= " {$separator} ". get_bloginfo("name");
                 break;
             case "post":
                 $title .= single_post_title(null, false);
@@ -40,7 +39,7 @@ function uf_titel() {
                 $title .= single_cat_title(null, false);
                 break;
             case "tag":
-                $title .= single_tag_title();
+                $title .= single_tag_title(null, false);
                 break;
             case "day":
                 $title .= get_the_time("Y m d");
