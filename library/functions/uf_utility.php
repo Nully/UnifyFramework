@@ -26,18 +26,18 @@ function uf_get_current_page_to_string() {
         $page = "day";
     }
     else if(is_month()) {
-        $page = "month";
+        $page = "month archive";
     }
     else if(is_year()) {
-        $page = "year";
+        $page = "year archive";
     }
     else if(is_date()) {
-        $page = "date";
+        $page = "date archive";
     }
     else if (is_404()) {
         $page = "404";
     }
-    return $page;
+    return apply_filters("uf_get_current_page_to_string", $page);
 }
 
 
@@ -45,13 +45,19 @@ function uf_get_current_page_to_string() {
  * get current page body class
  * alias to body_class method.
  */
-function uf_body_class() {
+function uf_body_class($class = null) {
     if(function_exists("body_class")) {
-        body_class();
+        $classes = get_body_class($class);
     }
     else {
-        echo 'class="'. uf_get_current_page_to_string() .'"';
+        if(!is_array($class)) {
+            $class = (array)$class;
+        }
+        $classes = array_merge($class, array(uf_get_current_page_to_string()));
     }
+
+    $classes = apply_filters("uf_body_class", $classes, $class);
+    echo 'class="'. join(" ", $classes) .'"';
 }
 
 
@@ -140,6 +146,8 @@ function uf_content_more_link($more) {
     if(!empty($more)) {
         $more = " &raquo; Read more ". $more;
     }
+
+    do_action("uf_content_more_link");
     return apply_filters("uf_content_more_link", $more);
 }
 add_filter("the_content_more_link", "uf_content_more_link");
@@ -161,6 +169,7 @@ function uf_get_comment_count($field = null) {
         return $comments;
     }
 
+    $comments = apply_filters("uf_comment_count", $comments);
     return $comments[$field];
 }
 
@@ -180,6 +189,7 @@ function uf_pagenavi($before = '', $after = '') {
     else {
         wp_pagenavi($before, $after);
     }
+    do_action("uf_pagenavi");
 }
 
 
