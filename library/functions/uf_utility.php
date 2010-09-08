@@ -258,7 +258,7 @@ function _uf_pagenumber() {
     $link_template = '<span class="page_numbers"><a href="%page_num_url" class="%class">%text</a></span>';
     $current_template = '<span class="page_numbers current_page">%text</span>';
     $out = "";
-    $out .= sprintf(__("Pages %s Of %s : "), number_format_i18n($max_page), number_format_i18n($paged));
+    $out .= sprintf(__("Pages %s Of %s : "), number_format_i18n($paged), number_format_i18n($max_page));
 
     if(($previous_post = true)) {
         $out .= get_previous_posts_link();
