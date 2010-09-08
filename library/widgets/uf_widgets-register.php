@@ -26,7 +26,7 @@ if(function_exists("register_sidebar")) {
     ));
 
     // register footer sidebars.
-    register_sidebars(4, array(
+    uf_register_sidebars(4, array(
         "name"        => __("Footer Sidebar %s"),
         "id"          => "footer-widget",
         "description" => __("for Footer widgets"),
@@ -35,6 +35,42 @@ if(function_exists("register_sidebar")) {
 		'before_title'  => '<h4 class="widget-title">',
 		'after_title'   => "</h4>\n",
     ));
+}
+
+
+/**
+ * WordPress 2.9.x version, has bug for register_sidebars().
+ * uses overload register_sidebars
+ *
+ * @access public
+ * @param  $count   Int    sidebar regist loop count
+ * @param  $args    Array  sidebar options
+ */
+function uf_register_sidebars($count = 1, $args = array()) {
+    global $wp_registered_sidebars;
+    if(empty($count)) {
+        $count = 1;
+    }
+
+    for($i = 1; $i <= $count; $i ++) {
+        $_args = $args;
+
+        if($count > 1) {
+            $_args["name"] = (isset($args["name"]) ? sprintf($args["name"], $i) : sprintf(__("Sidebar %s"), $i));
+        }
+        else {
+            $_args["name"] = (isset($args["name"]) ? $args["name"] : __("Sidebar"));
+        }
+
+        if(!isset($args["id"])) {
+            $_args["id"] = "sidebar";
+        }
+
+        $n = count($wp_registered_sidebars);
+        $_args["id"] = $_args["id"] . "-". $i;
+
+        register_sidebar($_args);
+    }
 }
 
 
