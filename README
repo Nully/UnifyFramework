@@ -10,6 +10,8 @@
 ## UnifyFrameworkとは:
 UnifyFramework は WordPress (http://wordpress.org/) の専用テーマです。
 テーマをもっと統合的に（Unify）作成しよう！をモットーに作成されているテーマです。
+レイアウトに利用しているCSSは960 GridSystemを利用しているので、カラム割はもちろん、多彩なレイアウトを表現できると思います。
+
 
 最新のリビジョンを閲覧、取得する場合は、
 
