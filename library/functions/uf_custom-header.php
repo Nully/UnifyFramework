@@ -5,7 +5,7 @@
 /**
  * custom header default image path.
  */
-define("HEADER_IMAGE", "%s/images/headers/sunset.jpg");
+define("HEADER_IMAGE", "%s/images/headers/maiko.jpg");
 /**
  * default header text color
  */
@@ -19,10 +19,25 @@ define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'uf_header_image_height', 200 ) );
 add_custom_image_header(null, "uf_admin_custom_image_header");
 if(function_exists("register_default_headers")) {
     register_default_headers(array(
-        "berries" => array(
-			'url' => '%s/images/headers/berries.jpg',
-			'thumbnail_url' => '%s/images/headers/berries-thumbnail.jpg',
-			'description' => "Berries"
+        "maiko" => array(
+			'url' => '%s/images/headers/maiko.jpg',
+			'thumbnail_url' => '%s/images/headers/maiko-thumb.jpg',
+			'description' => __("Maiko", "unify_framework")
+        ),
+        "cherryblossom" => array(
+			'url' => '%s/images/headers/cherryblossom.jpg',
+			'thumbnail_url' => '%s/images/headers/cherryblossom-thumb.jpg',
+			'description' => __("Cherryblossom", "unify_framework")
+        ),
+        "fern" => array(
+			'url' => '%s/images/headers/fern.jpg',
+			'thumbnail_url' => '%s/images/headers/fern-thumb.jpg',
+			'description' => __("Fern", "unify_framework")
+        ),
+        "path" => array(
+			'url' => '%s/images/headers/path.jpg',
+			'thumbnail_url' => '%s/images/headers/path-thumb.jpg',
+			'description' => __("Path", "unify_framework")
         ),
     ));
 }
