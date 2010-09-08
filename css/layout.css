@@ -138,6 +138,7 @@ a:hover  { color: #1f569a; text-decoration: underline; }
 #left-sidebar .widget ul li .children, #right-sidebar .widget ul li .children { font-size: inherit; }
 #left-sidebar .widget .widget-title, #right-sidebar .widget .widget-title { border-bottom: 1px solid #e6e6e6; padding-bottom: 5px; margin-bottom: 5px; }
 #footer .widget { min-height: 200px; }
+#footer .widget_calendar td a { background: #333; }
 
 
 
@@ -179,6 +180,7 @@ a:hover  { color: #1f569a; text-decoration: underline; }
 .widget_calendar table caption { font-size: 1.2em; }
 .widget_calendar table th { text-align: center; font-size: 1.3em; }
 .widget_calendar table td { text-align: center; font-size: 1.3em; }
+.widget_calendar table td a { background: #F3F3F3; display: block; }
 .widget_calendar table #prev { text-align: left; }
 .widget_calendar table #next { text-align: right; }
 
