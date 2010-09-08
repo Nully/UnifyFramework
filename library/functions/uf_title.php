@@ -15,7 +15,7 @@ function uf_titel() {
     global $post, $paged, $page, $uf_support_separators;
     $separator = $uf_support_separators[get_option("uf_doctitle_separator", 2)];
 
-    $title = "<title>";
+    $title = "";
     if(_uf_exists_seo_plugins()) {
         $title = get_bloginfo("name");
     }
@@ -62,9 +62,8 @@ function uf_titel() {
         }
     }
     $title .= " {$separator} ". get_bloginfo("name");
-    $title .= "</title>\n";
 
-    echo $title;
+    echo apply_filters("uf_title", $title);
 }
 
 
