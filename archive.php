@@ -9,7 +9,7 @@
         <?php elseif(is_year()): ?>
             <?php printf(__("Yearly posts : <span>%s</span>", "unify_framework"), get_the_date("Y")); ?>
         <?php else: ?>
-            <?php printf(__("Blog Archives")); ?>
+            <?php printf(__("Blog Archives", "unify_framework")); ?>
         <?php endif; ?>
     </h2>
 
