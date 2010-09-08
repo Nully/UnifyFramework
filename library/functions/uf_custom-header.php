@@ -60,5 +60,6 @@ function uf_custom_header() {
 ?>
 <img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH ?>" height="<?php echo HEADER_IMAGE_HEIGHT ?>" alt="" />
 <?php
+        do_action("uf_custom_header");
     }
 }
