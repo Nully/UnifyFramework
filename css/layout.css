@@ -102,6 +102,8 @@ a:hover  { color: #1f569a; text-decoration: underline; }
 
 /* ------------------------------------------------------------- MainContents */
 #main-contents {}
+#main-contents h2#page-title { font-size: 1.8em; font-style: italic; margin-bottom: 10px; }
+#main-contents h2#page-title span { font-weight: bold; }
 #main-contents .post { border-top: 4px solid #e6e6e6; margin-bottom: 20px; }
 #main-contents .post .post_header_meta { padding:5px 0; font-size: 1.2em; }
 #main-contents .post .author_name { float: left; }
