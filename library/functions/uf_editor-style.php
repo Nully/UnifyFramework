@@ -25,6 +25,8 @@ function overload_mce_css($mce_css) {
     $url = get_bloginfo("template_url");
     $url = rtrim($url, "/"). "/editor-style.css";
 
+    $url = apply_filters("overload_mce_css", $url);
+
     return $url;
 }
 
