@@ -5,12 +5,12 @@ define("UF_LIB_PATH", realpath(dirname(__FILE__). "/../library"). "/");
 
 
 if(version_compare(UF_SUPPOR_VERSION, $wp_version, ">=")) {
-    wp_die(sprintf(
+    wp_die(sprintf(__(
         "this WordPress version unsupported UnifyFramework.<br />\n".
         "WordPress Version: %s<br />".
         "UnifyFramework Version: %s<br />",
         $wp_version, UF_VERSION
-    ));
+    )));
 }
 
 /**
