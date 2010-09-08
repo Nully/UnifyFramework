@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UnifyFramework ver 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-08 15:21+0900\n"
-"PO-Revision-Date: 2010-09-08 15:33+0900\n"
+"POT-Creation-Date: 2010-09-08 15:35+0900\n"
+"PO-Revision-Date: 2010-09-08 15:36+0900\n"
 "Last-Translator: Nully <nully.nl@gmail.com>\n"
 "Language-Team: Nully <nully.nl@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -140,6 +140,13 @@ msgstr "検索"
 #, php-format
 msgid "Tag : <span>%s</span>"
 msgstr "タグ：<span>%s</span>"
+
+#: ../unify_framework/library/initialize.php:9
+#, php-format
+msgid ""
+"this WordPress version unsupported UnifyFramework.<br />\n"
+"WordPress Version: %s<br />UnifyFramework Version: %s<br />"
+msgstr "お使いの WordPress バージョンでは UnifyFramework はご利用になれません。<br />WordPress Version: %s<br />UnifyFramework Version: %s<br />"
 
 #: ../unify_framework/library/functions/uf_custom-header.php:25
 msgid "Maiko"
