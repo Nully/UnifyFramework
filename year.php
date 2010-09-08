@@ -1,1 +1,0 @@
-<?php /* UnifyFramework year template. */ ?>
