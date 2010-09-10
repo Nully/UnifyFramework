@@ -18,7 +18,7 @@ endif; ?>
  *
  */
 if(have_comments()) : ?>
-    <h3 id="comment-title" class="comment-title"><?php comments_number(__('No Comments', "unify_framework"), __('1 Comment', "unify_framework"), __('% Comments', "unify_framework")); ?></h3>
+    <h3 id="comment-title" class="comment-title"><?php comments_number(__('No Comments', "unify_framework"), __('1 Comment', "unify_framework"), __('%s Comments', "unify_framework")); ?></h3>
 
     <ol class="commentlist">
         <?php wp_list_comments(); ?>
