@@ -66,7 +66,7 @@ if ('open' == $post->comment_status) : ?>
                 <dd><input type="text" id="comment-author" name="author" value="<?php echo $comment_author; ?>" tabindex="1" />&nbsp;<?php _e('Required'); ?></dd>
                 <dt><label for="comment-email"><?php _e("Email"); ?> : </label></dt>
                 <dd><input type="text" id="comment-email" name="email" value="<?php echo $comment_author_email; ?>" tabindex="2" />&nbsp;<?php _e('Required'); ?></dd>
-                <dt><label for="comment-url"><?php _e("Name"); ?> : </label></dt>
+                <dt><label for="comment-url"><?php _e("Website"); ?> : </label></dt>
                 <dd><input type="text" id="comment-url" name="url" value="<?php echo $comment_author_url; ?>" tabindex="3" /></dd>
             </dl>
         <?php endif; ?>
