@@ -2,63 +2,46 @@
 /**
  * UnifyFramework utility support
  */
+/**
+ * get current page body class
+ * alias to body_class method.
+ */
+function uf_body_class($class = null) {
+    echo 'class="'. join(" ", apply_filters("uf_body_class", $class)) .'"';
+}
+
+
 
 /**
  * get current page, to String.
  *
  * @return String
  */
-function uf_get_current_page_to_string() {
-    $page = "home";
-    if(is_search()) {
-        $page = "search";
-    }
-    else if(is_single() || is_page()) {
-        $page = "post";
-    }
-    else if (is_category()) {
-        $page = "category";
-    }
-    else if(is_tag()) {
-        $page = "tag";
-    }
-    else if(is_day()) {
-        $page = "day";
-    }
-    else if(is_month()) {
-        $page = "month archive";
-    }
-    else if(is_year()) {
-        $page = "year archive";
-    }
-    else if(is_date()) {
-        $page = "date archive";
-    }
-    else if (is_404()) {
-        $page = "404";
-    }
-    return apply_filters("uf_get_current_page_to_string", $page);
+function uf_get_body_class($class_name) {
+    global $is_NS4, $is_IE, $is_winIE, $is_macIE, $is_gecko, $is_chrome, $is_opera, $is_lynx, $is_main_site, $is_iphone, $is_safari;
+
+    if(!is_array($class_name))
+        $class_name = (array)$class_name;
+
+    $classes = get_body_class();
+    $class = array();
+
+    if($is_NS4) $class[] = "ns4";
+    if($is_IE) $class[] = "ie";
+    if($is_winIE) $class[] = "win-ie";
+    if($is_macIE) $class[] = "mac-ie";
+    if($is_gecko) $class[] = "gecko";
+    if($is_chrome) $class[] = "chrome";
+    if($is_opera) $class[] = "opera";
+    if($is_lynx) $class[] = "lynx";
+    if($is_main_site) $class[] = "main-site";
+    if($is_iphone) $class[] = "iphone";
+    if($is_safari) $class[] = "safari";
+
+    return apply_filters("uf_get_body_class", array_merge($class_name, $class, $classes));
 }
+add_filter("uf_body_class", "uf_get_body_class");
 
-
-/**
- * get current page body class
- * alias to body_class method.
- */
-function uf_body_class($class = null) {
-    if(function_exists("body_class")) {
-        $classes = get_body_class($class);
-    }
-    else {
-        if(!is_array($class)) {
-            $class = (array)$class;
-        }
-        $classes = array_merge($class, array(uf_get_current_page_to_string()));
-    }
-
-    $classes = apply_filters("uf_body_class", $classes, $class);
-    echo 'class="'. join(" ", $classes) .'"';
-}
 
 
 /**
@@ -79,17 +62,6 @@ function uf_get_contents_class() {
 }
 
 
-/**
- * do enqueue stylesheets.
- *
- */
-function uf_init() {
-    if(is_admin ()) {
-        return;
-    }
-}
-add_action("init", "uf_init", 100);
-
 
 /**
  * load enqueued stylesheets
@@ -105,6 +77,8 @@ function uf_css() {
 
     do_action("uf_css");
 }
+add_action("uf_head", "uf_css");
+
 
 
 /**
@@ -123,6 +97,36 @@ function uf_javascript() {
 
     do_action("uf_javascript");
 }
+add_action("uf_head", "uf_javascript");
+
+
+
+/**
+ * get template part
+ *
+ * wrapped get_template_part.
+ *
+ * @access public
+ * @param  $slug    String
+ * @param  $name    String
+ * @return Void
+ */
+function uf_get_template_part($slug, $name = null) {
+    $slug = apply_filters("template_part_{$slug}", $slug, $name);
+
+    if(function_exists("get_template_part")) {
+        return get_template_part($slug, $name);
+    }
+
+    $templates = array();
+    if(!empty($name))
+        $templates[] = "{$slug}-{$name}.php";
+
+    $templates[] = "{$slug}.php";
+
+    return locate_template($templates, true, true);
+}
+
 
 
 /**
