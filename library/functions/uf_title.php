@@ -11,59 +11,55 @@ $uf_support_separators = array(
     5 => " | ",
     6 => " : ",
 );
-function uf_titel() {
-    global $post, $paged, $page, $uf_support_separators;
+function uf_title() {
+    global $uf_support_separators;
+    $separator = $uf_support_separators[get_option("uf_doctitle_separator", 2)];
+    echo apply_filters("uf_title", join($separator, uf_get_title()));
+}
+
+
+function uf_get_title() {
+    global $paged, $page, $s, $uf_support_separators;
     $separator = $uf_support_separators[get_option("uf_doctitle_separator", 2)];
 
-    $title = "";
-    if(_uf_exists_seo_plugins()) {
-        $title = get_bloginfo("name");
+    $title = array();
+    if(_uf_exists_seo_plugins ()) {
+        $title[] = wp_title($separator, false);
     }
     else {
-        $page = uf_get_current_page_to_string();
-        switch(strtolower($page)) {
-            case "search":
-                $title .= sprintf(__("Search result for : %s", "uf"), get_search_query());
+        if(is_home () || is_front_page()) {
+            $title[] = apply_filters("uf_title-is_home", get_bloginfo("description"));
+        }
+        elseif(is_404()) {
+            $title[] = __("Page not found.", "uf");
+        }
+        elseif(is_date() || is_archive()) {
+            if(is_year()) {
+                $title[] = apply_filters("uf_title-is_year", get_the_time("Y"));
+            }
+            if(is_month()) {
+                $title[] = apply_filters("uf_title-is_day",get_the_time("F"));
+            }
+            if(is_day()) {
+                $title[] = apply_filters("uf_title-is_day", get_the_time("d"));
+            }
+            // @TODO: add document title to, shown page week ?
+        }
+        elseif(is_search()) {
+            $title[] = sprintf(__("Search results %s", "uf"), esc_attr($s));
+        }
+        elseif((is_single() || is_page()) && !is_front_page()) {
+            $title[] = single_post_title(null, false);
+        }
 
-                if($paged >= 2) {
-                    $title .= sptrinf(__(" %s Page of %s", "uf"), $separator, $paged);
-                }
-                break;
-            case "post":
-                $title .= single_post_title(null, false);
-                if(!$title) {
-                    $title .= get_the_title();
-                }
-                break;
-            case "category":
-                $title .= single_cat_title(null, false);
-                break;
-            case "tag":
-                $title .= single_tag_title(null, false);
-                break;
-            case "day":
-                $title .= get_the_time("Y m d");
-                break;
-            case "month":
-                $title .= get_the_time("Y m");
-                break;
-            case "year":
-                $title .= get_the_time("Y");
-                break;
-            case "404":
-                $title .= sprintf(__("404 - Page not found", "uf"));
-                break;
-            default:
-                $title .= get_bloginfo("name"). " {$separator} ". get_bloginfo("description");
-                break;
+        if($paged > 2 || $page > 2) {
+            $title[] = sprintf(__("Page %s"), max($paged, $page));
         }
-        if($paged >= 2 || $page >= 2) {
-            $title .= sprintf(__(" %s Page of %s", "uf"), $separator, $paged);
-        }
+
+        $title[] = get_bloginfo("name");
     }
-    $title .= " {$separator} ". get_bloginfo("name");
 
-    echo apply_filters("uf_title", $title);
+    return apply_filters("uf_title", $title);
 }
 
 
