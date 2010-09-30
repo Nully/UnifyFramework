@@ -17,7 +17,7 @@ function uf_body_class($class = null) {
  *
  * @return String
  */
-function uf_get_body_class($class_name) {
+function uf_get_body_class($class_name = null) {
     global $is_NS4, $is_IE, $is_winIE, $is_macIE, $is_gecko, $is_chrome, $is_opera, $is_lynx, $is_main_site, $is_iphone, $is_safari;
 
     if(!is_array($class_name))
@@ -68,12 +68,12 @@ function uf_get_contents_class() {
  *
  */
 function uf_css() {
-    $page = uf_get_current_page_to_string();
+    //$page = uf_get_current_page_to_string();
     wp_enqueue_style("unify_framework-core",  get_bloginfo("template_url"). "/css/unify.css", null, UF_VERSION, "all");
     wp_enqueue_style("unify_framework-layout",  get_bloginfo("template_url"). "/css/layout.css", null, UF_VERSION, "all");
-    if (file_exists(TEMPLATEPATH. "/css/{$page}.css")) {
+/*    if (file_exists(TEMPLATEPATH. "/css/{$page}.css")) {
         wp_enqueue_style("unify_framework",  get_bloginfo("template_url"). "/css/{$page}.css", null, UF_VERSION, "all");
-    }
+    }*/
 
     do_action("uf_css");
 }
