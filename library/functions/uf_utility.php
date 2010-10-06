@@ -282,7 +282,8 @@ function _uf_pagenumber() {
     if($start_page >= 2 && $pages_show_num < $max_page) {
         $out .= str_replace(
             array("%page_num_url", "%class", "%text"),
-            array(get_pagenum_link(1), "first_page", 1)
+            array(get_pagenum_link(1), "first_page", 1),
+            $link_template
         );
     }
 
