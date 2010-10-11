@@ -273,6 +273,7 @@ function uf_nav_menu($args = array(), $show = true) {
 /**
  * get partial loop template
  *
+ * @since  1.0 beta
  * @access public
  * @param  $template_name   String  fetch target template name
  * @param  $sub_name        String  fetch target sub name
