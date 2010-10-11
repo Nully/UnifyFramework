@@ -1,6 +1,0 @@
-<?php
-/**
- * UnifyFramework excerpt support
- */
-
-
