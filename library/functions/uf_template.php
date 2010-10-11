@@ -118,10 +118,9 @@ function uf_css() {
     wp_enqueue_style("unify_framework-core",  get_bloginfo("template_url"). "/css/unify.css", null, UF_VERSION, "all");
     wp_enqueue_style("unify_framework-layout",  get_bloginfo("template_url"). "/css/layout.css", null, UF_VERSION, "all");
 
-    wp_print_styles();
     do_action("uf_css");
 }
-add_action("uf_head", "uf_css");
+add_action("init", "uf_css");
 
 
 
@@ -139,10 +138,9 @@ function uf_javascript() {
         wp_enqueue_script( 'comment-reply' );
     }
 
-    wp_print_head_scripts();
     do_action("uf_javascript");
 }
-add_action("uf_head", "uf_javascript");
+add_action("init", "uf_javascript");
 
 
 
