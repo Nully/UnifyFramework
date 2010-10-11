@@ -35,6 +35,13 @@ require_once UF_LIB_PATH. "functions/uf_posts.php";
 require_once UF_LIB_PATH. "functions/uf_template.php";
 require_once UF_LIB_PATH. "functions/uf_pagenavi.php";
 
+/**
+ * load admin page only.
+ *
+ */
+if(is_admin())
+    require_once UF_LIB_PATH. "functions/uf_admin.php";
+
 
 
 /**
