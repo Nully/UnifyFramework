@@ -6,10 +6,7 @@
     <title><?php uf_title(); ?></title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-    <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-    <?php uf_css(); ?>
-    <?php uf_javascript(); ?>
-    <?php wp_head(); ?>
+    <?php uf_head(); ?>
 </head>
 <body <?php uf_body_class(); ?>>
     <div id="container" class="container_16">
