@@ -115,6 +115,9 @@ function _uf_exists_seo_plugins() {
  *
  */
 function uf_css() {
+    if(is_admin())
+        return;
+
     wp_enqueue_style("unify_framework-core",  get_bloginfo("template_url"). "/css/unify.css", null, UF_VERSION, "all");
     wp_enqueue_style("unify_framework-layout",  get_bloginfo("template_url"). "/css/layout.css", null, UF_VERSION, "all");
 
@@ -129,6 +132,9 @@ add_action("init", "uf_css");
  *
  */
 function uf_javascript() {
+    if(is_admin())
+        return;
+
     wp_enqueue_script("jquery");
     wp_enqueue_script("laquu-js", get_bloginfo("template_url"). "/js/jquery.laquu-min.js", null, UF_VERSION);
     wp_enqueue_script("unify-js", get_bloginfo("template_url"). "/js/unify.js", null, UF_VERSION);
