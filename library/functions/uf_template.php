@@ -3,6 +3,15 @@
  * UnifyFramework Template scripts
  *
  */
+if($uf_is_wp_version_under_3) {
+    automatic_feed_links(true);
+}
+else {
+    add_theme_support("automatic-feed-links");
+}
+
+
+
 $uf_support_separators = array(
     0 => "&gt;",
     1 => "&lt;",
