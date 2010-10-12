@@ -69,7 +69,7 @@ define("HEADER_TEXTCOLOR", "FFFFFF");
 define( 'HEADER_IMAGE_WIDTH', apply_filters( 'uf_header_image_width', 940 ) );
 define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'uf_header_image_height', 200 ) );
 
-add_custom_image_header(null, "uf_admin_custom_image_header");
+add_custom_image_header(null, "uf_admin_custom_image_header_css");
 if(function_exists("register_default_headers")) {
     register_default_headers(array(
         "maiko" => array(
@@ -100,7 +100,7 @@ if(function_exists("register_default_headers")) {
  * admin page custom header style
  *
  */
-function uf_admin_custom_image_header() {
+function uf_admin_custom_image_header_css() {
 ?>
 <style type="text/css" media="all">
     .appearance_page_custom-header #headimg {
