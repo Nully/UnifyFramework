@@ -56,3 +56,30 @@ function uf_notice_table_create_failed() {
 <?php
 }
 
+
+
+/**
+ * deep escape Attribute values
+ *
+ * @access public
+ * @param  $data   Array    reference by Array data
+ * @param  $func   String   execute escape function
+ * @return Bool
+ */
+function uf_esc_attr_deep(&$data, $func) {
+    if(!is_array($data))
+        $data = (array)$data;
+
+    foreach($data as $name => $value) {
+        //var_dump($name, $value);
+        if(is_array($value)) {
+            $data[$name] = &uf_esc_attr_deep(&$value, $func);
+            continue;
+        }
+        $data[$name] = &call_user_func($func, &$value);
+    }
+    return $data;
+}
+
+
+
