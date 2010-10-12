@@ -24,6 +24,9 @@ if(function_exists("register_nav_menus")) {
 /**
  * load functions directory PHP file.
  */
+if(is_admin()) /* load admin page only.*/
+    require_once UF_LIB_PATH. "functions/uf_admin.php";
+
 require_once UF_LIB_PATH. "functions/uf_actions.php";
 require_once UF_LIB_PATH. "functions/uf_editor-style.php";
 require_once UF_LIB_PATH. "functions/uf_custom-background.php";
@@ -34,18 +37,5 @@ require_once UF_LIB_PATH. "functions/uf_post-thumbnail.php";
 require_once UF_LIB_PATH. "functions/uf_posts.php";
 require_once UF_LIB_PATH. "functions/uf_template.php";
 require_once UF_LIB_PATH. "functions/uf_pagenavi.php";
-
-/**
- * load admin page only.
- *
- */
-if(is_admin())
-    require_once UF_LIB_PATH. "functions/uf_admin.php";
-
-
-
-/**
- * load widget directory PHP file.
- */
-require_once UF_LIB_PATH. "widgets/uf_widgets-register.php";
+require_once UF_LIB_PATH. "functions/uf_widget.php";
 
