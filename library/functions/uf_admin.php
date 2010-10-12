@@ -25,7 +25,8 @@ add_action("admin_menu", "uf_add_admin_menu");
  */
 function uf_add_admin_sub_menus() {
     if(function_exists("add_submenu_page")) {
-        add_submenu_page("uf_settings", __("Custom post settings"), __("Custom Posts"), 10, "uf-custom-posts", "uf_admin_custom_post");
+        add_submenu_page("uf_settings", __("Custom post setting"), __("Custom Posts"), 10, "uf-custom-posts", "uf_admin_custom_post");
+        add_submenu_page("uf_settings", __("Post thumbnail setting"), __("Post thumbnail"), 10, "uf-post-thumbnail", "uf_admin_post_thumbnail");
     }
 }
 add_action("admin_menu", "uf_add_admin_sub_menus");
@@ -59,24 +60,43 @@ function uf_admin_settings() {
     <div class="uf-settings">
         <form action="action" method="post">
             <?php wp_nonce_field(); ?>
+            <div id="uf_option_editor_style">
+                <h3><?php _e("Editor style setting"); ?></h3>
+                <dl>
+                    <dt><?php _e("Editor style setting.", "unify_framework"); ?></dt>
+                    <dd><input type="hidden" name="uf[allow_editor_css]" value="0" />
+                        <input id="uf_allow_editor_css" type="checkbox" name="uf[allow_editor_css]" value="1" />
+                        <label for="uf_allow_editor_css"><?php _e("Allow custom editor style", "unify_framework"); ?></label><br />
+                        <span class="caution"><?php _e("* custom editor style file path: "); ?><?php echo bloginfo("template_directory"); ?>/editor-style.css</span></dd>
+                </dl>
+            <!-- End uf_option_editor_style --></div>
+
+
             <div id="uf_option_comment" class="settings-comment">
                 <h3><?php _e("Comment post setting.", "unify_framework"); ?></h3>
-                <p>setting a comment post.</p>
                 <dl>
-                    <dt>
-                        <input type="hidden" name="uf[comment_for_page]" value="0" />
-                        <input type="checkbox" name="uf[comment_for_page]" value="1"<?php if($options["comment_for_page"]) ?> /><br />
-                        <input type="text" name="uf[comment_allowd_pages]" value="<?php echo $options["comment_allowd_pages"] ?>" /><br />
-                        <span><?php _e("* separated 'comma' for page ID", "unify_framework"); ?></span>
-                    </dt>
-                    <dd><?php _e("Comment allwod page ?", "unify_framework"); ?></dd>
-                    <dt>
-                        <input type="hidden" name="uf[display_custom_header_in_front]" value="0" />
-                        <input type="checkbox" name="uf[display_custom_header_in_front]" value="1" />
-                    </dt>
-                    <dd><?php _e("display custom header in the home page or front page ?", "unify_framework"); ?></dd>
+                    <dt><?php _e("Comment", "unify_framework"); ?></dt>
+                    <dd><input type="hidden" name="uf[comment_for_page]" value="0" />
+                        <input id="uf_comment_for_page" type="checkbox" name="uf[comment_for_page]" value="1"<?php if($options["comment_for_page"]) ?> />
+                        <label for="uf_comment_for_page"><?php _e("Comment allwod page ?", "unify_framework"); ?></label><br />
+
+                        <input id="uf_comment_allowd_pages" type="text" name="uf[comment_allowd_pages]" value="<?php echo $options["comment_allowd_pages"] ?>" /><br />
+                        <label for="uf_comment_allowd_pages" class="caution"><?php _e("* separated 'comma' for page ID", "unify_framework"); ?></label></dd>
                 </dl>
-            <!-- End setting-general --></div>
+            <!-- End uf_option_comment --></div>
+
+
+            <div id="uf_option_custom_header">
+                <h3><?php _e("Custom header setting"); ?></h3>
+                <dl>
+                    <dt><?php _e("Custom header", "unify_framework"); ?></dt>
+                    <dd>
+                        <input type="hidden" name="uf[display_custom_header_in_front]" value="0" />
+                        <input type="checkbox" id="uf_display_custom_header_in_front" name="uf[display_custom_header_in_front]" value="1" />
+                        <label for="uf_display_custom_header_in_front"><?php _e("display custom header in the home page or front page ?", "unify_framework"); ?></label></dd>
+                </dl>
+            <!-- End uf_option_custom_header --></div>
+            <p><input type="submit" name="uf_save" value="<?php _e("Save as theme options"); ?>" class="button-primary" /></p>
         </form>
     <!-- End uf-settings --></div>
 <!-- End wrap --></div>
@@ -91,7 +111,6 @@ function uf_admin_settings() {
  * @return Void
  */
 function uf_admin_custom_post() {
-    register_post_type($post_type);
 ?>
 <div class="wrap" id="uf_admin">
     <?php screen_icon("options-general"); ?>
@@ -201,6 +220,23 @@ function uf_admin_get_registerd_custom_posts() {
 <?php
 }
 
+
+
+/**
+ * display theme support post-thumbnail
+ *    post-thumbnail support WordPress version 2.9.x
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_admin_post_thumbnail() {
+?>
+<div class="wrap" id="uf_admin">
+    <?php screen_icon("options-general"); ?>
+    <h2><?php _e("Post thumbnail setting", "unify_framework"); ?></h2>
+<!-- End uf_admin --></div>
+<?php
+}
 
 
 
