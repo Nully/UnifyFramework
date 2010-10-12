@@ -1,6 +1,7 @@
 <?php
 /**
  * UnifiFramework Widgets support
+ *
  */
 if(function_exists("register_sidebar")) {
     // for left sidebar
