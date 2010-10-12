@@ -24,6 +24,7 @@
 
 /* ------------------------------------------------------ UF Admin Custompost */
 #uf_custom_posts_description { width: 400px; }
+#uf_custom_posts_post_type_name { width: 250px; }
 #uf_custom_posts_name { width: 250px; }
 #uf_custom_psots_singular_name { width: 250px; }
 #uf_custom_posts_add_new { width: 250px; }
