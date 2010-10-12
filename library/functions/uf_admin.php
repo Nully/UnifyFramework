@@ -38,7 +38,7 @@ add_action("admin_menu", "uf_add_admin_sub_menus");
  * @access protected
  */
 function uf_admin_css() {
-    wp_enqueue_style("uf_admin_css", get_bloginfo("template_url"). "css/admin.css", $deps, $ver, $media);
+    wp_enqueue_style("uf_admin_css", get_bloginfo("template_url"). "/css/admin.css", array(), UF_VERSION, "all");
 }
 add_action("admin_init", "uf_admin_css");
 
