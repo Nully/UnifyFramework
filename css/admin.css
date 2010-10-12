@@ -1,0 +1,35 @@
+@charset "utf-8";
+/**
+ * UnifyFramework admin page styles
+ *
+ */
+/* ----------------------------------------------------------------- UF Admin */
+#uf_admin {}
+
+
+
+/* --------------------------------------------------------- UF Admin in Tags */
+#uf_admin h3 {}
+#uf_admin dl { margin-bottom: 30px; }
+#uf_admin dt { float: left; font-weight: bold; width: 180px; }
+#uf_admin dd { padding-left: 180px; margin-bottom: 15px; }
+#uf_admin hr { clear: both; margin: 0 0 30px; }
+
+
+
+/* ------------------------------------------------------ UF Admin Custompost */
+#uf_custom_posts_description { width: 400px; }
+#uf_custom_posts_name { width: 250px; }
+#uf_custom_psots_singular_name { width: 250px; }
+#uf_custom_posts_add_new { width: 250px; }
+#uf_custom_posts_add_new_item { width: 250px; }
+#uf_custom_posts_edit_item { width: 250px; }
+#uf_custom_posts_new_item { width: 250px; }
+#uf_custom_posts_view_item { width: 250px; }
+#uf_custom_posts_search_item { width: 250px; }
+#uf_custom_posts_not_found { width: 250px; }
+#uf_custom_posts_not_found_in_trush { width: 250px; }
+
+
+
+
