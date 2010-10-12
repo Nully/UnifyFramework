@@ -52,7 +52,7 @@ add_action("admin_init", "uf_admin_css");
  */
 function uf_admin_settings() {
 ?>
-<div class="wrap">
+<div class="wrap" id="uf_admin">
     <?php screen_icon("options-general"); ?>
     <h2><?php _e("UnifyFramework Setting page", "unify_framework"); ?></h2>
     <p><?php _e("setting UnifyFramework theme options.", "unify_framework"); ?></p>
@@ -93,7 +93,7 @@ function uf_admin_settings() {
 function uf_admin_custom_post() {
     register_post_type($post_type);
 ?>
-<div class="wrap">
+<div class="wrap" id="uf_admin">
     <?php screen_icon("options-general"); ?>
     <h2><?php _e("Custom post settings.", "unify_framework"); ?></h2>
     <h3><?php _e("Custom post type register field.", "unify_framework"); ?></h3>
