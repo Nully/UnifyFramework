@@ -114,74 +114,76 @@ function uf_admin_custom_post() {
  * @return Void
  */
 function uf_admin_get_custom_post_form() {
+    var_dump($_POST);
 ?>
 <form action="" method="post">
     <?php wp_nonce_field(); ?>
     <dl>
         <dt><?php _e("Description", "unify_framework"); ?></dt>
-        <dd><input type="text" name="uf_custom_post[description]" value="" /><br />
-            <span><?php _e("custom post type description", "unify_framework"); ?></span></dd>
+        <dd><input id="uf_custom_posts_description" type="text" name="uf_custom_posts[description]" value="" />
+            <label for="uf_custom_posts_description"><?php _e("shorty custom post type description", "unify_framework"); ?></label></dd>
         <dt><?php _e("Lables", "unify_framework"); ?></dt>
-        <dd><span><?php _e("labels settings", "unify_framework"); ?></span><br />
-            <input type="text" name="uf_custom_posts[name]" value="" />
-                <span><?php _e("custom post type unique name.", "unify_framework"); ?></span><br />
-            <input type="text" name="uf_custom_posts[singular_name]" value="" />
-                <span><?php _e("custom post type unique singular name.", "unify_framework"); ?></span><br />
-            <input type="text" name="uf_custom_posts[add_new]" value="" />
-                <span><?php _e("custom post type add new label.", "unify_framework"); ?></span><br />
-            <input type="text" name="uf_custom_posts[add_new_item]" value="" />
-                <span><?php _e("custom post type add new item label.", "unify_framework"); ?></span><br />
-            <input type="text" name="uf_custom_posts[edit_item]" value="" />
-                <span><?php _e("custom post type edit item label.", "unify_framework"); ?></span><br />
-            <input type="text" name="uf_custom_posts[new_item]" value="" />
-                <span><?php _e("custom post type new item label.", "unify_framework"); ?></span><br />
-            <input type="text" name="uf_custom_posts[view_item]" value="" />
-                <span><?php _e("custom post type view item label.", "unify_framework"); ?></span><br />
-            <input type="text" name="uf_custom_posts[search_items]" value="" />
-                <span><?php _e("custom post search item label.", "unify_framework"); ?></span><br />
-            <input type="text" name="uf_custom_posts[not_found]" value="" />
-                <span><?php _e("custom post search not found label.", "unify_framework"); ?></span><br />
-            <input type="text" name="uf_custom_posts[not_found_in_trush]" value="" />
-                <span><?php _e("custom post search not found in the trush.", "unify_framework"); ?></span><br />
+        <dd>
+            <input id="uf_custom_posts_name" type="text" name="uf_custom_posts[name]" value="" />
+                <label for="uf_custom_posts_name"><?php _e("custom post type unique name.", "unify_framework"); ?></label><br />
+            <input id="uf_custom_psots_singular_name" type="text" name="uf_custom_posts[singular_name]" value="" />
+                <label for="uf_custom_psots_singular_name"><?php _e("custom post type unique singular name.", "unify_framework"); ?></label><br />
+            <input id="uf_custom_posts_add_new" type="text" name="uf_custom_posts[add_new]" value="" />
+                <label for="uf_custom_posts_add_new"><?php _e("custom post type add new label.", "unify_framework"); ?></label><br />
+            <input id="uf_custom_posts_add_new_item" type="text" name="uf_custom_posts[add_new_item]" value="" />
+                <label for="uf_custom_posts_add_new_item"><?php _e("custom post type add new item label.", "unify_framework"); ?></label><br />
+            <input id="uf_custom_posts_edit_item" type="text" name="uf_custom_posts[edit_item]" value="" />
+                <label for="uf_custom_posts_edit_item"><?php _e("custom post type edit item label.", "unify_framework"); ?></label><br />
+            <input id="uf_custom_posts_new_item" type="text" name="uf_custom_posts[new_item]" value="" />
+                <label for="uf_custom_posts_new_item"><?php _e("custom post type new item label.", "unify_framework"); ?></label><br />
+            <input id="uf_custom_posts_view_item" type="text" name="uf_custom_posts[view_item]" value="" />
+                <label for="uf_custom_posts_view_item"><?php _e("custom post type view item label.", "unify_framework"); ?></label><br />
+            <input id="uf_custom_posts_search_item" type="text" name="uf_custom_posts[search_items]" value="" />
+                <label for="uf_custom_posts_search_item"><?php _e("custom post search item label.", "unify_framework"); ?></label><br />
+            <input id="uf_custom_posts_not_found" type="text" name="uf_custom_posts[not_found]" value="" />
+                <label for="uf_custom_posts_not_found"><?php _e("custom post search not found label.", "unify_framework"); ?></label><br />
+            <input id="uf_custom_posts_not_found_in_trush" type="text" name="uf_custom_posts[not_found_in_trush]" value="" />
+                <label for="uf_custom_posts_not_found_in_trush"><?php _e("custom post search not found in the trush.", "unify_framework"); ?></label><br />
         </dd>
         <dt><?php _e("Public", "unify_framework"); ?></dt>
         <dd><input type="hidden" name="uf_custom_posts[public]" value="0" />
-            <input type="checkbox" name="uf_custom_posts[public]" value="1" /><br />
-            <span><?php _e("shown admin UI.", "unify_framework"); ?></span></dd>
+            <input id="uf_custom_posts_public" type="checkbox" name="uf_custom_posts[public]" value="1" />
+            <label for="uf_custom_posts_public"><?php _e("shown admin UI.", "unify_framework"); ?></label></dd>
         <dt><?php _e("Search form", "unify_framework"); ?></dt>
         <dd><input type="hidden" name="uf_custom_posts[exclude_from_search]" value="0" />
-            <input type="checkbox" name="uf_custom_posts[exclude_from_search]" value="1" /><br />
-            <span><?php _e("exclude custom post type in search form.", "unify_framework"); ?></span></dd>
+            <input id="uf_custom_posts_exclude_form_search" type="checkbox" name="uf_custom_posts[exclude_from_search]" value="1" />
+            <label for="uf_custom_posts_exclude_form_search"><?php _e("exclude custom post type in search form.", "unify_framework"); ?></label></dd>
         <dt><?php _e("Show UI", "unify_framework"); ?></dt>
         <dd><input type="hidden" name="uf_custom_posts[show_ui]" value="0" />
-            <input type="checkbox" name="uf_custom_posts[show_ui]" value="1" /><br />
-            <span><?php _e("Whether to generate a default UI for managing this post type.", "unify_framework"); ?></span></dd>
+            <input id="uf_custom_posts_show_ui" type="checkbox" name="uf_custom_posts[show_ui]" value="1" />
+            <label for="uf_custom_posts_show_ui"><?php _e("Whether to generate a default UI for managing this post type.", "unify_framework"); ?></label></dd>
         <dt><?php _e("Capability Type", "unify_framework"); ?></dt>
-        <dd><select name="uf_custom_posts[capability_type]">
+        <dd><select id="uf_custom_posts_capability_type" name="uf_custom_posts[capability_type]">
                 <option value="page"><?php _e("Page"); ?></option>
                 <option value="post"><?php _e("Post"); ?></option>
-            </select><br />
-            <span><?php _e("The post type to use for checking read, edit, and delete capabilities.", "unify_framework"); ?></span></dd>
+            </select>
+            <label for="uf_custom_posts_capability_type"><?php _e("The post type to use for checking read, edit, and delete capabilities.", "unify_framework"); ?></label></dd>
         <dt><?php _e("Hierarchical", "unify_framework"); ?></dt>
         <dd><input type="hidden" name="uf_custom_posts[hierarchical]" value="0" />
-            <input type="checkbox" name="uf_custom_posts[hierarchical]" value="1" /><br />
-            <span><?php _e("this post type have a hieralchical."); ?></span></dd>
+            <input id="uf_custom_posts_herarchical" type="checkbox" name="uf_custom_posts[hierarchical]" value="1" />
+            <label for="uf_custom_posts_herarchical"><?php _e("this post type have a hieralchical."); ?></label></dd>
         <dt><?php _e("Supports", "unify_framework"); ?></dt>
         <dd>
             <input type="hidden" name="uf_custom_posts[supports][]" value="" />
             <?php foreach(array('title','editor','author','thumbnail','excerpt','comments') as $field): ?>
-            <input type="checkbox" name="wp_custom_posts[supports][]" value="<?php echo $field; ?>" />&nbsp;<?php _e(ucfirst($field)); ?>
+            <input id="uf_custom_posts_supports_<?php echo $field; ?>" type="checkbox" name="wp_custom_posts[supports][]" value="<?php echo $field; ?>" />&nbsp;<label for="uf_custom_posts_supports_<?php echo $field; ?>"><?php _e(ucfirst($field)); ?></label>
             <?php endforeach; ?>
         </dd>
         <dt><?php _e("Export", "unify_framework"); ?></dt>
         <dd><input type="hidden" name="uc_custom_posts[can_export]" value="0" />
-            <input type="checkbox" name="uc_custom_posts[can_export]" value="1" /><br />
-            <span><?php _e("this post type including WPExport ?", "unify_framework"); ?></span></dd>
+            <input id="uf_custom_posts_can_export" type="checkbox" name="uf_custom_posts[can_export]" value="1" />
+            <label for="uf_custom_posts_can_export"><?php _e("this post type including WPExport ?", "unify_framework"); ?></label></dd>
         <dt><?php _e("Nav Menus", "unify_framework"); ?></dt>
         <dd><input type="hidden" name="uf_custom_posts[show_in_nav_menus]" value="0" />
-            <input type="checkbox" name="uf_custom_posts[show_in_nav_menus]" value="1" /><br />
-            <span><?php _e("this custom post type including custom nav menus ?"); ?></span></dd>
+            <input id="uf_custom_posts_show_in_nav_menus" type="checkbox" name="uf_custom_posts[show_in_nav_menus]" value="1" />
+            <label for="uf_custom_posts_show_in_nav_menus"><?php _e("this custom post type including custom nav menus ?"); ?></label></dd>
     </dl>
+    <p><input type="submit" name="uf_custom_post_save" value="<?php _e("Save as custom post"); ?>" class="button-primary" /></p>
 </form>
 <?php
 }
