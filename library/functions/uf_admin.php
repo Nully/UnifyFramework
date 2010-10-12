@@ -11,7 +11,7 @@
  */
 function uf_add_admin_menu() {
     if(function_exists("add_menu_page"))
-        add_menu_page(__("UnifyFramework Setting page"), __("UnifyFramework Setting"), 10, "uf_settings", "uf_admin_settings");
+        add_menu_page(__("UnifyFramework Setting page"), __("UnifyFramework"), 10, "uf_settings", "uf_admin_settings");
 }
 add_action("admin_menu", "uf_add_admin_menu");
 
@@ -29,6 +29,18 @@ function uf_add_admin_sub_menus() {
     }
 }
 add_action("admin_menu", "uf_add_admin_sub_menus");
+
+
+
+/**
+ * display UnifyFramework admin page style
+ *
+ * @access protected
+ */
+function uf_admin_css() {
+    wp_enqueue_style("uf_admin_css", get_bloginfo("template_url"). "css/admin.css", $deps, $ver, $media);
+}
+add_action("admin_init", "uf_admin_css");
 
 
 
