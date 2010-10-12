@@ -1,5 +1,0 @@
-<?php
-/**
- * UnifyFramework CustomBackground support
- */
-

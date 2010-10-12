@@ -1,5 +1,0 @@
-<?php
-/**
- * UnifyFramework CustomHeader support
- */
-

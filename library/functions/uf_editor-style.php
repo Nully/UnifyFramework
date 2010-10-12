@@ -1,7 +1,0 @@
-<?php
-/**
- * UnifyFramework EditorStyle support
- */
-
-
-
