@@ -114,7 +114,6 @@ function uf_admin_custom_post() {
  * @return Void
  */
 function uf_admin_get_custom_post_form() {
-    var_dump($_POST);
 ?>
 <form action="" method="post">
     <?php wp_nonce_field(); ?>
@@ -169,13 +168,13 @@ function uf_admin_get_custom_post_form() {
             <label for="uf_custom_posts_herarchical"><?php _e("this post type have a hieralchical."); ?></label></dd>
         <dt><?php _e("Supports", "unify_framework"); ?></dt>
         <dd>
-            <input type="hidden" name="uf_custom_posts[supports][]" value="" />
+            <input type="hidden" name="uf_custom_posts[supports]" value="" />
             <?php foreach(array('title','editor','author','thumbnail','excerpt','comments') as $field): ?>
-            <input id="uf_custom_posts_supports_<?php echo $field; ?>" type="checkbox" name="wp_custom_posts[supports][]" value="<?php echo $field; ?>" />&nbsp;<label for="uf_custom_posts_supports_<?php echo $field; ?>"><?php _e(ucfirst($field)); ?></label>
+            <input id="uf_custom_posts_supports_<?php echo $field; ?>" type="checkbox" name="uf_custom_posts[supports][]" value="<?php echo $field; ?>" />&nbsp;<label for="uf_custom_posts_supports_<?php echo $field; ?>"><?php _e(ucfirst($field)); ?></label>
             <?php endforeach; ?>
         </dd>
         <dt><?php _e("Export", "unify_framework"); ?></dt>
-        <dd><input type="hidden" name="uc_custom_posts[can_export]" value="0" />
+        <dd><input type="hidden" name="uf_custom_posts[can_export]" value="0" />
             <input id="uf_custom_posts_can_export" type="checkbox" name="uf_custom_posts[can_export]" value="1" />
             <label for="uf_custom_posts_can_export"><?php _e("this post type including WPExport ?", "unify_framework"); ?></label></dd>
         <dt><?php _e("Nav Menus", "unify_framework"); ?></dt>
