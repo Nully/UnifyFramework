@@ -30,7 +30,6 @@ if(is_admin()) /* load admin page only.*/
 require_once UF_LIB_PATH. "functions/uf_actions.php";
 require_once UF_LIB_PATH. "functions/uf_theme-supports.php";
 require_once UF_LIB_PATH. "functions/uf_comments.php";
-require_once UF_LIB_PATH. "functions/uf_post-thumbnail.php";
 require_once UF_LIB_PATH. "functions/uf_posts.php";
 require_once UF_LIB_PATH. "functions/uf_template.php";
 require_once UF_LIB_PATH. "functions/uf_pagenavi.php";
