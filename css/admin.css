@@ -9,11 +9,16 @@
 
 
 /* --------------------------------------------------------- UF Admin in Tags */
-#uf_admin h3 {}
+#uf_admin h3 { color: #007; }
 #uf_admin dl { margin-bottom: 30px; }
 #uf_admin dt { float: left; font-weight: bold; width: 180px; }
 #uf_admin dd { padding-left: 180px; margin-bottom: 15px; }
 #uf_admin hr { clear: both; margin: 0 0 30px; }
+
+
+
+/* --------------------------------------------------------- UF Admin Options */
+#uf_comment_allowd_pages { width: 450px; }
 
 
 
@@ -30,6 +35,10 @@
 #uf_custom_posts_not_found { width: 250px; }
 #uf_custom_posts_not_found_in_trush { width: 250px; }
 
+
+
+/* ---------------------------------------------------- UF Admin custom class */
+#uf_admin .caution { color: #C00; font-weight: bold; font-size: 12px; }
 
 
 
