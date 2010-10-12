@@ -61,3 +61,33 @@ function uf_filter_custom_excerpt() {
 add_filter("get_the_excerpt", "uf_filter_custom_excerpt");
 
 
+
+/**
+ * theme activated action script.
+ *   theme activated, build theme supported custom-posts uses table.
+ *
+ * @access protected
+ * @notice uf_notice_table_create_failed
+ * @action uf_theme_activate
+ * @return Void
+ */
+function uf_theme_activate_build_table() {
+    global $wpdb;
+$query = <<<QUERY
+    CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}_uf_comments` (
+        `id` BIGINT( 20 ) NULL AUTO_INCREMENT PRIMARY KEY,
+        `custom_post` TEXT NULL ,
+        `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE = MYISAM ;
+QUERY;
+    if($wpdb->query($query) === false) {
+        add_action("admin_notices", "uf_notice_table_create_failed");
+    }
+}
+add_action("uf_theme_activated", "uf_theme_activate_build_table");
+
+
+
+
+
+
