@@ -3,6 +3,12 @@
  * UnifyFramework Admin page scripts
  *
  */
+require_once UF_LIB_PATH. "functions/admin-options.php";
+require_once UF_LIB_PATH. "functions/admin-custompost.php";
+require_once UF_LIB_PATH. "functions/admin-post-thumbnail.php";
+
+
+
 /**
  * register Admin menu.
  *
