@@ -11,7 +11,7 @@
  */
 function uf_add_admin_menu() {
     if(function_exists("add_submenu_page"))
-        add_submenu_page("themes.php", __("UnifyFramework Setting page"), __("UnifyFramework"), 10, "uf-settings", "uf_admin_option");
+        add_submenu_page("themes.php", __("UnifyFramework Setting page"), __("Theme options"), 10, "uf-settings", "uf_admin_option");
 }
 add_action("admin_menu", "uf_add_admin_menu");
 
