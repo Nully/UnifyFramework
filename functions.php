@@ -36,6 +36,7 @@ if(function_exists("register_nav_menus")) {
  * Load UnifyFramework uses scripts
  *
  */
+require_once TEMPLATEPATH. "/includes/core.php";
 require_once TEMPLATEPATH. "/includes/actions.php";
 require_once TEMPLATEPATH. "/includes/helpers.php";
 require_once TEMPLATEPATH. "/includes/theme-support.php";
@@ -45,9 +46,18 @@ require_once TEMPLATEPATH. "/includes/comments.php";
 require_once TEMPLATEPATH. "/includes/pagenavi.php";
 require_once TEMPLATEPATH. "/includes/widget.php";
 
+
+/**
+ * Load extensions
+ */
+require_once TEMPLATEPATH. "/includes/extension.php";
+require_once TEMPLATEPATH. "/includes/extensions/default-extensions.php";
+
+
 if(is_admin()) {
     require_once TEMPLATEPATH. "/includes/admin.php";
 }
+
 
 /**
  * Load user original custom functions
@@ -56,6 +66,7 @@ if(is_admin()) {
 if(file_exists(TEMPLATEPATH. "/includes/custom-functions.php")) {
     require_once TEMPLATEPATH. "/includes/custom-functions.php";
 }
+
 
 
 
