@@ -3,14 +3,59 @@
  * UnifyFramework functions support
  *
  */
+define("UF_VERSION", "1.0-Beta");
+define("UF_SUPPOR_VERSION", "2.9");
+define("UF_LIB_PATH", realpath(dirname(__FILE__). "/../library"). "/");
+
+
+if(version_compare(UF_SUPPOR_VERSION, $wp_version, ">=")) {
+    wp_die(sprintf(__(
+        "this WordPress version unsupported UnifyFramework.<br />\n".
+        "WordPress Version: %s<br />".
+        "UnifyFramework Version: %s<br />",
+        $wp_version, UF_VERSION
+    )));
+}
+
 
 // Make theme available for translation
 // Translations can be filed in the /languages/ directory
 load_theme_textdomain( 'unify_framework', TEMPLATEPATH . '/langs' );
-require_once dirname(__FILE__). "/library/initialize.php";
 
 
-if(file_exists(UF_LIB_PATH. "custom-functions.php")) {
-    require_once UF_LIB_PATH. "custom-functions.php";
+/**
+ * Over than WordPress version 3, register custom menu.
+ *
+ */
+if(function_exists("register_nav_menus")) {
+    register_nav_menu("Primary nav menu", "primary navigation menu");
 }
+
+
+/**
+ * Load UnifyFramework uses scripts
+ *
+ */
+require_once TEMPLATEPATH. "/includes/actions.php";
+require_once TEMPLATEPATH. "/includes/helpers.php";
+require_once TEMPLATEPATH. "/includes/theme-support.php";
+require_once TEMPLATEPATH. "/includes/template.php";
+require_once TEMPLATEPATH. "/includes/posts.php";
+require_once TEMPLATEPATH. "/includes/comments.php";
+require_once TEMPLATEPATH. "/includes/pagenavi.php";
+require_once TEMPLATEPATH. "/includes/widget.php";
+
+if(is_admin()) {
+    require_once TEMPLATEPATH. "/includes/admin.php";
+}
+
+/**
+ * Load user original custom functions
+ *
+ */
+if(file_exists(TEMPLATEPATH. "/includes/custom-functions.php")) {
+    require_once TEMPLATEPATH. "/includes/custom-functions.php";
+}
+
+
 
