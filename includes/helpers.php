@@ -12,7 +12,7 @@
  * @param  $attr   Array    HTMLAttributes
  * @return Void
  */
-function uf_form_input($type, $value = null, $attr = array()) {
+function uf_form_input($type, $value = null, $attr = array(), $echo = true) {
     $defaults = array( "type" => $type, "value" => (!is_array($value) ? $value: ""), "name" => "" );
     $label = "";
     if(isset($attr["label"])) {
@@ -20,7 +20,11 @@ function uf_form_input($type, $value = null, $attr = array()) {
         unset($attr["label"]);
     }
 
-    echo '<input'. _uf_parse_attr($defaults, $attr).' />'. $label. PHP_EOL;
+    $input = '<input'. _uf_parse_attr($defaults, $attr).' />'. $label. PHP_EOL;
+    if($echo)
+        echo $input;
+    else
+        return $input;
 }
 
 
@@ -31,7 +35,7 @@ function uf_form_input($type, $value = null, $attr = array()) {
  * @access public
  * @param  $value    String
  */
-function uf_form_checkbox($value = null, $attr = array()) {
+function uf_form_checkbox($value = null, $attr = array(), $echo = true) {
     $defaults = array("type" => "checkbox", "checked" => false, "name" => "", "value" => ( !is_array($value) ? $value: "" ), "show_hidden" => true);
     $label = "";
     if(isset($attr["label"])) {
@@ -52,7 +56,12 @@ function uf_form_checkbox($value = null, $attr = array()) {
         unset($args["show_hidden"]);
     }
 
-    echo '<input'. _uf_parse_attr($args).' />'. $label. PHP_EOL;
+    $input = '<input'. _uf_parse_attr($args).' />'. $label. PHP_EOL;
+
+    if($echo)
+        echo $input;
+    else
+        return $input;
 }
 
 
@@ -65,7 +74,7 @@ function uf_form_checkbox($value = null, $attr = array()) {
  * @param  $attr      Array
  * @param  $multiple  Bool
  */
-function uf_form_select($options, $attr = array(), $multiple = false) {
+function uf_form_select($options, $attr = array(), $multiple = false, $echo = true) {
     $defaults = array( "value" => "", "name" => "" );
     $args = wp_parse_args($attr, $defaults);
     if(isset($args["value"])) {
@@ -82,11 +91,16 @@ function uf_form_select($options, $attr = array(), $multiple = false) {
     if(!is_array($options))
         $options = (array)$options;
 
-    echo '<select'. _uf_parse_attr($args).'>'. PHP_EOL;
+    $select = '<select'. _uf_parse_attr($args).'>'. PHP_EOL;
         foreach($options as $value => $opt_label) {
-            echo '<option value="'. esc_attr($value) .'"'. (($selected == $value) ? ' selected="selected"': "") .'>'. esc_attr($opt_label) .'</option>'. PHP_EOL;
+            $select .= '<option value="'. esc_attr($value) .'"'. (($selected == $value) ? ' selected="selected"': "") .'>'. esc_attr($opt_label) .'</option>'. PHP_EOL;
         }
-    echo "</select>". $label. PHP_EOL;
+    $select .= "</select>". $label. PHP_EOL;
+
+    if($echo)
+        echo $select;
+    else
+        return $echo;
 }
 
 
