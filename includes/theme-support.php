@@ -96,6 +96,7 @@ if(function_exists("register_default_headers")) {
 }
 
 
+
 /**
  * admin page custom header style
  *
@@ -109,6 +110,7 @@ function uf_admin_custom_image_header_css() {
 </style>
 <?php
 }
+
 
 
 /**
@@ -135,24 +137,35 @@ function uf_custom_header() {
 
 
 /**
+ * theme supported EditorStyle register.
  *
+ * @access protected
+ * @return Void
  */
-if(function_exists("add_editor_style")) {
-    add_editor_style("editor-style.css");
+function uf_theme_support_editor_style() {
+    $options = uf_get_theme_option();
+    if(!$options["allow_editor_css"])
+        return;
+
+    if(function_exists("add_editor_style")) {
+        add_editor_style("editor-style.css");
+    }
+    else {
+        add_theme_support("editor-style");
+        add_action("mce_css", "uf_theme_support_override_css");
+    }
 }
-else if(function_exists("add_theme_support")) {
-    add_theme_support("editor-style");
-    add_action("mce_css", "uf_overload_mce_css");
-}
+add_action("admin_init", "uf_theme_support_editor_style");
+
 
 
 /**
- * overload TinyMCE editor style
+ * override TinyMCE editor style
  *
  * @since 1.0-Beta
  * @return String
  */
-function uf_overload_mce_css($mce_css) {
+function uf_theme_support_override_css($mce_css) {
     if(!empty($mce_css)) {
         return $mce_css;
     }
@@ -168,20 +181,34 @@ function uf_overload_mce_css($mce_css) {
 
 
 /**
- * UnifyFramework PostThumbnail support
+ * theme supported PostThumbnail register.
  *
- * @TODO: suppor admin page thumbnails supports type selector.
+ * @access public
+ * @return Void
  */
-$uf_post_thumb_supports = array(
-    "page", "post"
-);
-$uf_post_thumb_size = array(
-    "width" => 200,
-    "height" => 200
-);
-$uf_post_thumb_is_crop = false;
-add_theme_support("post-thumbnails", $uf_post_thumb_supports);
-set_post_thumbnail_size($uf_post_thumb_size["width"], $uf_post_thumb_size["height"], $uf_post_thumb_is_crop);
+function uf_theme_support_post_thumbnail() {
+    $options = uf_get_post_thumbnail_options();
+
+    if(!$options["post_thumb_enable"])
+        return;
+
+    $supports = array();
+    switch(strtolower($options["uf_post_thumb_support_type"])) {
+        case "page":
+            $supports[] = "page";
+            break;
+        case "post":
+            $supports[] = "post";
+            break;
+        case "all":
+            $supports = array( "page", "post" );
+            break;
+    }
+
+    add_theme_support("post-thumbnails", $supports);
+    set_post_thumbnail_size($options["post_thumb_width"], $options["post_thumb_height"], false);
+}
+add_action("init", "uf_theme_support_post_thumbnail");
 
 
 
