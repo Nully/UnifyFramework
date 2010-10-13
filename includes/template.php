@@ -136,8 +136,8 @@ function uf_javascript() {
         return;
 
     wp_enqueue_script("jquery");
-    wp_enqueue_script("laquu-js", get_bloginfo("template_url"). "/js/jquery.laquu-min.js", null, UF_VERSION);
-    wp_enqueue_script("unify-js", get_bloginfo("template_url"). "/js/unify.js", null, UF_VERSION);
+    wp_enqueue_script("laquu-js", get_bloginfo("template_url"). "/includes/js/jquery.laquu-min.js", null, UF_VERSION);
+    wp_enqueue_script("unify-js", get_bloginfo("template_url"). "/includes/js/unify.js", null, UF_VERSION);
 
     // Comment reply javascript
     if(is_singular() && get_option("thread_comments")) {
