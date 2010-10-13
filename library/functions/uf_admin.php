@@ -11,7 +11,7 @@
  */
 function uf_add_admin_menu() {
     if(function_exists("add_submenu_page"))
-        add_submenu_page("themes.php", __("UnifyFramework Setting page"), __("UnifyFramework"), 10, "uf_settings", "uf_admin_option");
+        add_submenu_page("themes.php", __("UnifyFramework Setting page"), __("UnifyFramework"), 10, "uf-settings", "uf_admin_option");
 }
 add_action("admin_menu", "uf_add_admin_menu");
 
@@ -23,6 +23,10 @@ add_action("admin_menu", "uf_add_admin_menu");
  * @access protected
  */
 function uf_admin_init() {
+    global $plugin_page;
+    if($plugin_page != "uf-settings")
+        return;
+
     wp_enqueue_script("jquery-ui-tabs", false, array("jquery", "jquery-ui-core"));
     wp_enqueue_style("uf_admin_css", get_bloginfo("template_url"). "/css/admin.css", array(), UF_VERSION, "all");
 }
