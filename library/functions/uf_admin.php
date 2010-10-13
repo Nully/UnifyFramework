@@ -84,14 +84,14 @@ function uf_admin_option() {
     <div id="uf_admin_tabs">
         <ul id="uf_admin_menu">
             <?php foreach($menus as $hook => $label): ?>
-            <li><a href="#uf_admin_page_<?php echo $hook; ?>"><?php echo $label; ?></a></li>
+                <li><a href="#uf_admin_page_<?php echo $hook; ?>"><?php echo $label; ?></a></li>
             <?php endforeach; ?>
         </ul>
 
         <?php foreach($menus as $hook => $label): ?>
-        <div class="uf_admin_tab_panel" id="uf_admin_page_<?php echo $hook; ?>">
-            <?php echo do_action("uf_admin_page_{$hook}"); ?>
-        </div>
+            <div class="uf_admin_tab_panel" id="uf_admin_page_<?php echo $hook; ?>">
+                <?php echo do_action("uf_admin_page_{$hook}"); ?>
+            </div>
         <?php endforeach; ?>
     <!-- End uf_admin_tabs --></div>
 <!-- End wrap --></div>
