@@ -35,12 +35,50 @@ add_action("admin_init", "uf_admin_init");
 
 
 /**
+ * after register setting data callback action
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_admin_register_hook() {
+    global $pagenow, $plugin_page;
+
+    // no post data
+    if(!isset($_POST))
+        return;
+    // no set nonce
+    if(!isset($_POST["uf_admin_nonce"]))
+        return;
+
+    // redirect base URL
+    $redirect_url = get_admin_url(null, "$pagenow?page={$plugin_page}");
+
+    if($_POST["uf_save_option"]) { // for theme options
+        $redirect_url .= "#uf_admin_page_general-option";
+    }
+    elseif($_POST["uf_custom_post_save"]) { // for theme supported custom post type
+        $redirect_url .= "#uf_admin_page_custom-post";
+        if(!uf_add_custom_post($_POST["uf_custom_posts_post_type_name"], $_POST["uf_custom_posts"])) {
+            return;
+        }
+    }
+
+    wp_redirect($redirect_url);
+    die();
+}
+add_action("admin_init", "uf_admin_register_hook");
+
+
+/**
  * display jQuery UI tabs
  *
  * @access protected
  * @return Void
  */
 function uf_admin_head() {
+    global $plugin_page;
+    if($plugin_page != "uf-settings")
+        return;
 ?>
 <script type="text/javascript">
     jQuery(function(){
@@ -109,11 +147,13 @@ function uf_admin_option() {
 function uf_admin_general_option() {
 ?>
 <form action="" method="post">
+    <?php wp_nonce_field(); ?>
+    <?php uf_form_input("hidden", wp_create_nonce(), array( "name" => "uf_admin_nonce" )); ?>
     <h3><?php _e("Editor style setting"); ?></h3>
     <dl>
         <dt><?php _e("Editor style setting.", "unify_framework"); ?></dt>
         <dd><?php uf_form_checkbox(1, array(
-            "id" => "uf_allow_editor_css", "name" => "uf[allow_editor_css]", "label" => __("Allow custom editor style", "unify_framework")
+            "id" => "uf_allow_editor_css", "name" => "uf_options[allow_editor_css]", "label" => __("Allow custom editor style", "unify_framework")
             )); ?><br />
             <span class="caution"><?php _e("* custom editor style file path: "); ?><?php echo bloginfo("template_directory"); ?>/editor-style.css</span></dd>
     </dl>
@@ -122,7 +162,7 @@ function uf_admin_general_option() {
     <dl>
         <dt><?php _e("Comment", "unify_framework"); ?></dt>
         <dd><?php uf_form_checkbox(1, array(
-                "id" => "uf_comment_for_page", "name" => "uf[comment_for_page]", "label" => __("Comment allwod page ?", "unify_framework")
+                "id" => "uf_comment_for_page", "name" => "uf_options[comment_for_page]", "label" => __("Comment allwod page ?", "unify_framework")
             )); ?><br />
             <?php uf_form_input("text", "", array( "id" => "uf_comment_allowd_pages", "name" => "uf[comment_allowd_pages]" )); ?><br />
             <label for="uf_comment_allowd_pages" class="caution"><?php _e("* separated 'comma' for page ID", "unify_framework"); ?></label></dd>
@@ -132,7 +172,7 @@ function uf_admin_general_option() {
     <dl>
         <dt><?php _e("Custom header", "unify_framework"); ?></dt>
         <dd><?php uf_form_checkbox(1, array(
-            "id" => "uf_display_custom_header_in_front", "name" => "uf[display_custom_header_in_front]", "label" => __("display custom header in the home page or front page ?", "unify_framework")
+            "id" => "uf_display_custom_header_in_front", "name" => "uf_options[display_custom_header_in_front]", "label" => __("display custom header in the home page or front page ?", "unify_framework")
         )); ?></dd>
     </dl>
     <p><input type="submit" name="uf_save_option" value="<?php _e("Save options"); ?>" class="button-primary" /></p>
@@ -151,65 +191,31 @@ add_action("uf_admin_page_general-option", "uf_admin_general_option");
  * @return Void
  */
 function uf_admin_page_custom_post() {
+    if($_GET["uf_cp_edit_id"]) {
+        $options = uf_get_custom_post($_GET["uf_cp_edit_id"]);
+    }
 ?>
-<div class="wrap" id="uf_admin">
-    <h3><?php _e("Custom post type register field.", "unify_framework"); ?></h3>
-    <?php uf_admin_get_custom_post_form(); ?>
-    <hr />
-    <h3><?php _e("Registerd custom post types"); ?></h3>
-    <?php uf_admin_get_registerd_custom_posts(); ?>
-<!-- End wrap --></div>
-<?php
-}
-add_action("uf_admin_page_custom-post", "uf_admin_page_custom_post");
-
-
-
-/**
- * Dsiplay Custom post type form for Admin
- *
- * @access public
- * @return Void
- */
-function uf_admin_get_custom_post_form() {
-?>
+<h3><?php _e("Custom post type register field.", "unify_framework"); ?></h3>
 <form action="" method="post">
     <?php wp_nonce_field(); ?>
+    <?php uf_form_input("hidden", wp_create_nonce(), array( "name" => "uf_admin_nonce" )); ?>
     <dl>
-        <dt><?php _e("Description", "unify_framework"); ?></dt>
-        <dd><input id="uf_custom_posts_description" type="text" name="uf_custom_posts[description]" value="" />
-            <label for="uf_custom_posts_description"><?php _e("shorty custom post type description", "unify_framework"); ?></label></dd>
+        <dt><?php _e("Custom post type name", "unify_framework"); ?></dt>
+        <dd><?php uf_form_input("text", "", array(
+            "id" => "uf_custom_posts_post_type_name", "name" => "uf_custom_posts_post_type_name", "label" => __("unique custom post name")
+        )); ?></dd>
 
-        <dt><?php _e("Lable", "unify_framework"); ?></dt>
+        <dt><?php _e("Description", "unify_framework"); ?></dt>
+        <dd><?php uf_form_input("text", "", array(
+            "id" => "uf_custom_posts_description", "name" => "uf_custom_posts[description]", "label" => __("shorty custom post type description", "unify_framework")
+        )); ?></dd>
+
+        <dt><?php _e("Labels", "unify_framework"); ?></dt>
         <dd><?php uf_form_input("text", "", array(
             "id" => "uf_custom_posts_name", "name" => "uf_custom_posts[name]", "label" => __("custom post type unique name.", "unify_framework")
         )); ?><br />
         <?php uf_form_input("text", "", array(
             "id" => "uf_custom_psots_singular_name", "name" => "uf_custom_posts[singular_name]", "label" => __("custom post type unique singular name.", "unify_framework")
-        )); ?><br />
-        <?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_add_new", "name" => "uf_custom_posts[add_new]", "label" => __("custom post type add new label.", "unify_framework")
-        )); ?><br />
-        <?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_add_new_item", "name" => "uf_custom_posts[add_new_item]", "label" => __("custom post type add new item label.", "unify_framework")
-        )); ?><br />
-        <?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_edit_item", "name" => "uf_custom_posts[edit_item]", "label" => __("custom post type edit item label.", "unify_framework")
-        )); ?><br />
-        <?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_new_item", "name" => "uf_custom_posts[new_item]", "label" => __("custom post type new item label.", "unify_framework")
-        )); ?><br />
-        <?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_view_item", "name" => "uf_custom_posts[view_item]", "label" => __("custom post type view item label.", "unify_framework")
-        )); ?><br />
-        <?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_search_item", "name" => "uf_custom_posts[search_items]", "label" => __("custom post search item label.", "unify_framework")
-        )); ?><br />
-        <?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_not_found", "name" => "uf_custom_posts[not_found]", "label" => __("custom post search not found label.", "unify_framework")
-        )); ?><br />
-        <?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_not_found_in_trush", "name" => "uf_custom_posts[not_found_in_trush]", "label" => __("custom post search not found in the trush.", "unify_framework")
         )); ?></dd>
 
         <dt><?php _e("Public", "unify_framework"); ?></dt>
@@ -258,8 +264,12 @@ function uf_admin_get_custom_post_form() {
     </dl>
     <p><input type="submit" name="uf_custom_post_save" value="<?php _e("Save as custom post"); ?>" class="button-primary" /></p>
 </form>
+<hr />
+<h3><?php _e("Registerd custom post types"); ?></h3>
+<?php uf_admin_get_registerd_custom_posts(); ?>
 <?php
 }
+add_action("uf_admin_page_custom-post", "uf_admin_page_custom_post");
 
 
 
@@ -270,9 +280,28 @@ function uf_admin_get_custom_post_form() {
  * @return Void
  */
 function uf_admin_get_registerd_custom_posts() {
-
+    $custom_posts = uf_get_custom_posts();
 ?>
-<p><?php _e("No in registerd", "unify_framework"); ?></p>
+<?php if(empty($custom_posts)): ?>
+    <p><?php _e("No in registerd", "unify_framework"); ?></p>
+<?php else: ?>
+    <table border="0" cellpadding="0" cellspacing="0" class="widefat">
+        <thead>
+            <tr>
+                <th><?php _e("ID", "unify_framework"); ?></th>
+                <th><?php _e("CustomPost name", "unify_framework"); ?></th>
+                <th><?php _e("Actions", "unify_framework"); ?></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th><?php _e("ID", "unify_framework"); ?></th>
+                <th><?php _e("CustomPost name", "unify_framework"); ?></th>
+                <th><?php _e("Actions", "unify_framework"); ?></th>
+            </tr>
+        </tfoot>
+    </table>
+<?php endif; ?>
 <?php
 }
 
