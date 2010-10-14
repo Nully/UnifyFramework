@@ -9,6 +9,7 @@ class UF_Core {}
  * @access public
  * @return Void
  */
+/*
 function uf_load_extensions() {
     $theme_options = uf_get_theme_option();
 
@@ -29,7 +30,7 @@ function uf_load_extensions() {
     }
 }
 add_action("uf_init", "uf_load_extensions");
-
+*/
 
 /**
  * get UnifyFramework options
