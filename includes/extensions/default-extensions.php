@@ -101,10 +101,15 @@ class UF_PostThumbnail extends UF_Extension {
 
 
     function edit_option() {
-        if(!empty($_POST) && isset($_POST["save_post_thumb_options"])) {
-            uf_update_post_thumbnail_options();
+        if(isset($_POST["save_post_thumb_options"])) {
+            uf_update_option("post_thumbnail", array(
+                "post_thumb_enable" => $_POST["post_thumb_enable"],
+                "uf_post_thumb_support_type" => $_POST["uf_post_thumb_support_type"],
+                "post_thumb_width"  => $_POST["post_thumb_width"],
+                "post_thumb_height" => $_POST["post_thumb_height"]
+            ));
         }
-        $options = uf_get_post_thumbnail_options();
+        $options = uf_get_option("post_thumbnail");
     ?>
         <div class="wrap" id="uf_admin">
             <?php screen_icon("options-general"); ?>
