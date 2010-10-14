@@ -16,25 +16,8 @@ class UF_Admin extends UF_Extension {
      * @return Void
      */
     function init() {
-        #add_action("admin_init", array(&$this, "admin_init"));
         add_action("admin_head", array(&$this, "admin_head"));
         add_action("admin_menu", array(&$this, "register_menu"));
-    }
-
-
-    /**
-     * Admin init callback hook
-     *
-     * @access public
-     * @return Void
-     */
-    function admin_init() {
-        global $pagenow, $plugin_page;
-        if($pagenow != "themes.php" || $plugin_page != "uf-admin")
-            return;
-
-        //wp_enqueue_script("jquery-ui-tabs", false, array("jquery", "jquery-ui-core"));
-        wp_enqueue_style("uf_admin_css", get_bloginfo("template_url"). "/css/admin.css", array(), UF_VERSION, "all");
     }
 
 
