@@ -73,5 +73,11 @@ if(file_exists(TEMPLATEPATH. "/includes/custom-functions.php")) {
 }
 
 
+/**
+ * Hook uf_init registerd hooks
+ * 
+ */
+do_action("uf_init");
+
 
 
