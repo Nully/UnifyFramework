@@ -143,7 +143,7 @@ function uf_custom_header() {
  * @return Void
  */
 function uf_theme_support_editor_style() {
-    $options = uf_get_theme_option();
+    $options = uf_get_option("theme_options");
     if(!$options["allow_editor_css"])
         return;
 
