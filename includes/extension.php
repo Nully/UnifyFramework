@@ -1,4 +1,29 @@
 <?php
+/**
+ * UnifyFramework extensions scripts
+ *
+ */
+/**
+ * Load enabled extension
+ *
+ * @access protected
+ */
+function uf_load_extensions() {
+    $extensions = uf_get_option("theme_options", "extensions");
+    if(empty($extensions))
+        return;
+
+    foreach($extensions as $extension => $enable_or_disable) {
+        if($enable_or_disable === false)
+            continue;
+
+        var_dump($extension);
+    }
+}
+add_action("init", "uf_load_extensions");
+
+
+
 class UF_Extension {
     /**
      * Protected extension vars
@@ -36,20 +61,7 @@ class UF_Extension {
         $this->name = $name;
         $this->description = $description;
 
-        $this->_init();
         $this->init();
-    }
-
-
-
-    /**
-     * Default initializer
-     *
-     * @access private
-     * @return Void
-     */
-    function _init() {
-        add_action("admin_init", array(&$this, "init_admin"));
     }
 
 
@@ -61,22 +73,6 @@ class UF_Extension {
      * @return Void
      */
     function init() {}
-
-
-
-    /**
-     * Admin init callback hook
-     *
-     * @access public
-     * @return Void
-     */
-    function init_admin() {
-        global $pagenow, $plugin_page;
-        if($pagenow != "themes.php")
-            return;
-
-        wp_enqueue_style("uf_admin_css", get_bloginfo("template_url"). "/css/admin.css", array(), UF_VERSION, "all");
-    }
 
 
 
