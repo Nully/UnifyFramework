@@ -86,7 +86,9 @@ class UF_PostThumbnail extends UF_Extension {
      */
     function init() {
         add_action("admin_menu", array(&$this, "register_menu"));
+        add_action("after_setup_theme", array(&$this, "init_post_thumbnail"));
     }
+
 
 
     /**
@@ -94,17 +96,25 @@ class UF_PostThumbnail extends UF_Extension {
      *
      * @access public
      * @return Void
+     * @action admin_menu
      */
     function register_menu() {
         add_submenu_page("themes.php", __("UnifyFramework PostThumbnail settings", "unify_framework"), __("PostThumbnail", "unify_framework"), 10, "uf-post-thumbnail", array(&$this, "edit_option"));
     }
 
 
+
+    /**
+     * Edit PostThumbnail support options
+     *
+     * @access public
+     * @return Void
+     */
     function edit_option() {
         if(isset($_POST["save_post_thumb_options"])) {
             uf_update_option("post_thumbnail", array(
                 "post_thumb_enable" => $_POST["post_thumb_enable"],
-                "uf_post_thumb_support_type" => $_POST["uf_post_thumb_support_type"],
+                "post_thumb_support_type" => $_POST["post_thumb_support_type"],
                 "post_thumb_width"  => $_POST["post_thumb_width"],
                 "post_thumb_height" => $_POST["post_thumb_height"]
             ));
@@ -125,26 +135,59 @@ class UF_PostThumbnail extends UF_Extension {
 
                     <dt><?php _e("Support post type", "unify_framework"); ?></dt>
                     <dd><?php uf_form_select(array( "page" => __("Page"), "post" => __("Post"), "all" => __("All")), array(
-                        "id" => "uf_post_thumb_support_type", "name" => "uf_post_thumb_support_type",
-                        "label" => __("Choice a support post type"), "value" => $options["uf_post_thumb_support_type"]
+                        "id" => "uf_post_thumb_support_type", "name" => "post_thumb_support_type",
+                        "label" => __("Choice a support post type"), "value" => $options["post_thumb_support_type"]
                     )); ?></dd>
 
                     <dt><?php _e("Thumbnail width", "unify_framework"); ?></dt>
-                    <dd><?php uf_form_input("text", 200, array(
-                        "id" => "uf_post_thumb_width", "name" => "post_thumb_width", "label" => __("set image width is 'px'."),
-                        "value" => $options["post_thumb_width"]
+                    <dd><?php uf_form_input("text", $options["post_thumb_width"] ? $options["post_thumb_width"] : 200, array(
+                        "id" => "uf_post_thumb_width", "name" => "post_thumb_width", "label" => __("set image width is 'px'.")
                     )); ?></dd>
 
                     <dt><?php _e("Thumbnail height", "unify_framework"); ?></dt>
-                    <dd><?php uf_form_input("text", 200, array(
-                        "id" => "uf_post_thumb_height", "name" => "post_thumb_height", "label" => __("set image height is 'px'."),
-                        "value" => $options["post_thumb_height"]
+                    <dd><?php uf_form_input("text", $options["post_thumb_height"] ? $options["post_thumb_height"] : 200, array(
+                        "id" => "uf_post_thumb_height", "name" => "post_thumb_height", "label" => __("set image height is 'px'.")
                     )); ?></dd>
                 </dl>
                 <p><input type="submit" name="save_post_thumb_options" value="<?php _e("Save post thumbnail options"); ?>" class="button-primary" /></p>
             </form>
         </div>
     <?php
+    }
+
+
+
+    /**
+     * initialize PostThumbnail theme support
+     *
+     * @access public
+     * @return Void
+     * @action init
+     */
+    function init_post_thumbnail() {
+        $options = uf_get_option("post_thumbnail");
+
+        // no have a options
+        if(empty($options)) return;
+
+        // disable PostThumbnail
+        if(!$options["post_thumb_enable"]) return;
+
+        $supports = array();
+        switch(strtolower($options["post_thumb_support_type"])) {
+            case "page":
+                $supports[] = "page";
+                break;
+            case "post":
+                $supports[] = "post";
+                break;
+            case "all":
+                $supports = array( "page", "post" );
+                break;
+        }
+
+        add_theme_support("post-thumbnails", $supports);
+        set_post_thumbnail_size($options["post_thumb_width"], $options["post_thumb_height"], false);
     }
 }
 
