@@ -59,27 +59,19 @@ function uf_notice_table_create_failed() {
 
 
 /**
- * deep escape Attribute values
+ * display notice message
+ *   unsupported WordPress version
  *
- * @access public
- * @param  $data   Array    reference by Array data
- * @param  $func   String   execute escape function
- * @return Bool
+ * @access protected
+ * @return Void
  */
-function uf_esc_attr_deep(&$data, $func) {
-    if(!is_array($data))
-        $data = (array)$data;
-
-    foreach($data as $name => $value) {
-        //var_dump($name, $value);
-        if(is_array($value)) {
-            $data[$name] = &uf_esc_attr_deep(&$value, $func);
-            continue;
-        }
-        $data[$name] = &call_user_func($func, &$value);
-    }
-    return $data;
+function uf_unsupported_version_notice() {
+    global $wp_version;
+    echo '<div class="error fade">';
+    echo sprintf(__("UnifyFramework is not supported this WordPress version %s."), $wp_version );
+    echo "<br />";
+    echo __("Upgrade your WordPress version.");
+    echo "</div>";
 }
-
 
 
