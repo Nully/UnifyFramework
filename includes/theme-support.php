@@ -180,35 +180,4 @@ function uf_theme_support_override_css($mce_css) {
 
 
 
-/**
- * theme supported PostThumbnail register.
- *
- * @access public
- * @return Void
- */
-function uf_theme_support_post_thumbnail() {
-    $options = uf_get_post_thumbnail_options();
-
-    if(!$options["post_thumb_enable"])
-        return;
-
-    $supports = array();
-    switch(strtolower($options["uf_post_thumb_support_type"])) {
-        case "page":
-            $supports[] = "page";
-            break;
-        case "post":
-            $supports[] = "post";
-            break;
-        case "all":
-            $supports = array( "page", "post" );
-            break;
-    }
-
-    add_theme_support("post-thumbnails", $supports);
-    set_post_thumbnail_size($options["post_thumb_width"], $options["post_thumb_height"], false);
-}
-add_action("init", "uf_theme_support_post_thumbnail");
-
-
 
