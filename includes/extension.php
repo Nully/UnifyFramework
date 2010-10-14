@@ -30,7 +30,7 @@ function uf_load_extensions() {
         }
     }
 }
-add_action("init", "uf_load_extensions");
+add_action("uf_init", "uf_load_extensions");
 
 
 
