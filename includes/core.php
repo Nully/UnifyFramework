@@ -44,6 +44,7 @@ add_action("uf_init", "uf_load_extensions");
 function uf_get_option($alias, $field = null, $default = array()) {
     do_action("uf_get_option");
 
+    do_action("uf_get_option", $alias, $field, $default);
     $options = get_option("uf_theme_options", $default);
 
     // no have options
@@ -91,18 +92,89 @@ function uf_update_option($alias, $data) {
 
 
 /**
+ * get UnifyFramework theme support, Custom Post Type multi options data.
+ *
+ * @access public
+ * @param  $default  Array  not have option, return default value
+ * @return Mix
+ */
+function uf_get_custom_post_options($default = array()) {
+    $options = uf_get_option("custom_posts");
+    if(empty($options))
+        return $default;
+
+    return $options;
+}
+
+
+
+/**
+ * get UnifyFramework theme support, Custom Post type single option data
+ *
+ * @access public
+ * @return Mix
+ */
+function uf_get_custom_post_option($id, $default = array()) {
+    $options = uf_get_custom_post_options();
+    do_action("uf_pre_get_custom_post_option", $id);
+
+    if(empty($options))
+        return $default;
+
+    if(!isset($options[$id]))
+        return $default;
+
+    apply_filters("uf_pre_get_custom_post_option", $options);
+    return $options[$id];
+}
+
+
+
+/**
+ * save|update UnifyFramework theme support, Custom Post Type options
+ *
+ * @access public
+ * @param  $data  Array
+ * @param  $id    Int|Null
+ * @return Bool
+ */
+function uf_update_custom_post_option($data, $id = null) {
+    $options = uf_get_custom_post_options(array());
+    apply_filters("uf_pre_update_custom_post_option", $options);
+
+    if(!is_null($id) && is_numeric($id)) {
+        $options[$id] = $data;
+    }
+    else {
+        $keys = array_keys($options);
+        if(empty($keys))
+            $col_id = 1;
+        else
+            $col_id  = array_pop($keys);
+
+        $options[$col_id] = $data;
+    }
+
+    apply_filters("uf_after_update_custom_post_option", $options);
+    return uf_update_option("custom_posts", $options);
+}
+
+
+
+/**
  * get UnifyFramework theme options
  *
  * @access public
  * @return Array
  */
+/*
 function uf_get_theme_option() {
     $options = get_option("uf_theme_options");
     if(empty($options))
         $options = array();
 
     return $options;
-}
+}*/
 
 
 
@@ -112,6 +184,7 @@ function uf_get_theme_option() {
  * @access public
  * @return Void
  */
+/*
 function uf_update_theme_option() {
     $options = array(
         "allow_editor_css"     => $_POST["allow_editor_css"],
@@ -126,7 +199,7 @@ function uf_update_theme_option() {
 
     $options = uf_parse_to_bool_deep($options);
     update_option("uf_theme_options", $options);
-}
+}*/
 
 
 
@@ -136,9 +209,10 @@ function uf_update_theme_option() {
  * @access public
  * @return Void
  */
+/*
 function uf_delete_theme_options() {
     delete_option("uf_theme_options");
-}
+}*/
 
 
 
@@ -148,13 +222,14 @@ function uf_delete_theme_options() {
  * @access public
  * @return Array
  */
+/*
 function uf_get_post_thumbnail_options() {
     $options = get_option("uf_post_thumbnail_options");
     if(empty($options))
         $options = array();
 
     return $options;
-}
+}*/
 
 
 
@@ -164,6 +239,7 @@ function uf_get_post_thumbnail_options() {
  * @access public
  * @return Void
  */
+/*
 function uf_update_post_thumbnail_options() {
     $options = array(
         "post_thumb_enable" => $_POST["post_thumb_enable"],
@@ -175,7 +251,7 @@ function uf_update_post_thumbnail_options() {
     $options = uf_deep_esc_attr($options);
     $options = uf_parse_to_bool_deep($options);
     update_option("uf_post_thumbnail_options", $options);
-}
+}*/
 
 
 
