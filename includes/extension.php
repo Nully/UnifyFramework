@@ -9,6 +9,8 @@
  * @access protected
  */
 function uf_load_extensions() {
+    $uf_extensions = array();
+
     $extensions = uf_get_option("theme_options", "extensions");
     if(empty($extensions))
         return;
@@ -17,7 +19,15 @@ function uf_load_extensions() {
         if($enable_or_disable === false)
             continue;
 
-        var_dump($extension);
+        $class_name = str_replace("_", " ", $extension);
+        $class_name = str_replace(" ", "", ucwords($class_name));
+        $class_name = "UF_". $class_name;
+        if(class_exists($class_name)) {
+            $uf_extensions[$class_name] = &new $class_name();
+            if(method_exists($uf_extensions[$class_name], "init")) {
+                call_user_func(&$uf_extensions[$class_name], "init");
+            }
+        }
     }
 }
 add_action("init", "uf_load_extensions");
@@ -60,8 +70,6 @@ class UF_Extension {
         $this->id   = $id;
         $this->name = $name;
         $this->description = $description;
-
-        $this->init();
     }
 
 
