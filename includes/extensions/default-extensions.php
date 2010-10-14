@@ -29,6 +29,7 @@ class UF_CustomPost extends UF_Extension {
     function init() {
         add_action("admin_menu", array(&$this, "register_menu"));
         add_action("admin_init", array(&$this, "register_options"));
+        add_action("admin_notices", array(&$this, "display_notice"));
     }
 
 
@@ -58,12 +59,35 @@ class UF_CustomPost extends UF_Extension {
         if(!$_POST["save_custom_post"] || !$_POST)
             return;
 
+        global $pagenow, $plugin_page;
+        $base_url = get_admin_url(null, "{$pagenow}?page={$plugin_page}");
         if($_POST["save_custom_post"]) {
+            $options = array(
+                "custom_post_type_name" => $_POST["custom_post_type_name"],
+                "labels"    => $_POST["labels"],
+                "public"    => $_POST["public"],
+                "exclude_from_search" => $_POST["exclude_from_search"],
+                "show_ui"   => $_POST["show_ui"],
+                "capability_type" => $_POST["capability_type"],
+                "hierarchical"    => $_POST["hierarchical"],
+                "supports"        => $_POST["supports"],
+                "can_export"      => $_POST["can_export"],
+                "show_in_nav_menus" => $_POST["show_in_nav_menus"],
+            );
+
+            if(empty($options["custom_post_type_name"])) {
+                add_action("admin_notices", array(&$this, "validate_error_notice"));
+                return;
+            }
+
+            //$options = apply_filters("uf_custom_post_options");
+            
+            $base_url .= "&save=true";
         }
         else if($_POST) {
         }
 
-        // wp_redirect();
+        wp_redirect($base_url);
     }
 
 
@@ -86,7 +110,7 @@ class UF_CustomPost extends UF_Extension {
                 <dl>
                     <dt><?php _e("Custom post type name", "unify_framework"); ?></dt>
                     <dd><?php uf_form_input("text", "", array(
-                        "id" => "uf_custom_posts_post_type_name", "name" => "custom_post_name", "label" => __("unique custom post name")
+                        "id" => "uf_custom_posts_post_type_name", "name" => "custom_post_type_name", "label" => __("unique custom post name")
                     )); ?></dd>
 
                     <dt><?php _e("Description", "unify_framework"); ?></dt>
@@ -196,6 +220,42 @@ class UF_CustomPost extends UF_Extension {
             <p><?php _e("", "unify_framework"); ?></p>
         </div>
     <?php
+    }
+
+
+
+    /**
+     * Display validate error messages
+     *
+     * @access  protected
+     * @return Void
+     */
+    function validate_error_notice() {
+        echo '<div class="error fade">'. PHP_EOL;
+            echo '<p>'. __("Error. not empty custom post type name."). '</p>'. PHP_EOL;
+        echo '</div>'. PHP_EOL;
+    }
+
+
+    /**
+     * Display notice messages
+     *
+     * @access protected
+     * @return Void
+     */
+    function display_notice() {
+        if(!empty($_POST)) // fix not saved display notice messages.
+            return;
+
+        if($_GET["save"]) { // add new custom post
+            echo '<div class="updated fade">'. PHP_EOL;
+                echo '<p>'. __("Success. add a new custom post."). '</p>';
+            echo '</div>'. PHP_EOL;
+        }
+        elseif($_GET) {
+        }
+        elseif($_GET) {
+        }
     }
 }
 
