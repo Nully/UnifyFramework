@@ -25,7 +25,7 @@ function uf_load_extensions() {
         if(class_exists($class_name)) {
             $uf_extensions[$class_name] = &new $class_name();
             if(method_exists($uf_extensions[$class_name], "init")) {
-                call_user_func(&$uf_extensions[$class_name], "init");
+                call_user_func(array(&$uf_extensions[$class_name], "init"));
             }
         }
     }
