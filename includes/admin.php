@@ -17,7 +17,7 @@ function uf_admin_save_options() {
         ));
     }
 }
-add_action("init", "uf_admin_save_options", 0);
+add_action("uf_init", "uf_admin_save_options", 0);
 
 
 
