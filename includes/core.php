@@ -31,6 +31,63 @@ function uf_load_extensions() {
 add_action("uf_init", "uf_load_extensions");
 
 
+/**
+ * get UnifyFramework options
+ *
+ * @access public
+ * @param  $alias   String        option field alias name
+ * @param  $field   String|Null   option alias field name ($options[$alias][$field])
+ * @param  $default Mix           return default value
+ * @return Mix
+ */
+function uf_get_option($alias, $field = null, $default = array()) {
+    do_action("uf_get_option");
+
+    $options = get_option("uf_theme_options", $default);
+
+    // no have options
+    if(empty($options))
+        return $default;
+
+    // no have option alias
+    if(!isset($options[$alias]))
+        return $default;
+
+    // empty field name return a options in alias data
+    if(empty($field))
+        return $options[$alias];
+
+    // have a field name, return single value
+    if(isset($options[$alias][$field]))
+        return $options[$alias][$field];
+
+    return $default;
+}
+
+
+
+/**
+ * save|update UnifyFramework theme options
+ *
+ * @access public
+ * @param  $alias   String   option field alias name
+ * @param  $data    Mix      option data
+ * @return Bool
+ */
+function uf_update_option($alias, $data) {
+    $options = get_option("uf_theme_options");
+
+    if(empty($options))
+        $options = array();
+
+    $data = uf_deep_esc_attr($data);
+    $data = uf_parse_to_bool_deep($data);
+    $options[$alias] = $data;
+    update_option("uf_theme_options", $options);
+    do_action("uf_update_option", $options);
+}
+
+
 
 /**
  * get UnifyFramework theme options
