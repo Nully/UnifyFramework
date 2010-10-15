@@ -57,8 +57,9 @@ add_action("admin_head", "uf_admin_head");
  * @return Void
  */
 function uf_admin_submenu() {
-    if(function_exists("add_submenu_page"))
-        add_submenu_page("themes.php", __("UnifyFramework setting pages", "unify_framework"), __("Theme Options", "unify_framework"), 10, "uf-admin", "uf_admin_setting");
+    add_menu_page(__("UnifyFramework setting pages", "unify_framework"), __("Theme Options", "unify_framework"), 10, "uf-options", "uf_admin_setting");
+    //if(function_exists("add_submenu_page"))
+        //add_submenu_page("themes.php", __("UnifyFramework setting pages", "unify_framework"), __("Theme Options", "unify_framework"), 10, "uf-admin", "uf_admin_setting");
 }
 add_action("admin_menu", "uf_admin_submenu");
 
