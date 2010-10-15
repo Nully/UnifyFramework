@@ -1,0 +1,7 @@
+<?php
+/**
+ * UnifyFramework PostThumbnail support
+ *
+ */
+
+
