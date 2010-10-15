@@ -19,8 +19,8 @@ function uf_load_extensions() {
         if($enable_or_disable === false)
             continue;
 
-        if(file_exists(TEMPLATEPATH. "/includes/{$extension}.php")) {
-            require_once TEMPLATEPATH. "/includes/{$extension}.php";
+        if(file_exists(TEMPLATEPATH. "/includes/extensions/{$extension}.php")) {
+            require_once TEMPLATEPATH. "/includes/extensions/{$extension}.php";
         }
 
         /*
