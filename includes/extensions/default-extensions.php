@@ -30,6 +30,7 @@ class UF_CustomPost extends UF_Extension {
         add_action("admin_menu", array(&$this, "register_menu"));
         add_action("admin_init", array(&$this, "register_options"));
         add_action("admin_notices", array(&$this, "display_notice"));
+        add_filter("uf_custom_post_options", array(&$this, "_filter_custom_post_options"));
     }
 
 
@@ -56,11 +57,18 @@ class UF_CustomPost extends UF_Extension {
      * @return Void
      */
     function register_options() {
-        if(!$_POST["save_custom_post"] || !$_POST)
+        if($_GET["delete"] && $_GET["id"]) {
+            if(uf_delete_custom_post($_GET["id"])) {
+                add_action("admin_notices", array(&$this, "delete_notice"));
+            }
+        }
+
+        if(!$_POST["save_custom_post"])
             return;
 
         global $pagenow, $plugin_page;
-        $base_url = get_admin_url(null, "{$pagenow}?page={$plugin_page}");
+        $base_url = get_admin_url(null, "{$pagenow}?");
+
         if($_POST["save_custom_post"]) {
             $options = array(
                 "custom_post_type_name" => $_POST["custom_post_type_name"],
@@ -80,14 +88,57 @@ class UF_CustomPost extends UF_Extension {
                 return;
             }
 
-            //$options = apply_filters("uf_custom_post_options");
+            $options = apply_filters("uf_custom_post_options", $options);
+            if($_POST["id"]) {
+                uf_update_custom_post_option($options, $_POST["id"]);
+                $base_url .= "&page=uf-edit-custom-post";
+            }
+            else {
+                uf_update_custom_post_option($options);
+                $base_url .= "&page=uf-add-custom-post";
+            }
             
             $base_url .= "&save=true";
         }
-        else if($_POST) {
-        }
-
         wp_redirect($base_url);
+    }
+
+
+
+    /**
+     * uf_custom_post_options Filter hook.
+     *
+     * @access private
+     * @param  $options   Array   CustomPost options
+     * @return Array
+     */
+    function _filter_custom_post_options($options) {
+        $options = uf_parse_to_bool_deep($options);
+
+        $options["labels"]["name"]          = empty($options["labels"]["name"]) ? $options["custom_post_type_name"]: $options["labels"]["name"];
+        $options["labels"]["singular_name"] = empty($options["labels"]["singular_name"]) ? $options["custom_post_type_name"]: $options["labels"]["singular_name"];
+        $options["labels"]["add_new"]       = empty($options["labels"]["add_new"]) ? "Add new ". $options["custom_post_type_name"]: $options["labels"]["add_new"];
+        $options["labels"]["add_new_item"]  = empty($options["labels"]["add_new_item"]) ? "Add for ". $options["custom_post_type_name"]: $options["labels"]["add_new_item"];
+        $options["labels"]["edit"]          = empty($options["labels"]["edit"]) ? "Edit ". $options["custom_post_type_name"]: $options["labels"]["edit"];
+        $options["labels"]["edit_item"]     = empty($options["labels"]["edit_item"]) ? "Edit for ". $options["custom_post_type_name"]: $options["labels"]["edit_item"];
+        $options["labels"]["new_item"]      = empty($options["labels"]["new_item"]) ? "New ". $options["custom_post_type_name"]: $options["labels"]["new_item"];
+        $options["labels"]["view"]          = empty($options["labels"]["view"]) ? "View ". $options["custom_post_type_name"]: $options["labels"]["view"];
+        $options["labels"]["view_item"]     = empty($options["labels"]["view_item"]) ? "View for ". $options["custom_post_type_name"]: $options["labels"]["view_item"];
+        $options["labels"]["search_items"]  = empty($options["labels"]["search_items"]) ? "search ". $options["custom_post_type_name"]: $options["labels"]["search_items"];
+        $options["labels"]["not_found"]     = empty($options["labels"]["not_found"]) ? "Not Found". $options["custom_post_type_name"]: $options["labels"]["not_found"];
+        $options["labels"]["not_found_in_trush"] = empty($options["labels"]["not_found_in_trush"]) ? "Not Found in Trush". $options["labels"]["custom_post_type_name"]: $options["labels"]["not_found_in_trush"];
+        $options["labels"]["parent"]        = empty($options["labels"]["parent"]) ? "parent to ". $options["labels"]["custom_post_type_name"]: $options["labels"]["parent"];
+
+        $options["supports"] = empty($options["supports"]) ? array(): $options["supports"];
+
+        $options["pubic"]               = empty($options["public"]) ? false: true;
+        $options["exclude_form_search"] = empty($options["exclude_form_search"]) ? false: true;
+        $options["show_ui"]           = empty($options["show_ui"]) ? false: true ;
+        $options["hierarchical"]      = empty($options["hierarchical"]) ? false: true;
+        $options["can_export"]        = empty($options["can_export"]) ? false: true;
+        $options["show_in_nav_menus"] = empty($options["show_in_nav_menus"]) ? false: true;
+
+        return $options;
     }
 
 
@@ -98,6 +149,10 @@ class UF_CustomPost extends UF_Extension {
      * @access public
      */
     function add_new() {
+        $options = array();
+        if($_GET["id"]) {
+            $options = uf_get_custom_post_option($_GET["id"]);
+        }
     ?>
         <div class="wrap" id="uf_admin">
             <?php screen_icon("options-general"); ?>
@@ -105,11 +160,12 @@ class UF_CustomPost extends UF_Extension {
             <p><?php _e("", "unify_framework"); ?></p>
             <h3><?php _e("Custom post type register field.", "unify_framework"); ?></h3>
             <form action="" method="post">
+                <?php if($_GET["id"]): ?><input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>" /><?php endif; ?>
                 <?php wp_nonce_field(); ?>
                 <?php uf_form_input("hidden", wp_create_nonce(), array( "name" => "uf_admin_nonce" )); ?>
                 <dl>
                     <dt><?php _e("Custom post type name", "unify_framework"); ?></dt>
-                    <dd><?php uf_form_input("text", "", array(
+                    <dd><?php uf_form_input("text", $options["custom_post_type_name"], array(
                         "id" => "uf_custom_posts_post_type_name", "name" => "custom_post_type_name", "label" => __("unique custom post name")
                     )); ?></dd>
 
@@ -118,55 +174,55 @@ class UF_CustomPost extends UF_Extension {
                         <?php uf_form_label(__("shorty custom post type description", "unify_framework")); ?></dd>
 
                     <dt><?php _e("Labels", "unify_framework"); ?></dt>
-                    <dd><?php uf_form_input("text", "", array( "id" => "uf_custom_posts_name", "name" => "labels[name]")); ?>
+                    <dd><?php uf_form_input("text", $options["labels"]["name"], array( "id" => "uf_custom_posts_name", "name" => "labels[name]")); ?>
                         <?php uf_form_label(__("custom post type unique name.", "unify_framework"), "uf_custom_posts_name") ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_psots_singular_name", "name" => "labels[singular_name]",)); ?>
+                        <?php uf_form_input("text", $options["labels"]["singular_name"], array( "id" => "uf_custom_psots_singular_name", "name" => "labels[singular_name]",)); ?>
                         <?php uf_form_label(__("singular name.", "unify_framework"), "uf_custom_psots_singular_name") ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_add_new", "name" => "labels[add_new]" )); ?>
+                        <?php uf_form_input("text", $options["labels"]["add_new"], array( "id" => "uf_custom_posts_add_new", "name" => "labels[add_new]" )); ?>
                         <?php uf_form_label(__("add new label.", "unify_framework"), "uf_custom_posts_add_new"); ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_add_new_item", "name" => "labels[add_new_item]")); ?>
+                        <?php uf_form_input("text", $options["labels"]["add_new_item"], array( "id" => "uf_custom_posts_add_new_item", "name" => "labels[add_new_item]")); ?>
                         <?php uf_form_label(__("add new item label.", "unify_framework"), "uf_custom_posts_add_new_item"); ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_edit", "name" => "labels[edit]" )); ?>
+                        <?php uf_form_input("text", $options["labels"]["edit"], array( "id" => "uf_custom_posts_edit", "name" => "labels[edit]" )); ?>
                         <?php uf_form_label(__("edit label.", "unify_framework"), "uf_custom_posts_edit") ?><br />
                         
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_edit_item", "name" => "labels[edit_item]" )); ?>
+                        <?php uf_form_input("text", $options["labels"]["edit_item"], array( "id" => "uf_custom_posts_edit_item", "name" => "labels[edit_item]" )); ?>
                         <?php uf_form_label(__("edit item label.", "unify_framework"), "uf_custom_posts_edit_item"); ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_new_item", "name" => "labels[new_item]" )); ?>
+                        <?php uf_form_input("text", $options["labels"]["new_item"], array( "id" => "uf_custom_posts_new_item", "name" => "labels[new_item]" )); ?>
                         <?php uf_form_label(__("new item label.", "unify_framework"), "uf_custom_posts_new_item") ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_view", "name" => "labels[view]" )); ?>
+                        <?php uf_form_input("text", $options["labels"]["view"], array( "id" => "uf_custom_posts_view", "name" => "labels[view]" )); ?>
                         <?php uf_form_label(__("view label.", "unify_framework"), "uf_custom_posts_view"); ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_view_item", "name" => "labels[view_item]" )); ?>
+                        <?php uf_form_input("text", $options["labels"]["view_item"], array( "id" => "uf_custom_posts_view_item", "name" => "labels[view_item]" )); ?>
                         <?php uf_form_label(__("view item label.", "unify_framework"), "uf_custom_posts_view_item") ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_search_item", "name" => "labels[search_items]" )); ?>
+                        <?php uf_form_input("text", $options["labels"]["search_items"], array( "id" => "uf_custom_posts_search_item", "name" => "labels[search_items]" )); ?>
                         <?php uf_form_label(__("search items label.", "unify_framework"), "uf_custom_posts_search_items"); ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_not_found", "name" => "labels[not_found]" )); ?>
+                        <?php uf_form_input("text", $options["labels"]["not_found"], array( "id" => "uf_custom_posts_not_found", "name" => "labels[not_found]" )); ?>
                         <?php uf_form_label(__("not found label.", "unify_framework"), "uf_custom_posts_not_found"); ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_not_found_in_trush", "name" => "labels[not_found_in_trash]" )); ?>
+                        <?php uf_form_input("text", $options["labels"]["not_found_in_trush"], array( "id" => "uf_custom_posts_not_found_in_trush", "name" => "labels[not_found_in_trash]" )); ?>
                         <?php uf_form_label(__("not found in trush label.", "unify_framework"), "uf_custom_posts_not_found_in_trash"); ?><br />
 
-                        <?php uf_form_input("text", "", array( "id" => "uf_custom_posts_parent", "name" => "labels[parent]" )); ?>
+                        <?php uf_form_input("text", $options["labels"]["parent"], array( "id" => "uf_custom_posts_parent", "name" => "labels[parent]" )); ?>
                         <?php uf_form_label(__("parent label.", "unify_framework"), "uf_custom_posts_parent") ?></dd>
 
                     <dt><?php _e("Public", "unify_framework"); ?></dt>
-                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_public", "name" => "public" )); ?>
+                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_public", "name" => "public", "checked" => $options["public"] )); ?>
                         <?php uf_form_label(__("shown admin UI.", "unify_framework"), "uf_custom_posts_public") ?></dd>
 
                     <dt><?php _e("Search form", "unify_framework"); ?></dt>
-                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_exclude_form_search", "name" => "exclude_from_search" )); ?>
+                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_exclude_form_search", "name" => "exclude_from_search", "checked" => $options["public"] )); ?>
                         <?php uf_form_label(__("exclude custom post type in search form.", "unify_framework"), "uf_custom_posts_exclude_form_search"); ?></dd>
 
                     <dt><?php _e("Show UI", "unify_framework"); ?></dt>
-                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_show_ui", "name" => "show_ui" )); ?>
+                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_show_ui", "name" => "show_ui", "checked" => $options["show_ui"] )); ?>
                         <?php uf_form_label(__("Whether to generate a default UI for managing this post type.", "unify_framework"), "uf_custom_posts_show_ui"); ?></dd>
 
                     <dt><?php _e("Capability Type", "unify_framework"); ?></dt>
@@ -176,27 +232,26 @@ class UF_CustomPost extends UF_Extension {
                     )); ?></dd>
 
                     <dt><?php _e("Hierarchical", "unify_framework"); ?></dt>
-                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_herarchical", "name" => "hierarchical" )); ?>
+                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_herarchical", "name" => "hierarchical", "checked" => $options["hierarchical"] )); ?>
                         <?php uf_form_label(__("this post type have a hieralchical."), "uf_custom_posts_herarchical") ?></dd>
 
                     <dt><?php _e("Supports", "unify_framework"); ?></dt>
                     <dd>
                         <?php uf_form_input("hidden", "", array( "name" => "supports" )); ?>
                         <?php foreach($this->supports as $field): ?>
-                        <?php $checked = isset($options["supports"]) && !is_array($options["supports"]) ? in_array($options["supports"]): true; ?>
                             <?php uf_form_checkbox($field, array(
                                 "id" => "uf_custom_posts_supports_". strtolower($field), "name" => "supports[]",
-                                "label" => __($field), "show_hidden" => false, "checked" => $checked
+                                "label" => __($field), "show_hidden" => false, "checked" => !!in_array($field, empty($options["supports"]) ? array(): $options["supports"])
                             )); ?>
                         <?php endforeach; ?>
                     </dd>
 
                     <dt><?php _e("Export", "unify_framework"); ?></dt>
-                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_can_export", "name" => "can_export")); ?>
+                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_can_export", "name" => "can_export", "checked" => $options["can_export"])); ?>
                         <?php uf_form_label(__("this post type including WPExport ?", "unify_framework"), "uf_custom_posts_can_export"); ?></dd>
 
                     <dt><?php _e("Nav Menus", "unify_framework"); ?></dt>
-                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_show_in_nav_menus", "name" => "show_in_nav_menus")); ?>
+                    <dd><?php uf_form_checkbox(1, array( "id" => "uf_custom_posts_show_in_nav_menus", "name" => "show_in_nav_menus", "checked" => $options["show_in_nav_menus"])); ?>
                         <?php uf_form_label(__("this custom post type including custom nav menus ?"), "uf_custom_posts_show_in_nav_menus"); ?></dd>
                 </dl>
                 <p><input type="submit" name="save_custom_post" value="<?php _e("Save as custom post"); ?>" class="button-primary" /></p>
@@ -213,12 +268,79 @@ class UF_CustomPost extends UF_Extension {
      * @return Void
      */
     function edit() {
+        global $pagenow, $plugin_page;
+        $options = uf_get_custom_post_options();
+        $url = get_admin_url(null, "{$pagenow}?");
     ?>
         <div class="wrap" id="uf_admin">
             <?php screen_icon("options-general"); ?>
             <h2><?php _e("Edit CustomPosts", "unify_framework"); ?></h2>
-            <p><?php _e("", "unify_framework"); ?></p>
-        </div>
+            <table border="0" cellpadding="0" cellspacing="0" class="widefat">
+                <thead>
+                    <tr>
+                        <th><?php _e("ID", "unify_framework"); ?></th>
+                        <th><?php _e("CustomPost type name", "unify_framework"); ?></th>
+                        <th><?php _e("Public", "unify_framework"); ?></th>
+                        <th><?php _e("Exclude SearchForm", "unify_framework"); ?></th>
+                        <th><?php _e("Capability Type", "unify_framework"); ?></th>
+                        <th><?php _e("Hierarchical", "unify_framework"); ?></th>
+                        <th><?php _e("Supports", "unify_framework"); ?></th>
+                        <th><?php _e("Can Exports", "unify_framework"); ?></th>
+                        <th><?php _e("Show in Nav Menus", "unify_framework"); ?></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th><?php _e("ID", "unify_framework"); ?></th>
+                        <th><?php _e("CustomPost type name", "unify_framework"); ?></th>
+                        <th><?php _e("Public", "unify_framework"); ?></th>
+                        <th><?php _e("Exclude SearchForm", "unify_framework"); ?></th>
+                        <th><?php _e("Capability Type", "unify_framework"); ?></th>
+                        <th><?php _e("Hierarchical", "unify_framework"); ?></th>
+                        <th><?php _e("Supports", "unify_framework"); ?></th>
+                        <th><?php _e("Can Exports", "unify_framework"); ?></th>
+                        <th><?php _e("Show in Nav Menus", "unify_framework"); ?></th>
+                    </tr>
+                </tfoot>
+                <?php if(empty($options)): ?>
+                <tbody>
+                    <tr>
+                        <td colspan="9"><?php _e("Not registerd CustomPosts yet."); ?></td>
+                    </tr>
+                </tbody>
+                <?php else: ?>
+                <?php foreach($options as $id => $custom_post): ?>
+                <tbody>
+                    <tr>
+                        <td><?php echo $id; ?></td>
+                        <td><span class="uf_custom_post_type_name"><?php echo $custom_post["custom_post_type_name"]; ?></span>
+                            <div class="uf_inline_col">
+                                <span class="edit"><a href="<?php echo wp_nonce_url($url. "?page=uf-add-custom-post&id={$id}"); ?>"><?php _e("Edit"); ?></a></span> |
+                                <span class="delete"><a href="<?php echo wp_nonce_url($url. "?page=uf-edit-custom-post&id={$id}&delete=true"); ?>"><?php _e("Delete"); ?></a></span>
+                            </div>
+                        </td>
+                        <td><?php echo ($custom_post["public"] == true) ? __("Yes"): __("No"); ?></td>
+                        <td><?php echo ($custom_post["exclude_form_search"] == true) ? __("Yes"): __("No"); ?></td>
+                        <td><?php echo __($custom_post["capability_type"]); ?></td>
+                        <td><?php echo ($custom_post["hierarchical"] == true) ? __("Yes"): __("No"); ?></td>
+                        <td><?php echo join(",", array_map("__", $custom_post["supports"])); ?></td>
+                        <td><?php echo ($custom_post["can_export"] == true) ? __("Yes"): __("No"); ?></td>
+                        <td><?php echo ($custom_post["show_in_nav_menus"] == true) ? __("Yes"): __("No"); ?></td>
+                    </tr>
+                </tbody>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </table>
+            <script type="text/javascript">
+                var msg = "<?php _e("Delete '%title%'. \\n this action can't cancel."); ?>";
+                jQuery(function($){
+                    $(".delete").click(function(){
+                        var title = $(this).parents("td").find(".uf_custom_post_type_name").text();
+                        return confirm(msg.replace("%title%", title));
+                    });
+                });
+            </script>
+        <!-- End uf_admin --></div>
     <?php
     }
 
@@ -237,6 +359,13 @@ class UF_CustomPost extends UF_Extension {
     }
 
 
+    function delete_notice() {
+        echo '<div class="updated fade">'. PHP_EOL,
+            '<p>'. __("Delete. remove selected custom post type") .'</p>',
+        '</div>';
+    }
+
+
     /**
      * Display notice messages
      *
@@ -251,10 +380,6 @@ class UF_CustomPost extends UF_Extension {
             echo '<div class="updated fade">'. PHP_EOL;
                 echo '<p>'. __("Success. add a new custom post."). '</p>';
             echo '</div>'. PHP_EOL;
-        }
-        elseif($_GET) {
-        }
-        elseif($_GET) {
         }
     }
 }
