@@ -162,6 +162,29 @@ function uf_update_custom_post_option($data, $id = null) {
 
 
 /**
+ * delete UnifyFramework theme support, Custom Post Type option
+ *
+ * @access public
+ * @param  $id
+ * @return Bool
+ */
+function uf_delete_custom_post($id) {
+    if(!$id)
+        return false;
+
+    $id = (int)$id;
+    $options = uf_get_custom_post_options();
+    if(!isset($options[$id]))
+        return false;
+
+    unset($options[$id]);
+    uf_update_option("custom_posts", $options);
+    return true;
+}
+
+
+
+/**
  * get UnifyFramework theme options
  *
  * @access public
