@@ -19,6 +19,11 @@ function uf_load_extensions() {
         if($enable_or_disable === false)
             continue;
 
+        if(file_exists(TEMPLATEPATH. "/includes/{$extension}.php")) {
+            require_once TEMPLATEPATH. "/includes/{$extension}.php";
+        }
+
+        /*
         $class_name = str_replace("_", " ", $extension);
         $class_name = str_replace(" ", "", ucwords($class_name));
         $class_name = "UF_". $class_name;
@@ -27,7 +32,7 @@ function uf_load_extensions() {
             if(method_exists($uf_extensions[$class_name], "init")) {
                 call_user_func(array(&$uf_extensions[$class_name], "init"));
             }
-        }
+        }*/
     }
 }
 add_action("uf_init", "uf_load_extensions");
