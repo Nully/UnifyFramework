@@ -150,7 +150,7 @@ function uf_update_custom_post_option($data, $id = null) {
         if(empty($keys))
             $col_id = 1;
         else
-            $col_id  = array_pop($keys);
+            $col_id  = array_pop($keys) + 1;
 
         $options[$col_id] = $data;
     }
@@ -314,7 +314,7 @@ function uf_deep_esc_attr($vars) {
         if(is_array($var)) {
             $vars[$name] = uf_deep_esc_attr($var);
         }
-        else {
+        elseif(!is_bool($var)) {
             $vars[$name] = esc_attr($var);
         }
     }
