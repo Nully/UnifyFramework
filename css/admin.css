@@ -9,6 +9,7 @@
 
 
 /* --------------------------------------------------------- UF Admin in Tags */
+#uf_admin h2 { border-bottom: 1px solid #CCC; padding-bottom: 0; }
 #uf_admin h3 { color: #007; }
 #uf_admin dl { margin-bottom: 30px; }
 #uf_admin dt { float: left; font-weight: bold; width: 180px; }
@@ -47,6 +48,31 @@
 
 
 /* ---------------------------------------------------------- UI Tabs setting */
+h2 .tab-nav {
+    font: italic normal normal 24px/35px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;
+    padding: 4px 20px 6px;
+}
+h2 .tab-nav { /* WordPress 3.0 like tab menu Style */
+    border-color: #CCC #CCC #F9F9F9;
+    border-style: solid;
+    border-width: 1px 1px 0px;
+    border-top-left-radius: 5px 5px;
+    border-top-right-radius: 5px 5px;
+    color: #C1C1C1;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0px 6px -1px 0px;
+    padding: 4px 14px 6px;
+    text-decoration: none;
+    text-shadow: white 0px 1px 0px;
+}
+h2 .tab-nav-avtive {
+    border-width: 1px;
+    color: #464646;
+}
+
+/*
 .ui-tabs {}
 .ui-tabs-nav {}
 .ui-tabs-nav:after { content: "."; display: block; height: 0; clear: both; line-height: 0; visibility: hidden; }
@@ -68,5 +94,5 @@
     padding: 12px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-}
+}*/
 
