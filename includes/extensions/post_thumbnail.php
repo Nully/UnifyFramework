@@ -153,7 +153,7 @@ function uf_pt_init_post_thumbanil() {
     add_theme_support("post-thumbnails", $types);
     set_post_thumbnail_size($width, $height, $crop);
 }
-add_action("after_theme_setup", "uf_pt_init_post_thumbanil");
+add_action("after_setup_theme", "uf_pt_init_post_thumbanil");
 
 
 
