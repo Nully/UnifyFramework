@@ -298,6 +298,7 @@ function uf_cp_options_edit_panel() {
 ?>
 <div class="wrap" id="uf_admin">
     <?php uf_admin_page_tab_nav(); ?>
+    <p><?php _e("Edit custom post.", "unify_framework"); ?></p>
     <table border="0" cellpadding="0" cellspacing="0" class="widefat">
         <thead>
             <tr>
