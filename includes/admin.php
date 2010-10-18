@@ -39,18 +39,6 @@ add_action("admin_init", "uf_admin_init");
 
 
 /**
- * admin_head action hook
- *
- * @access protected
- * @return Void
- */
-function uf_admin_head() {
-}
-add_action("admin_head", "uf_admin_head");
-
-
-
-/**
  * admin_menu action hook
  *
  * @access protected
@@ -138,6 +126,10 @@ function uf_admin_setting() {
         <h3><?php _e("Comment post setting.", "unify_framework"); ?></h3>
         <dl>
             <dt><?php _e("Comment", "unify_framework"); ?></dt>
+            <dd><?php uf_form_checkbox(1, array(
+                "id" => "uf_comment_required_name", "name" => "comment_required_name", "label" => __("name only required.", "unify_framework"),
+                "checked" => $options["comment_required_name"]
+            )); ?></dd>
             <dd><?php uf_form_checkbox(1, array(
                 "id" => "uf_comment_for_page", "name" => "comment_for_page", "label" => __("Comment allwod page ?", "unify_framework"),
                 "checked" => $options["comment_for_page"]
