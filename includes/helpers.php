@@ -30,6 +30,36 @@ function uf_form_input($type, $value = null, $attr = array(), $echo = true) {
 
 
 /**
+ * render textarea element
+ *
+ * @access public
+ * @param  $value  Mix      default value
+ * @param  $attr   Array    HTMLAttributes
+ * @return Void
+ */
+function uf_form_textarea($value, $attr = array(), $echo = true) {
+    $defaults = array( "cols" => 30, "rows" => 10, "name" => "" );
+    $args = wp_parse_args($attr, $defaults);
+
+    if(isset($args["label"])) {
+        $label = " ". uf_form_label($args["label"], $args["id"], false);
+        unset($args["label"]);
+    }
+    $area = '<textarea'. _uf_parse_attr($args). '>';
+    if($value)
+        $area .= $value;
+
+    $area .= "</textarea>";
+
+    if($echo)
+        echo $area;
+    else
+        return $area;
+}
+
+
+
+/**
  * render checkbox element
  *
  * @access public
