@@ -100,7 +100,7 @@ function uf_form_select($options, $attr = array(), $multiple = false, $echo = tr
     if($echo)
         echo $select;
     else
-        return $echo;
+        return $select;
 }
 
 
