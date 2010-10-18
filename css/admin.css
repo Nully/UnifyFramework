@@ -48,11 +48,11 @@
 
 
 /* ---------------------------------------------------------- UI Tabs setting */
-h2 .tab-nav {
+h2 .nav-tab {
     font: italic normal normal 24px/35px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;
     padding: 4px 20px 6px;
 }
-h2 .tab-nav { /* WordPress 3.0 like tab menu Style */
+h2 .nav-tab { /* WordPress 3.0 like tab menu Style */
     border-color: #CCC #CCC #F9F9F9;
     border-style: solid;
     border-width: 1px 1px 0px;
@@ -67,32 +67,10 @@ h2 .tab-nav { /* WordPress 3.0 like tab menu Style */
     text-decoration: none;
     text-shadow: white 0px 1px 0px;
 }
-h2 .tab-nav-avtive {
+h2 .nav-tab-avtive {
     border-width: 1px;
     color: #464646;
 }
 
-/*
-.ui-tabs {}
-.ui-tabs-nav {}
-.ui-tabs-nav:after { content: "."; display: block; height: 0; clear: both; line-height: 0; visibility: hidden; }
-.ui-tabs-nav li { float: left; margin-right: 10px; margin-bottom: -1px; }
-.ui-tabs-nav li a {
-    display: block;
-    padding: 6px 4px;
-    background: #EEE;
-    border: 1px solid #666;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-.ui-tabs-nav .ui-tabs-selected {}
-.ui-tabs-nav li.ui-tabs-selected a, .ui-tabs-nav li.ui-tabs-active a { border-bottom: none; background: #FFF; padding-bottom: 7px; }
-.ui-tabs-panel {
-    z-index: 1000;
-    background: #FFF;
-    border: 1px solid #666;
-    padding: 12px;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-}*/
+
 
