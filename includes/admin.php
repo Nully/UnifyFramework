@@ -114,54 +114,73 @@ function uf_admin_setting() {
     <p><?php _e("setting UnifyFramework theme options.", "unify_framework"); ?></p>
     <form action="" method="post">
         <?php wp_nonce_field(); ?>
-        <h3><?php _e("Editor style setting"); ?></h3>
-        <dl>
-            <dt><?php _e("Editor style setting.", "unify_framework"); ?></dt>
-            <dd><?php uf_form_checkbox(1, array(
-                "id" => "uf_allow_editor_css", "name" => "allow_editor_css","label" => __("Allow custom editor style", "unify_framework"),
-                "checked" => $options["allow_editor_css"]
-            )); ?><br />
-            <span class="caution"><?php _e("* custom editor style file path: "); ?><?php echo bloginfo("template_directory"); ?>/editor-style.css</span></dd>
-        </dl>
 
-        <h3><?php _e("Comment post setting.", "unify_framework"); ?></h3>
-        <dl>
-            <dt><?php _e("Comment", "unify_framework"); ?></dt>
-            <dd><?php uf_form_checkbox(1, array(
-                "id" => "uf_comment_required_name", "name" => "comment_required_name", "label" => __("name only required.", "unify_framework"),
-                "checked" => $options["comment_required_name"]
-            )); ?></dd>
-            <dd><?php uf_form_checkbox(1, array(
-                "id" => "uf_comment_for_page", "name" => "comment_for_page", "label" => __("Comment allwod page ?", "unify_framework"),
-                "checked" => $options["comment_for_page"]
-            )); ?><br />
-            <?php uf_form_input("text", $options["comment_allowd_pages"], array( "id" => "uf_comment_allowd_pages", "name" => "comment_allowd_pages" )); ?><br />
-            <label for="uf_comment_allowd_pages" class="caution"><?php _e("* separated 'comma' for page ID", "unify_framework"); ?></label></dd>
-        </dl>
+        <?php uf_admin_postbox(__("Editor style setting"), array(array(
+            "label" => __("Editor style setting.", "unify_framework"),
+            "field" => uf_form_checkbox(1, array(
+                "id" => "uf_allow_editor_css", "name" => "allow_editor_css",
+                "label" => __("Allow custom editor style", "unify_framework"),
+                "checked" => $options["allow_editor_css"],
+            ), false),
+            "extra" => sprintf(__("* custom editor style file path: %s"), get_bloginfo("template_directory"). "/editor-style.css")
+        ))); ?>
 
-        <h3><?php _e("Custom Image header setting"); ?></h3>
-        <dl>
-            <dt><?php _e("Custom ImageHeader", "unify_framework"); ?></dt>
-            <dd><?php uf_form_checkbox(1, array(
-                "id" => "uf_display_custom_header_in_front", "name" => "show_custom_header_in_front", "label" => __("display custom header in the home page or front page ?", "unify_framework"),
-                "checked" => $options["show_custom_header_in_front"]
-            )); ?></dd>
-        </dl>
 
-        <h3><?php _e("Extensions", "unify_framework"); ?></h3>
-        <dl>
-            <dt><?php _e("CustomPost extension", "unify_framework"); ?></dt>
-            <dd><?php uf_form_checkbox(1, array(
-                "id" => "uf_extension_custom_post", "name" => "custom_post", "label" => __("Enable theme support custom post type.", "unify_framework"),
-                "checked" => $options["extensions"]["custom_post"]
-            )); ?><br />
-            <span class="caution"><?php _e("* is installed Custom Post Type UI, this extension always disable."); ?></span><br />
+        <?php uf_admin_postbox(__("Comment post setting.", "unify_framework"), array(
+            array(
+                "label" => __("Required field setting", "unify_framework"),
+                "field" => uf_form_checkbox(1, array(
+                    "id" => "uf_comment_required_name", "name" => "comment_required_name",
+                    "label" => __("name only required.", "unify_framework"),
+                    "checked" => $options["comment_required_name"]
+                ), false)
+            ),
+            array(
+                "label" => __("Comment allowd page setting", "unify_framework"),
+                "field" => uf_form_checkbox(1, array(
+                    "id" => "uf_comment_for_page", "name" => "comment_for_page",
+                    "label" => __("Comment allwod page ?", "unify_framework"),
+                    "checked" => $options["comment_for_page"]
+                ), false). "<br />".
+                uf_form_input("text", $options["comment_allowd_pages"], array(
+                    "id" => "uf_comment_allowd_pages", "name" => "comment_allowd_pages",
+                ), false),
+                "extra" => __("* separated 'comma' for page ID", "unify_framework")
+            )
+        )); ?>
 
-            <?php uf_form_checkbox(1, array(
-                "id" => "uf_extension_post_thumbnail", "name" => "post_thumbnail", "label" => __("Enable theme support post thumbnail."),
-                "checked" => $options["extensions"]["post_thumbnail"]
-            )); ?></dd>
-        </dl>
+
+        <?php uf_admin_postbox(__("Custom Image header setting", "unify_framework"), array(
+            array(
+                "label" => __("Custom ImageHeader", "unify_framework"),
+                "field" => uf_form_checkbox(1, array(
+                    "id" => "uf_display_custom_header_in_front", "name" => "show_custom_header_in_front",
+                    "label" => __("display custom header in the home page or front page ?", "unify_framework"),
+                    "checked" => $options["show_custom_header_in_front"]
+                ), false),
+            )
+        )); ?>
+
+
+        <?php uf_admin_postbox(__("Extensions", "unify_framework"), array(
+            array(
+                "label" => __("CustomPost extension", "unify_framework"),
+                "field" => uf_form_checkbox(1, array(
+                    "id" => "uf_extension_custom_post", "name" => "custom_post",
+                    "label" => __("Enable theme support custom post type.", "unify_framework"),
+                    "checked" => $options["extensions"]["custom_post"]
+                ), false),
+                "extra" => __("* is installed Custom Post Type UI, this extension always disable.", "unify_framework")
+            ),
+            array(
+                "label" => __("PostThumbnail extension", "unify_framework"),
+                "field" => uf_form_checkbox(1, array(
+                    "id" => "uf_extension_post_thumbnail", "name" => "post_thumbnail", "label" => __("Enable theme support post thumbnail."),
+                    "checked" => $options["extensions"]["post_thumbnail"]
+                ), false),
+            )
+        )); ?>
+
         <p><input type="submit" name="save_option" value="<?php _e("Save options"); ?>" class="button-primary" /></p>
     </form>
 <!-- End wrap --></div>
@@ -169,6 +188,40 @@ function uf_admin_setting() {
 }
 
 
+
+/**
+ * uf_admin_postbox
+ *
+ * UnifyFramework admin panel postbox HTML display.
+ *
+ * @access public
+ * @param  $title    String    postbox title bar
+ * @param  $data     Array     postbod data array. array( "field string" => "field value" ) pair, display dl tag.
+ * @param  $extra    Bool|String   postbox inside a extra comment data.
+ * @return Void|String
+ */
+function uf_admin_postbox($title, $data = array()) {
+    if(!is_array($data))
+        $data = (array)$data;
+?>
+<div class="postbox">
+    <h3 class="hndle"><?php echo $title; ?></h3>
+    <div class="inside">
+        <dl>
+            <?php foreach($data as $pair): ?>
+            <dt><?php echo $pair["label"]; ?></dt>
+            <dd><?php echo $pair["field"]; ?>
+                <?php if($pair["extra"]): ?>
+                <br />
+                <span class="caution"><?php echo $pair["extra"]; ?></span>
+                <?php endif; ?>
+            </dd>
+            <?php endforeach; ?>
+        </dl>
+    <!-- End inside --></div>
+<!-- End postbox --></div>
+<?php
+}
 
 
 
