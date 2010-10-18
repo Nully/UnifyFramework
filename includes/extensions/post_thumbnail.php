@@ -102,7 +102,8 @@ function uf_pt_admin_edit_page() {
 
             <dt><?php _e("Thumbnail crop", "unify_fraemwork"); ?></dt>
             <dd><?php uf_form_checkbox(1, array(
-                "id" => "uf_post_thumb_crop", "name" => "crop", "label" => __("upload image crop ?", "unify_framework")
+                "id" => "uf_post_thumb_crop", "name" => "crop", "label" => __("upload image crop ?", "unify_framework"),
+                "checked" => !!$options["crop"]
             )); ?></dd>
         </dl>
         <p><input type="submit" name="save_post_thumb_options" value="<?php _e("Save post thumbnail options"); ?>" class="button-primary" /></p>
