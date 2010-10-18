@@ -56,7 +56,6 @@ require_once TEMPLATEPATH. "/includes/widget.php";
  * Load extensions
  */
 require_once TEMPLATEPATH. "/includes/extension.php";
-require_once TEMPLATEPATH. "/includes/extensions/default-extensions.php";
 
 
 if(is_admin()) {
