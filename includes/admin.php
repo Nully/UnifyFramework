@@ -58,10 +58,56 @@ add_action("admin_head", "uf_admin_head");
  */
 function uf_admin_submenu() {
     add_menu_page(__("UnifyFramework setting pages", "unify_framework"), __("Theme Options", "unify_framework"), 10, "uf-options", "uf_admin_setting");
-    //if(function_exists("add_submenu_page"))
-        //add_submenu_page("themes.php", __("UnifyFramework setting pages", "unify_framework"), __("Theme Options", "unify_framework"), 10, "uf-admin", "uf_admin_setting");
+    uf_admin_add_page_nav(__("Theme Options", "unify_framework"), "uf-options");
 }
 add_action("admin_menu", "uf_admin_submenu");
+
+
+
+/**
+ * Register admin theme option global navigation stack.
+ *
+ * @access public
+ * @param  $label    String    menu text label
+ * @param  $page     String    admin theme option setting Query 'page' name.
+ * @return Bool|String  registerd page slug name.
+ */
+global $uf_admin_page_navs;
+$uf_admin_page_navs = array();
+function uf_admin_add_page_nav($label, $page) {
+    global $uf_admin_page_navs;
+
+    if(isset($uf_admin_page_navs[$page]))
+        return false;
+
+    $uf_admin_page_navs[$page] = array(
+        "label" => $label
+    );
+
+    return $page;
+}
+
+
+
+/**
+ * UnifyFramework admin page Navigation tab
+ *
+ * @access public
+ * @return Void
+ */
+function uf_admin_page_tab_nav() {
+    global $plugin_page, $uf_admin_page_navs;
+
+    $base_url = get_admin_url(null, "admin.php");
+?>
+<?php screen_icon("options-general"); ?>
+<h2>
+    <?php foreach($uf_admin_page_navs as $name => $nav): ?>
+    <a href="<?php echo $base_url; ?>?page=<?php echo $name; ?>" class="nav-tab<?php echo ($plugin_page == $name) ? " nav-tab-active": ""; ?>"><?php echo $nav["label"]; ?></a>
+    <?php endforeach; ?>
+</h2>
+<?php
+}
 
 
 
@@ -131,164 +177,5 @@ function uf_admin_setting() {
 
 
 
-/**
- * UnifyFramework admin page Navigation tab
- *
- * @access public
- * @return Void
- */
-function uf_admin_page_tab_nav() {
-    global $plugin_page;
-?>
-<?php screen_icon("options-general"); ?>
-<h2>
-    <a href="#" class="nav-tab nav-tab-active"><?php _e("UnifyFramework setting page", "unify_framework"); ?></a>
-    <a href="#" class="nav-tab">aaa</a>
-    <a href="#" class="nav-tab">bbb</a>
-</h2>
-<?php
-}
-
-
-/**
- * Display custom post form for Admin
- *
- * @access public
- * @return Void
- */
-/*
-function uf_admin_page_custom_post() {
-    if($_GET["uf_cp_edit_id"]) {
-        $options = uf_get_custom_post($_GET["uf_cp_edit_id"]);
-    }
-?>
-<h3><?php _e("Custom post type register field.", "unify_framework"); ?></h3>
-<form action="" method="post">
-    <?php wp_nonce_field(); ?>
-    <?php uf_form_input("hidden", wp_create_nonce(), array( "name" => "uf_admin_nonce" )); ?>
-    <dl>
-        <dt><?php _e("Custom post type name", "unify_framework"); ?></dt>
-        <dd><?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_post_type_name", "name" => "uf_custom_posts_post_type_name", "label" => __("unique custom post name")
-        )); ?></dd>
-
-        <dt><?php _e("Description", "unify_framework"); ?></dt>
-        <dd><?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_description", "name" => "uf_custom_posts[description]", "label" => __("shorty custom post type description", "unify_framework")
-        )); ?></dd>
-
-        <dt><?php _e("Labels", "unify_framework"); ?></dt>
-        <dd><?php uf_form_input("text", "", array(
-            "id" => "uf_custom_posts_name", "name" => "uf_custom_posts[name]", "label" => __("custom post type unique name.", "unify_framework")
-        )); ?><br />
-        <?php uf_form_input("text", "", array(
-            "id" => "uf_custom_psots_singular_name", "name" => "uf_custom_posts[singular_name]", "label" => __("custom post type unique singular name.", "unify_framework")
-        )); ?></dd>
-
-        <dt><?php _e("Public", "unify_framework"); ?></dt>
-        <dd><?php uf_form_checkbox(1, array(
-            "id" => "uf_custom_posts_public", "name" => "uf_custom_posts[public]", "label" => __("shown admin UI.", "unify_framework")
-        )); ?></dd>
-
-        <dt><?php _e("Search form", "unify_framework"); ?></dt>
-        <dd><?php uf_form_checkbox(1, array(
-            "id" => "uf_custom_posts_exclude_form_search", "name" => "uf_custom_posts[exclude_from_search]", "label" => __("exclude custom post type in search form.", "unify_framework")
-        )); ?></dd>
-
-        <dt><?php _e("Show UI", "unify_framework"); ?></dt>
-        <dd><?php uf_form_checkbox(1, array(
-            "id" => "uf_custom_posts_show_ui", "name" => "uf_custom_posts[show_ui]", "label" => __("Whether to generate a default UI for managing this post type.", "unify_framework")
-        )); ?></dd>
-
-        <dt><?php _e("Capability Type", "unify_framework"); ?></dt>
-        <dd><?php uf_form_select(array( "page" => __("Page"), "post" => __("Post")), array(
-            "id" => "uf_custom_posts_capability_type", "name" => "uf_custom_posts[capability_type]", "label" => __("The post type to use for checking read, edit, and delete capabilities.", "unify_framework"),
-            "value" => ""
-        )); ?></dd>
-
-        <dt><?php _e("Hierarchical", "unify_framework"); ?></dt>
-        <dd><?php uf_form_checkbox(1, array(
-            "id" => "uf_custom_posts_herarchical", "name" => "uf_custom_posts[hierarchical]", "label" => __("this post type have a hieralchical.")
-        )); ?></dd>
-
-        <dt><?php _e("Supports", "unify_framework"); ?></dt>
-        <dd>
-            <?php uf_form_input("hidden", "", array( "name" => "uf_custom_posts[supports]" )); ?>
-            <?php foreach(array('Title','Editor','Author','Thumbnail','Excerpt','Comments') as $field): ?>
-                <?php uf_form_checkbox($field, array( "id" => "uf_custom_posts_supports_". strtolower($field), "name" => "uf_custom_posts[supports][]", "label" => __($field), "show_hidden" => false )); ?>
-            <?php endforeach; ?>
-        </dd>
-
-        <dt><?php _e("Export", "unify_framework"); ?></dt>
-        <dd><?php uf_form_checkbox(1, array(
-            "id" => "uf_custom_posts_can_export", "name" => "uf_custom_posts[can_export]", "label" => __("this post type including WPExport ?", "unify_framework")
-        )); ?></dd>
-
-        <dt><?php _e("Nav Menus", "unify_framework"); ?></dt>
-        <dd><?php uf_form_checkbox(1, array(
-            "id" => "uf_custom_posts_show_in_nav_menus", "name" => "uf_custom_posts[show_in_nav_menus]", "label" => __("this custom post type including custom nav menus ?")
-        )); ?></dd>
-    </dl>
-    <p><input type="submit" name="uf_custom_post_save" value="<?php _e("Save as custom post"); ?>" class="button-primary" /></p>
-</form>
-<hr />
-<h3><?php _e("Registerd custom post types"); ?></h3>
-<?php uf_admin_get_registerd_custom_posts(); ?>
-<?php
-}
-add_action("uf_admin_page_custom-post", "uf_admin_page_custom_post");
-*/
-
-
-/**
- * Display registerd custom posts
- *
- * @access public
- * @return Void
- */
-/*
-function uf_admin_get_registerd_custom_posts() {
-    $custom_posts = uf_get_custom_posts();
-?>
-<?php if(empty($custom_posts)): ?>
-    <p><?php _e("No in registerd", "unify_framework"); ?></p>
-<?php else: ?>
-    <table border="0" cellpadding="0" cellspacing="0" class="widefat">
-        <thead>
-            <tr>
-                <th><?php _e("ID", "unify_framework"); ?></th>
-                <th><?php _e("CustomPost name", "unify_framework"); ?></th>
-                <th><?php _e("Actions", "unify_framework"); ?></th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th><?php _e("ID", "unify_framework"); ?></th>
-                <th><?php _e("CustomPost name", "unify_framework"); ?></th>
-                <th><?php _e("Actions", "unify_framework"); ?></th>
-            </tr>
-        </tfoot>
-    </table>
-<?php endif; ?>
-<?php
-}
-*/
-
-
-/**
- * display theme support post-thumbnail
- *    post-thumbnail support WordPress version 2.9.x
- *
- * @access protected
- * @return Void
- */
-/*
-function uf_admin_page_post_thumbnail() {
-?>
-<h3><?php _e("Post thumbnail setting", "unify_framework"); ?></h3>
-<?php
-}
-add_action("uf_admin_page_post-thumbnail", "uf_admin_page_post_thumbnail");
-*/
 
 
