@@ -42,6 +42,9 @@ function uf_cp_register_menus() {
     if(function_exists("add_submenu_page")) {
         add_submenu_page("uf-options", __("Add Custom Post", "unify_framework"), __("Add Custom Post", "unify_framework"), 10, "uf-cp-add", "uf_cp_options_register_panel");
         add_submenu_page("uf-options", __("Edit Custom Post", "unify_framework"), __("Edit Custom Post", "unify_framework"), 10, "uf-cp-edit", "uf_cp_options_edit_panel");
+
+        uf_admin_add_page_nav(__("Add Custom Post", "unify_framework"), "uf-cp-add");
+        uf_admin_add_page_nav(__("Edit Custom Post", "unify_framework"), "uf-cp-edit");
     }
 }
 add_action("admin_menu", "uf_cp_register_menus");
@@ -168,8 +171,7 @@ function uf_cp_options_register_panel() {
     global $uf_custom_post_supports;
 ?>
 <div class="wrap" id="uf_admin">
-    <?php screen_icon("options-general"); ?>
-    <h2><?php _e("Add new CustomPost", "unify_framework"); ?></h2>
+    <?php uf_admin_page_tab_nav(); ?>
     <p><?php _e("", "unify_framework"); ?></p>
     <h3><?php _e("Custom post type register field.", "unify_framework"); ?></h3>
     <form action="" method="post">
@@ -295,8 +297,7 @@ function uf_cp_options_edit_panel() {
     $options = uf_get_custom_post_options();
 ?>
 <div class="wrap" id="uf_admin">
-    <?php screen_icon("options-general"); ?>
-    <h2><?php _e("Edit CustomPosts", "unify_framework"); ?></h2>
+    <?php uf_admin_page_tab_nav(); ?>
     <table border="0" cellpadding="0" cellspacing="0" class="widefat">
         <thead>
             <tr>
