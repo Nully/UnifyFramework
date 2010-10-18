@@ -78,7 +78,7 @@ function uf_cp_options_hook() {
         );
 
         if(!$options["custom_post_type_name"]) {
-            add_action("admin_notic", "uf_cp_options_notices");
+            //add_action("admin_notices", "uf_cp_options_notices");
             return;
         }
 
@@ -112,6 +112,12 @@ function uf_cp_options_notices() {
     if($_GET["save"]) {
         echo '<div class="updated fade">',
             "<p>". __("Success. CustomPost saved"). "</p>",
+        "</div>";
+    }
+    // validate error, required field 'custom_post_type_name'
+    elseif($_POST["save_custom_post"] && !$_POST["custom_post_type_name"]) {
+        echo '<div class="error fade">',
+            '<p>'. __("required field CustomPost type name", "unify_framework") .'</p>',
         "</div>";
     }
 }
@@ -178,7 +184,6 @@ function uf_cp_options_register_panel() {
 <div class="wrap" id="uf_admin">
     <?php uf_admin_page_tab_nav(); ?>
     <p><?php _e("", "unify_framework"); ?></p>
-    <h3><?php _e("Custom post type register field.", "unify_framework"); ?></h3>
     <form action="" method="post">
         <?php if($_GET["id"]): ?><input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>" /><?php endif; ?>
         <?php wp_nonce_field(); ?>
@@ -283,10 +288,6 @@ function uf_cp_options_register_panel() {
                 "field" => uf_form_checkbox(1, array( "id" => "uf_custom_posts_public", "name" => "public", "checked" => $options["public"], "label" => __("Public.", "unify_framework") ), false),
             ),
             array(
-                "label" => __("shown admin UI.", "unify_framework"),
-                "field" => uf_form_checkbox(1, array( "id" => "uf_custom_posts_show_ui", "name" => "show_admin_ui", "checked" => $options["show_admin_ui"], "label" => __("shown admin UI.", "unify_framework") ), false),
-            ),
-            array(
                 "label" => __("Search form", "unify_framework"),
                 "field" => uf_form_checkbox(1, array( "id" => "uf_custom_posts_exclude_form_search", "name" => "exclude_from_search", "checked" => $options["public"], "label" => __("exclude custom post type in search form.", "unify_framework") ), false),
             ),
@@ -299,7 +300,7 @@ function uf_cp_options_register_panel() {
                 "field" => uf_form_select(array( "page" => __("Page"), "post" => __("Post")), array(
                     "id" => "uf_custom_posts_capability_type", "name" => "capability_type",
                     "label" => __("The post type to use for checking read, edit, and delete capabilities.", "unify_framework"),
-                    "value" => ""
+                    "value" => $options["capability_type"]
                 ), false, false),
             ),
             array(
@@ -313,10 +314,6 @@ function uf_cp_options_register_panel() {
             array(
                 "label" => __("Export", "unify_framework"),
                 "field" => uf_form_checkbox(1, array( "id" => "uf_custom_posts_can_export", "name" => "can_export", "checked" => $options["can_export"], "label" => __("this post type including WPExport ?", "unify_framework")), false),
-            ),
-            array(
-                "label" => __("Nav Menus", "unify_framework"),
-                "field" => uf_form_checkbox(1, array( "id" => "uf_custom_posts_show_in_nav_menus", "name" => "show_in_nav_menus", "checked" => $options["show_in_nav_menus"], "label" => __("this custom post type including custom nav menus ?")), false),
             ),
             array(
                 "label" => __("Nav Menus", "unify_framework"),
