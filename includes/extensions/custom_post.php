@@ -169,6 +169,11 @@ add_filter("uf_cp_options_filter", "uf_cp_options_filter");
  */
 function uf_cp_options_register_panel() {
     global $uf_custom_post_supports;
+
+    $options = array();
+    if($_GET["id"]) {
+        $options = uf_get_custom_post_option($_GET["id"]);
+    }
 ?>
 <div class="wrap" id="uf_admin">
     <?php uf_admin_page_tab_nav(); ?>
