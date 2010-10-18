@@ -6,9 +6,10 @@
 function uf_admin_save_options() {
     if($_POST["save_option"]) {
         uf_update_option("theme_options", array(
-            "allow_editor_css"     => $_POST["allow_editor_css"],
-            "comment_for_page"     => $_POST["comment_for_page"],
-            "comment_allowd_pages" => $_POST["comment_allowd_pages"],
+            "allow_editor_css"      => $_POST["allow_editor_css"],
+            "comment_required_name" => $_POST["comment_required_name"],
+            "comment_for_page"      => $_POST["comment_for_page"],
+            "comment_allowd_pages"  => $_POST["comment_allowd_pages"],
             "show_custom_header_in_front" => $_POST["show_custom_header_in_front"],
             "extensions" => array(
                 "custom_post"    => $_POST["custom_post"],
