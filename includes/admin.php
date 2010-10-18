@@ -75,8 +75,7 @@ function uf_admin_setting() {
     $options = uf_get_option("theme_options");
 ?>
 <div class="wrap" id="uf_admin">
-    <?php screen_icon("options-general"); ?>
-    <h2><?php _e("UnifyFramework setting page", "unify_framework"); ?></h2>
+    <?php uf_admin_page_tab_nav(); ?>
     <p><?php _e("setting UnifyFramework theme options.", "unify_framework"); ?></p>
     <form action="" method="post">
         <?php wp_nonce_field(); ?>
@@ -130,6 +129,25 @@ function uf_admin_setting() {
 <?php
 }
 
+
+
+/**
+ * UnifyFramework admin page Navigation tab
+ *
+ * @access public
+ * @return Void
+ */
+function uf_admin_page_tab_nav() {
+    global $plugin_page;
+?>
+<?php screen_icon("options-general"); ?>
+<h2>
+    <a href="#" class="nav-tab nav-tab-active"><?php _e("UnifyFramework setting page", "unify_framework"); ?></a>
+    <a href="#" class="nav-tab">aaa</a>
+    <a href="#" class="nav-tab">bbb</a>
+</h2>
+<?php
+}
 
 
 /**
