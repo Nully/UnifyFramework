@@ -19,7 +19,8 @@ function uf_pt_admin_save_options() {
         "enable" => $_POST["enable"],
         "support_type" => $_POST["support_type"],
         "width"  => $_POST["width"],
-        "height" => $_POST["height"]
+        "height" => $_POST["height"],
+        "crop"   => $_POST["crop"]
     ));
 }
 add_action("init", "uf_pt_admin_save_options");
@@ -70,7 +71,6 @@ add_action("admin_menu", "uf_pt_admin_menu");
  */
 function uf_pt_admin_edit_page() {
     $options = uf_get_option("post_thumbnail");
-    var_dump($options);
 ?>
 <div class="wrap" id="uf_admin">
     <?php uf_admin_page_tab_nav(); ?>
@@ -87,17 +87,22 @@ function uf_pt_admin_edit_page() {
             <dt><?php _e("Support post type", "unify_framework"); ?></dt>
             <dd><?php uf_form_select(array( "page" => __("Page"), "post" => __("Post"), "all" => __("All")), array(
                 "id" => "uf_post_thumb_support_type", "name" => "support_type",
-                "label" => __("Choice a support post type"), "value" => $options["support_type"]
+                "label" => __("Choice a support post type", "unify_framework"), "value" => $options["support_type"]
             )); ?></dd>
 
             <dt><?php _e("Thumbnail width", "unify_framework"); ?></dt>
             <dd><?php uf_form_input("text", $options["width"] ? $options["width"] : 200, array(
-                "id" => "uf_post_thumb_width", "name" => "width", "label" => __("set image width is 'px'.")
+                "id" => "uf_post_thumb_width", "name" => "width", "label" => __("set image width is 'px'.", "unify_framework")
             )); ?></dd>
 
             <dt><?php _e("Thumbnail height", "unify_framework"); ?></dt>
             <dd><?php uf_form_input("text", $options["height"] ? $options["height"] : 200, array(
-                "id" => "uf_post_thumb_height", "name" => "height", "label" => __("set image height is 'px'.")
+                "id" => "uf_post_thumb_height", "name" => "height", "label" => __("set image height is 'px'.", "unify_framework")
+            )); ?></dd>
+
+            <dt><?php _e("Thumbnail crop", "unify_fraemwork"); ?></dt>
+            <dd><?php uf_form_checkbox(1, array(
+                "id" => "uf_post_thumb_crop", "name" => "crop", "label" => __("upload image crop ?", "unify_framework")
             )); ?></dd>
         </dl>
         <p><input type="submit" name="save_post_thumb_options" value="<?php _e("Save post thumbnail options"); ?>" class="button-primary" /></p>
@@ -106,6 +111,48 @@ function uf_pt_admin_edit_page() {
 <?php
 }
 
+
+
+/**
+ * uf_pt_init_post_thumbnail
+ *
+ * UnifyFramework PostThumbnail support setting.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_pt_init_post_thumbanil() {
+    $options = uf_get_option("post_thumbnail", array());
+    if(empty($options) || $options["enable"] == false)
+        return;
+
+    $types = array();
+    switch(strtolower($options["support_type"])) {
+        case "page":
+            $types[] = "page";
+            break;
+        case "post":
+            $types[] = "post";
+            break;
+        default:
+            $types = array("post", "page");
+            break;
+    }
+
+    $width = (int)$options["width"];
+    $height = (int)$options["height"];
+    $crop = !!$options["crop"];
+
+    if(empty($width))
+        $width = 180;
+
+    if(empty($height))
+        $height = 200;
+
+    add_theme_support("post-thumbnails", $types);
+    set_post_thumbnail_size($width, $height, $crop);
+}
+add_action("after_theme_setup", "uf_pt_init_post_thumbanil");
 
 
 
