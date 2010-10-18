@@ -5,40 +5,44 @@
  */
 /* ----------------------------------------------------------------- UF Admin */
 #uf_admin { margin-bottom: 50px; }
+#uf_admin:after, #uf_admin form:after { content: "."; display: block; height: 0; line-height: 0; clear: both; visibility: hidden; }
 
 
 
 /* --------------------------------------------------------- UF Admin in Tags */
 #uf_admin h2 { border-bottom: 1px solid #CCC; padding-bottom: 0; }
 #uf_admin h3 { color: #444; }
-#uf_admin dl { margin-bottom: 60px; }
-#uf_admin dt { float: left; width: 180px; }
-#uf_admin dd { padding-left: 180px; margin-bottom: 15px; }
+#uf_admin dl { margin: 10px 0; }
+#uf_admin dt { float: left; width: 160px; padding: 5px 10px; }
+#uf_admin dd { padding-left: 160px; padding: 5px 10px 5px 180px; margin-bottom: 5px; }
 #uf_admin hr { clear: both; margin: 0 0 30px; }
+#uf_admin .postbox { float: left; width: 49%; margin-right: 0.5%; }
+#uf_admin .postbox h3 { margin: 0; padding: 7px 9px; }
+#uf_admin .postbox .hndle { cursor: auto; }
 
 
 
 /* --------------------------------------------------------- UF Admin Options */
-#uf_comment_allowd_pages { width: 450px; }
+#uf_comment_allowd_pages { width: 99%; }
 
 
 
 /* ------------------------------------------------------ UF Admin Custompost */
-#uf_custom_posts_description { width: 400px; }
-#uf_custom_posts_post_type_name { width: 250px; }
-#uf_custom_posts_name { width: 250px; }
-#uf_custom_psots_singular_name { width: 250px; }
-#uf_custom_posts_add_new { width: 250px; }
-#uf_custom_posts_add_new_item { width: 250px; }
-#uf_custom_posts_edit { width: 250px; }
-#uf_custom_posts_edit_item { width: 250px; }
-#uf_custom_posts_new_item { width: 250px; }
-#uf_custom_posts_view { width: 250px; }
-#uf_custom_posts_view_item { width: 250px; }
-#uf_custom_posts_search_item { width: 250px; }
-#uf_custom_posts_not_found { width: 250px; }
-#uf_custom_posts_not_found_in_trush { width: 250px; }
-#uf_custom_posts_parent { width: 250px; }
+#uf_custom_posts_description { width: 60%; }
+#uf_custom_posts_post_type_name { width: 40%; }
+#uf_custom_posts_name { width: 40%; }
+#uf_custom_psots_singular_name { width: 40%; }
+#uf_custom_posts_add_new { width: 40%; }
+#uf_custom_posts_add_new_item { width: 40%; }
+#uf_custom_posts_edit { width: 40%; }
+#uf_custom_posts_edit_item { width: 40%; }
+#uf_custom_posts_new_item { width: 40%; }
+#uf_custom_posts_view { width: 40%; }
+#uf_custom_posts_view_item { width: 40%; }
+#uf_custom_posts_search_item { width: 40%; }
+#uf_custom_posts_not_found { width: 40%; }
+#uf_custom_posts_not_found_in_trush { width: 40%; }
+#uf_custom_posts_parent { width: 40%; }
 
 
 
