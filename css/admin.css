@@ -48,10 +48,6 @@
 
 
 /* ---------------------------------------------------------- UI Tabs setting */
-h2 .nav-tab {
-    font: italic normal normal 24px/35px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;
-    padding: 4px 20px 6px;
-}
 h2 .nav-tab { /* WordPress 3.0 like tab menu Style */
     border-color: #CCC #CCC #F9F9F9;
     border-style: solid;
@@ -66,6 +62,11 @@ h2 .nav-tab { /* WordPress 3.0 like tab menu Style */
     padding: 4px 14px 6px;
     text-decoration: none;
     text-shadow: white 0px 1px 0px;
+}
+
+h2 .nav-tab {
+    font: italic normal normal 24px/35px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;
+    padding: 4px 20px 6px;
 }
 h2 .nav-tab-avtive {
     border-width: 1px;
