@@ -12,6 +12,31 @@ $uf_custom_post_supports = array(
 
 
 /**
+ * uf_cp_register_post_types
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_cp_register_post_types() {
+    $custom_posts = uf_get_option("custom_posts");
+    if(empty($custom_posts))
+        return;
+
+    foreach($custom_posts as $id => $args) {
+        $post_type = $args["custom_post_type_name"];
+        unset($args["custom_post_type_name"]);
+
+        foreach($args["supports"] as $field => $value) {
+            $args["supports"][$field] = strtolower(str_replace(" ", "-", $value));
+        }
+        register_post_type($post_type, $args);
+    }
+}
+add_action("init", "uf_cp_register_post_types");
+
+
+
+/**
  * uf_cp_admin_head
  *
  * CustomPost admin panel header
@@ -64,20 +89,8 @@ function uf_cp_options_hook() {
 
     $base_url = get_admin_url(null, "{$pagenow}?");
     if($_POST["save_custom_post"]) {
-        $options = array(
-            "custom_post_type_name" => $_POST["custom_post_type_name"],
-            "labels"    => $_POST["labels"],
-            "public"    => $_POST["public"],
-            "exclude_from_search" => $_POST["exclude_from_search"],
-            "show_ui"   => $_POST["show_ui"],
-            "capability_type" => $_POST["capability_type"],
-            "hierarchical"    => $_POST["hierarchical"],
-            "supports"        => $_POST["supports"],
-            "can_export"      => $_POST["can_export"],
-            "show_in_nav_menus" => $_POST["show_in_nav_menus"],
-        );
-
-        if(!$options["custom_post_type_name"]) {
+        $options = uf_cp_get_post_option();
+        if(!$options["custom_post_type_name"] || !preg_match("@^[\w\-_]+$@", $options["custom_post_type_name"])) {
             //add_action("admin_notices", "uf_cp_options_notices");
             return;
         }
@@ -115,10 +128,13 @@ function uf_cp_options_notices() {
         "</div>";
     }
     // validate error, required field 'custom_post_type_name'
-    elseif($_POST["save_custom_post"] && !$_POST["custom_post_type_name"]) {
-        echo '<div class="error fade">',
-            '<p>'. __("required field CustomPost type name", "unify_framework") .'</p>',
-        "</div>";
+    elseif(!empty($_POST)) {
+        if($_POST["save_custom_post"] && !$_POST["custom_post_type_name"] || !preg_match("@^[\w\-_]+$@", $options["custom_post_type_name"])) {
+            echo '<div class="error fade">',
+                '<p>'. __("required field CustomPost type name", "unify_framework") .'</p>',
+                '<p>'. __("Custom post type name is Digits and underscore (_) and hyphen (-).", "unify_framework"). '</p>',
+            "</div>";
+        }
     }
 }
 add_action("admin_notices", "uf_cp_options_notices");
@@ -135,29 +151,42 @@ add_action("admin_notices", "uf_cp_options_notices");
  */
 function uf_cp_options_filter($options) {
     $options = uf_parse_to_bool_deep($options);
-
-    $options["labels"]["name"]          = empty($options["labels"]["name"]) ? $options["custom_post_type_name"]: $options["labels"]["name"];
-    $options["labels"]["singular_name"] = empty($options["labels"]["singular_name"]) ? $options["custom_post_type_name"]: $options["labels"]["singular_name"];
-    $options["labels"]["add_new"]       = empty($options["labels"]["add_new"]) ? "Add new ". $options["custom_post_type_name"]: $options["labels"]["add_new"];
-    $options["labels"]["add_new_item"]  = empty($options["labels"]["add_new_item"]) ? "Add for ". $options["custom_post_type_name"]: $options["labels"]["add_new_item"];
-    $options["labels"]["edit"]          = empty($options["labels"]["edit"]) ? "Edit ". $options["custom_post_type_name"]: $options["labels"]["edit"];
-    $options["labels"]["edit_item"]     = empty($options["labels"]["edit_item"]) ? "Edit for ". $options["custom_post_type_name"]: $options["labels"]["edit_item"];
-    $options["labels"]["new_item"]      = empty($options["labels"]["new_item"]) ? "New ". $options["custom_post_type_name"]: $options["labels"]["new_item"];
-    $options["labels"]["view"]          = empty($options["labels"]["view"]) ? "View ". $options["custom_post_type_name"]: $options["labels"]["view"];
-    $options["labels"]["view_item"]     = empty($options["labels"]["view_item"]) ? "View for ". $options["custom_post_type_name"]: $options["labels"]["view_item"];
-    $options["labels"]["search_items"]  = empty($options["labels"]["search_items"]) ? "search ". $options["custom_post_type_name"]: $options["labels"]["search_items"];
-    $options["labels"]["not_found"]     = empty($options["labels"]["not_found"]) ? "Not Found". $options["custom_post_type_name"]: $options["labels"]["not_found"];
-    $options["labels"]["not_found_in_trush"] = empty($options["labels"]["not_found_in_trush"]) ? "Not Found in Trush". $options["labels"]["custom_post_type_name"]: $options["labels"]["not_found_in_trush"];
-    $options["labels"]["parent"]        = empty($options["labels"]["parent"]) ? "parent to ". $options["labels"]["custom_post_type_name"]: $options["labels"]["parent"];
+    $name = $options["custom_post_type_name"];
 
     $options["supports"] = empty($options["supports"]) ? array(): $options["supports"];
-
     $options["pubic"]               = empty($options["public"]) ? false: true;
     $options["exclude_form_search"] = empty($options["exclude_form_search"]) ? false: true;
     $options["show_ui"]           = empty($options["show_ui"]) ? false: true ;
     $options["hierarchical"]      = empty($options["hierarchical"]) ? false: true;
     $options["can_export"]        = empty($options["can_export"]) ? false: true;
     $options["show_in_nav_menus"] = empty($options["show_in_nav_menus"]) ? false: true;
+
+    $options["labels"]["name"]          = empty($options["labels"]["name"]) ? "{$name}": $options["labels"]["name"];
+    $options["labels"]["singular_name"] = empty($options["labels"]["singular_name"]) ? "{$name}": $options["labels"]["singular_name"];
+    $options["labels"]["add_new"]       = empty($options["labels"]["add_new"]) ? "Add {$name}": $options["labels"]["add_new"];
+    $options["labels"]["add_new_item"]  = empty($options["labels"]["add_new_item"]) ? "Add new {$name}": $options["labels"]["add_new_item"];
+    $options["labels"]["edit_item"]     = empty($options["labels"]["edit_item"]) ? "Edit {$name}": $options["labels"]["edit_item"];
+    $options["labels"]["new_item"]      = empty($options["labels"]["new_item"]) ? "New {$name}": $options["labels"]["new_item"];
+    $options["labels"]["view_item"]     = empty($options["labels"]["view_item"]) ? "View {$name}": $options["labels"]["view_item"];
+    $options["labels"]["search_items"]  = empty($options["labels"]["search_items"]) ? "Search item {$name}": $options["labels"]["search_items"];
+    $options["labels"]["not_found"]     = empty($options["labels"]["not_found"]) ? "Not Found posts {$name}": $options["labels"]["not_found"];
+    $options["labels"]["not_found_in_trash"] = empty($options["labels"]["not_found_in_trash"]) ? "Not Found posts in Trush {$name}": $options["labels"]["not_found_in_trash"];
+    $options["labels"]["parent_item_colon"]  = empty($options["labels"]["parent_item_colon"]) ? "Parent item colon {$name}": $options["labels"]["parent_item_colon"];
+/*
+    $options["labels"]["name"]          = empty($options["labels"]["name"]) ? $options["custom_post_type_name"]: $options["labels"]["name"];
+    $options["labels"]["singular_name"] = empty($options["labels"]["singular_name"]) ? $options["custom_post_type_name"]: $options["labels"]["singular_name"];
+    $options["labels"]["add_new"]       = empty($options["labels"]["add_new"]) ? "Add new ". $options["custom_post_type_name"]: $options["labels"]["add_new"];
+    $options["labels"]["add_new_item"]  = empty($options["labels"]["add_new_item"]) ? "Add for ". $options["custom_post_type_name"]: $options["labels"]["add_new_item"];
+    # $options["labels"]["edit"]          = empty($options["labels"]["edit"]) ? "Edit ". $options["custom_post_type_name"]: $options["labels"]["edit"];
+    $options["labels"]["edit_item"]     = empty($options["labels"]["edit_item"]) ? "Edit for ". $options["custom_post_type_name"]: $options["labels"]["edit_item"];
+    $options["labels"]["new_item"]      = empty($options["labels"]["new_item"]) ? "New ". $options["custom_post_type_name"]: $options["labels"]["new_item"];
+    # $options["labels"]["view"]          = empty($options["labels"]["view"]) ? "View ". $options["custom_post_type_name"]: $options["labels"]["view"];
+    $options["labels"]["view_item"]     = empty($options["labels"]["view_item"]) ? "View for ". $options["custom_post_type_name"]: $options["labels"]["view_item"];
+    $options["labels"]["search_items"]  = empty($options["labels"]["search_items"]) ? "search ". $options["custom_post_type_name"]: $options["labels"]["search_items"];
+    $options["labels"]["not_found"]     = empty($options["labels"]["not_found"]) ? "Not Found". $options["custom_post_type_name"]: $options["labels"]["not_found"];
+    $options["labels"]["not_found_in_trush"] = empty($options["labels"]["not_found_in_trush"]) ? "Not Found in Trush". $options["labels"]["custom_post_type_name"]: $options["labels"]["not_found_in_trush"];
+    $options["labels"]["parent"]        = empty($options["labels"]["parent"]) ? "parent to ". $options["labels"]["custom_post_type_name"]: $options["labels"]["parent"];
+*/
 
     return $options;
 }
@@ -179,6 +208,9 @@ function uf_cp_options_register_panel() {
     $options = array();
     if($_GET["id"]) {
         $options = uf_get_custom_post_option($_GET["id"]);
+    }
+    else {
+        $options = uf_cp_get_post_option();
     }
 ?>
 <div class="wrap" id="uf_admin">
@@ -228,20 +260,12 @@ function uf_cp_options_register_panel() {
                 "field" => uf_form_input("text", $options["labels"]["add_new_item"], array( "id" => "uf_custom_posts_add_new_item", "name" => "labels[add_new_item]"), false),
             ),
             array(
-                "label" => uf_form_label(__("edit label.", "unify_framework"), "uf_custom_posts_edit", false),
-                "field" => uf_form_input("text", $options["labels"]["edit"], array( "id" => "uf_custom_posts_edit", "name" => "labels[edit]" ), false),
-            ),
-            array(
                 "label" => uf_form_label(__("edit item label.", "unify_framework"), "uf_custom_posts_edit_item", false),
                 "field" => uf_form_input("text", $options["labels"]["edit_item"], array( "id" => "uf_custom_posts_edit_item", "name" => "labels[edit_item]" ), false),
             ),
             array(
                 "label" => uf_form_label(__("new item label.", "unify_framework"), "uf_custom_posts_new_item", false),
                 "field" => uf_form_input("text", $options["labels"]["new_item"], array( "id" => "uf_custom_posts_new_item", "name" => "labels[new_item]" ), false),
-            ),
-            array(
-                "label" => uf_form_label(__("view label.", "unify_framework"), "uf_custom_posts_view", false),
-                "field" => uf_form_input("text", $options["labels"]["view"], array( "id" => "uf_custom_posts_view", "name" => "labels[view]" ), false),
             ),
             array(
                 "label" => uf_form_label(__("view item label.", "unify_framework"), "uf_custom_posts_view_item", false),
@@ -257,11 +281,11 @@ function uf_cp_options_register_panel() {
             ),
             array(
                 "label" => uf_form_label(__("not found in trush label.", "unify_framework"), "uf_custom_posts_not_found_in_trash", false),
-                "field" => uf_form_input("text", $options["labels"]["not_found_in_trush"], array( "id" => "uf_custom_posts_not_found_in_trush", "name" => "labels[not_found_in_trash]" ), false),
+                "field" => uf_form_input("text", $options["labels"]["not_found_in_trash"], array( "id" => "uf_custom_posts_not_found_in_trush", "name" => "labels[not_found_in_trash]" ), false),
             ),
             array(
                 "label" => uf_form_label(__("parent label.", "unify_framework"), "uf_custom_posts_parent", false),
-                "field" => uf_form_input("text", $options["labels"]["parent"], array( "id" => "uf_custom_posts_parent", "name" => "labels[parent]" ), false),
+                "field" => uf_form_input("text", $options["labels"]["parent_item_colon"], array( "id" => "uf_custom_posts_parent", "name" => "labels[parent_item_colon]" ), false),
             ),
         )); ?>
 
@@ -419,6 +443,32 @@ function uf_cp_options_edit_panel() {
 <?php
 }
 
+
+
+/**
+ * get CustomTaxonomy $_POST data array.
+ *
+ * @access public
+ * @return Array
+ */
+function uf_cp_get_post_option() {
+    $options = array(
+        "custom_post_type_name" => $_POST["custom_post_type_name"],
+        "labels"    => isset($_POST["labels"]) ? $_POST["labels"]: array(),
+        "public"    => isset($_POST["public"]) ? $_POST["public"]: true,
+        "exclude_from_search" => isset($_POST["exclude_from_search"]) ? $_POST["exclude_from_search"]: false,
+        "show_ui"   => isset($_POST["show_ui"]) ? $_POST["show_ui"]: true,
+        "capability_type" => isset($_POST["capability_type"]) ? $_POST["capability_type"]: "post",
+        "hierarchical"    => isset($_POST["hierarchical"]) ? $_POST["hierarchical"]: true,
+        "supports"        => isset($_POST["supports"]) ? $_POST["supports"]: array("Title", "Editor"),
+        "can_export"      => isset($_POST["can_export"]) ? $_POST["can_export"]: true,
+        "show_in_nav_menus" => isset($_POST["show_in_nav_menus"]) ? $_POST["show_in_nav_menus"]: true,
+    );
+
+    $options = uf_deep_esc_attr($options);
+    $options = uf_parse_to_bool_deep($options);
+    return $options;
+}
 
 
 
