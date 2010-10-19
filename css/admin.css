@@ -50,6 +50,32 @@
 
 
 
+/* -------------------------------------------------- UF Admin CustomTaxonomy */
+#uf_tax_taxonomy_name { width: 90%; }
+#uf_tax_query_var { width: 90%; }
+#uf_tax_rewrite { width: 90%; }
+#uf_tax_public {}
+#uf_tax_hierarchical {}
+#uf_tax_shou_ui {}
+#uf_tax_show_in_nav_menus {}
+#uf_tax_tag_cloud {}
+#uf_tax_labels_name { width: 90%; }
+#uf_tax_labels_singular { width: 90%; }
+#uf_tax_labels_search_items { width: 90%; }
+#uf_tax_labels_popular_items { width: 90%; }
+#uf_tax_labels_all_items { width: 90%; }
+#uf_tax_labels_parent_item { width: 90%; }
+#uf_tax_labels_parent_item_colon { width: 90%; }
+#uf_tax_labels_edit_item { width: 90%; }
+#uf_tax_labels_update_item { width: 90%; }
+#uf_tax_labels_add_new_item { width: 90%; }
+#uf_tax_labels_new_item_name { width: 90%; }
+#uf_tax_labels_separate_items_with_commas { width: 90%; }
+#uf_tax_labels_add_or_remove_items { width: 90%; }
+#uf_tax_labels_choose_from_most_used { width: 90%; }
+
+
+
 /* ---------------------------------------------------- UF Admin custom class */
 #uf_admin .caution { color: #C00; font-weight: bold; font-size: 12px; }
 
