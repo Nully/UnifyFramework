@@ -12,8 +12,9 @@ function uf_admin_save_options() {
             "comment_allowd_pages"  => $_POST["comment_allowd_pages"],
             "show_custom_header_in_front" => $_POST["show_custom_header_in_front"],
             "extensions" => array(
-                "custom_post"    => $_POST["custom_post"],
-                "post_thumbnail" => $_POST["post_thumbnail"],
+                "custom_post"       => $_POST["custom_post"],
+                "custom_taxonomies" => $_POST["custom_taxonomies"],
+                "post_thumbnail"    => $_POST["post_thumbnail"],
             ),
         ));
     }
@@ -173,6 +174,14 @@ function uf_admin_setting() {
                 "extra" => __("* is installed Custom Post Type UI, this extension always disable.", "unify_framework")
             ),
             array(
+                "label" => __("CustomTaxonomies extension", "unify_framework"),
+                "field" => uf_form_checkbox(1, array(
+                    "id" => "uf_extension_custom_tax", "name" => "custom_taxonomies",
+                    "label" => __("Enable theme support custom taxonomies.", "unify_framework"),
+                    "checked" => $options["extensions"]["custom_taxonomies"]
+                ), false),
+            ),
+            array(
                 "label" => __("PostThumbnail extension", "unify_framework"),
                 "field" => uf_form_checkbox(1, array(
                     "id" => "uf_extension_post_thumbnail", "name" => "post_thumbnail", "label" => __("Enable theme support post thumbnail."),
@@ -207,17 +216,19 @@ function uf_admin_postbox($title, $data = array()) {
 <div class="postbox">
     <h3 class="hndle"><?php echo $title; ?></h3>
     <div class="inside">
-        <dl>
+        <table border="0" cellpadding="0" cellspacing="0">
             <?php foreach($data as $pair): ?>
-            <dt><?php echo $pair["label"]; ?></dt>
-            <dd><?php echo $pair["field"]; ?>
-                <?php if($pair["extra"]): ?>
-                <br />
-                <span class="caution"><?php echo $pair["extra"]; ?></span>
-                <?php endif; ?>
-            </dd>
+            <tr>
+                <th><?php echo $pair["label"]; ?></th>
+                <td><?php echo $pair["field"]; ?>
+                    <?php if($pair["extra"]): ?>
+                    <br />
+                    <span class="caution"><?php echo $pair["extra"]; ?></span>
+                    <?php endif; ?>
+                </td>
+            </tr>
             <?php endforeach; ?>
-        </dl>
+        </table>
     <!-- End inside --></div>
 <!-- End postbox --></div>
 <?php
