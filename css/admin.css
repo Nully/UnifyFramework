@@ -19,6 +19,10 @@
 #uf_admin .postbox { float: left; width: 49%; margin-right: 0.5%; }
 #uf_admin .postbox h3 { margin: 0; padding: 7px 9px; }
 #uf_admin .postbox .hndle { cursor: auto; }
+#uf_admin .postbox table { margin-top: 10px; margin-bottom: 10px; width: 100%; }
+#uf_admin .postbox table th, #uf_admin .postbox table td { vertical-align: top; text-align: left; }
+#uf_admin .postbox table th { white-space: nowrap; padding: 6px 9px; width: 30%; }
+#uf_admin .postbox table td { padding: 6px 9px; }
 
 
 
@@ -29,20 +33,20 @@
 
 /* ------------------------------------------------------ UF Admin Custompost */
 #uf_custom_posts_description { width: 90%; }
-#uf_custom_posts_post_type_name { width: 70%; }
-#uf_custom_posts_name { width: 70%; }
-#uf_custom_psots_singular_name { width: 70%; }
-#uf_custom_posts_add_new { width: 70%; }
-#uf_custom_posts_add_new_item { width: 70%; }
-#uf_custom_posts_edit { width: 70%; }
-#uf_custom_posts_edit_item { width: 70%; }
-#uf_custom_posts_new_item { width: 70%; }
-#uf_custom_posts_view { width: 70%; }
-#uf_custom_posts_view_item { width: 70%; }
-#uf_custom_posts_search_item { width: 70%; }
-#uf_custom_posts_not_found { width: 70%; }
-#uf_custom_posts_not_found_in_trush { width: 70%; }
-#uf_custom_posts_parent { width: 70%; }
+#uf_custom_posts_post_type_name { width: 80%; }
+#uf_custom_posts_name { width: 80%; }
+#uf_custom_psots_singular_name { width: 80%; }
+#uf_custom_posts_add_new { width: 80%; }
+#uf_custom_posts_add_new_item { width: 80%; }
+#uf_custom_posts_edit { width: 80%; }
+#uf_custom_posts_edit_item { width: 80%; }
+#uf_custom_posts_new_item { width: 80%; }
+#uf_custom_posts_view { width: 80%; }
+#uf_custom_posts_view_item { width: 80%; }
+#uf_custom_posts_search_item { width: 80%; }
+#uf_custom_posts_not_found { width: 80%; }
+#uf_custom_posts_not_found_in_trush { width: 80%; }
+#uf_custom_posts_parent { width: 80%; }
 
 
 
