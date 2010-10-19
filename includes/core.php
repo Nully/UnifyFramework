@@ -85,8 +85,8 @@ function uf_update_option($alias, $data) {
     $data = uf_deep_esc_attr($data);
     $data = uf_parse_to_bool_deep($data);
     $options[$alias] = $data;
-    update_option("uf_theme_options", $options);
     do_action("uf_update_option", $options);
+    return update_option("uf_theme_options", $options);
 }
 
 
@@ -185,96 +185,82 @@ function uf_delete_custom_post($id) {
 
 
 /**
- * get UnifyFramework theme options
+ * get registerd UnifyFramework theme support, CustomTaxonomy
+ *
+ * @access public
+ * @param  $id     Int   fetch target position number.
+ * @preturn Array
+ */
+function uf_get_custom_tax($id) {
+    $options = uf_get_option("custom_taxonomy", $id);
+    return apply_filters("uf_get_custom_tax", $options);
+}
+
+
+
+/**
+ * get registerd UnifyFramework theme support, CustomTaxonomies.
  *
  * @access public
  * @return Array
  */
-/*
-function uf_get_theme_option() {
-    $options = get_option("uf_theme_options");
+function uf_get_custom_taxes() {
+    $options = uf_get_option("custom_taxonomy");
+    return apply_filters("uf_get_custom_taxes", $options);
+}
+
+
+
+/**
+ * save|update UnifyFramework theme support, CustomTaxonomy.
+ *
+ * @access public
+ * @param  $option     Array     save option data array
+ * @param  $id         Int|Null  save position number.
+ * @return Bool
+ */
+function uf_update_custom_tax($option, $id = null) {
+    $options = uf_get_option("custom_taxonomy");
     if(empty($options))
         $options = array();
 
-    return $options;
-}*/
+    $id = (int)$id;
+    if($id <= 0) {
+        $keys = array_keys($options);
+        $col_id = (empty($keys) ? 1: array_pop($keys) + 1);
+        $options[$col_id] = $option;
+    }
+    else {
+        $options[$id] = $option;
+    }
+
+    $options = apply_filters("uf_update_custom_tax", $options);
+    uf_update_option("custom_taxonomy", $options);
+    return true;
+}
 
 
 
 /**
- * update UnifyFramework theme options
+ * delete UnifyFramework theme support, CustomTaxonomy
  *
  * @access public
- * @return Void
+ * @param  $id     Int   delete target col ID
+ * @return Bool
  */
-/*
-function uf_update_theme_option() {
-    $options = array(
-        "allow_editor_css"     => $_POST["allow_editor_css"],
-        "comment_for_page"     => $_POST["comment_for_page"],
-        "comment_allowd_pages" => $_POST["comment_allowd_pages"],
-        "show_custom_header_in_front" => $_POST["show_custom_header_in_front"],
-        "extensions" => array(
-            "extension_custom_post"    => $_POST["extension_custom_post"],
-            "extension_post_thumbnail" => $_POST["extension_post_thumbnail"],
-        ),
-    );
+function uf_delete_custom_tax($id) {
+    $options = uf_get_option("custom_taxonomy");
 
-    $options = uf_parse_to_bool_deep($options);
-    update_option("uf_theme_options", $options);
-}*/
-
-
-
-/**
- * delete UnifyFramework theme options
- *
- * @access public
- * @return Void
- */
-/*
-function uf_delete_theme_options() {
-    delete_option("uf_theme_options");
-}*/
-
-
-
-/**
- * get post thumbnail options
- *
- * @access public
- * @return Array
- */
-/*
-function uf_get_post_thumbnail_options() {
-    $options = get_option("uf_post_thumbnail_options");
     if(empty($options))
-        $options = array();
+        return true;
 
-    return $options;
-}*/
+    if(!isset($options[$id]))
+        return false;
 
+    unset($options[$id]);
 
-
-/**
- * update post thumbnail options
- *
- * @access public
- * @return Void
- */
-/*
-function uf_update_post_thumbnail_options() {
-    $options = array(
-        "post_thumb_enable" => $_POST["post_thumb_enable"],
-        "uf_post_thumb_support_type" => $_POST["uf_post_thumb_support_type"],
-        "post_thumb_width"  => $_POST["post_thumb_width"],
-        "post_thumb_height" => $_POST["post_thumb_height"]
-    );
-
-    $options = uf_deep_esc_attr($options);
-    $options = uf_parse_to_bool_deep($options);
-    update_option("uf_post_thumbnail_options", $options);
-}*/
+    return uf_update_option("custom_taxonomy", $options);
+}
 
 
 
