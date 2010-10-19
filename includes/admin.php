@@ -31,7 +31,7 @@ add_action("uf_init", "uf_admin_save_options", 0);
  */
 function uf_admin_init() {
     global $pagenow, $plugin_page;
-    if($pagenow != "themes.php")
+    if($pagenow != "admin.php")
         return;
 
     wp_enqueue_style("uf_admin_css", get_bloginfo("template_url"). "/css/admin.css", array(), UF_VERSION, "all");
