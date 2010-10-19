@@ -73,7 +73,7 @@ h2 .nav-tab { /* WordPress 3.0 like tab menu Style */
 }
 h2 .nav-tab {
     font: italic normal bold 14px/35px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;
-    padding: 4px 20px 6px;
+    padding: 4px 10px 6px;
 }
 h2 .nav-tab-active {
     border-width: 1px;
