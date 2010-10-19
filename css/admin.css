@@ -68,7 +68,7 @@ h2 .nav-tab { /* WordPress 3.0 like tab menu Style */
     text-shadow: white 0px 1px 0px;
 }
 h2 .nav-tab {
-    font: italic normal normal 24px/35px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;
+    font: italic normal bold 14px/35px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;
     padding: 4px 20px 6px;
 }
 h2 .nav-tab-active {
