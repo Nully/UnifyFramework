@@ -20,7 +20,13 @@ function uf_form_input($type, $value = null, $attr = array(), $echo = true) {
         unset($attr["label"]);
     }
 
-    $input = '<input'. _uf_parse_attr($defaults, $attr).' />'. $label. PHP_EOL;
+    $checked = false;
+    if(isset($attr["checked"]) && $attr["checked"] === true) {
+        $checked = ' checked="checked"';
+    }
+    unset($attr["checked"]);
+
+    $input = '<input'. _uf_parse_attr($defaults, $attr). $checked .' />'. $label. PHP_EOL;
     if($echo)
         echo $input;
     else
