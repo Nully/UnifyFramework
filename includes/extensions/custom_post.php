@@ -194,7 +194,6 @@ function uf_cp_options_register_panel() {
                 "label" => __("Custom post type name", "unify_framework"),
                 "field" => uf_form_input("text", $options["custom_post_type_name"], array(
                     "id" => "uf_custom_posts_post_type_name", "name" => "custom_post_type_name",
-                    "label" => __("unique custom post name", "unify_framework")
                 ), false)
             ),
         )); ?>
