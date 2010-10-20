@@ -19,11 +19,11 @@ function uf_admin_save_options() {
         ));
 
         $option = uf_get_option("theme_options");
-        if($option["commen_required_name"]) {
-            update_option("required_name_email", false);
+        if($option["comment_required_name"]) {
+            update_option("require_name_email", 0);
         }
         else {
-            update_option("required_name_email", true);
+            update_option("require_name_email", 1);
         }
     }
 }
