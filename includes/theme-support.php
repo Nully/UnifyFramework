@@ -120,6 +120,7 @@ function uf_admin_custom_image_header_css() {
 function uf_custom_header() {
     global $post;
 
+
     // show_custom_header_in_front option enabled not display header image.
     $options = uf_get_option("theme_options");
     if((is_home() || is_front_page()) && $options["show_custom_header_in_front"])
