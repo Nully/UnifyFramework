@@ -122,6 +122,11 @@ add_action("init", "uf_cp_options_hook");
  * @return Void
  */
 function uf_cp_options_notices() {
+    global $plugin_page;
+
+    if($plugin_page != "uf-cp-add" || $plugin_page != "uf-cp-edit")
+        return;
+
     if($_GET["save"]) {
         echo '<div class="updated fade">',
             "<p>". __("Success. CustomPost saved"). "</p>",
