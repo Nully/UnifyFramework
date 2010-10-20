@@ -126,7 +126,7 @@ function uf_custom_header() {
         return;
 
 
-    if(is_singular() && has_post_thumbnail($post->ID)) {
+    if(current_theme_supports("post-thumbnails") && is_singular() && has_post_thumbnail($post->ID)) {
         $image = wp_get_attachment_image(get_post_thumbnail_id($post->ID), "post-thumbnail");
         if($image[1] >= HEADER_IMAGE_WIDTH) {
             echo get_the_post_thumbnail($post->ID, "post-thumbnail");
