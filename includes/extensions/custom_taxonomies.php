@@ -4,6 +4,31 @@
  *
  */
 /**
+ * uf_ct_init
+ *
+ * CustomTaxonomies register action hook
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_ct_init() {
+    $options = uf_get_custom_taxes();
+    if(empty($options))
+        return;
+
+    foreach($options as $id => $args) {
+        $taxonomy = $args["taxonomy_name"];
+        unset($args["taxonomy_name"]);
+        $object_type = $args["taxonomy_type"];
+        unset($args["taxonomy_type"]);
+        register_taxonomy($taxonomy, $object_type, $args);
+    }
+}
+add_action("init", "uf_ct_init");
+
+
+
+/**
  * uf_ct_admin_init
  *
  * CustomTaxonomies admin_init action hook
