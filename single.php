@@ -20,6 +20,6 @@
     <?php if($wp_query->max_num_pages >= 2): ?>
     <div id="uf-pagenavi" class="clearfix"><?php uf_pagenavi(); ?></div>
     <?php endif; ?>
-    <?php uf_comment_form(); ?>
+    <?php comments_template(); ?>
 <!-- End main-contents --></div>
 <?php get_footer(); ?>
