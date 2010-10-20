@@ -123,7 +123,7 @@ function uf_custom_header() {
 
     // show_custom_header_in_front option enabled not display header image.
     $options = uf_get_option("theme_options");
-    if((is_home() || is_front_page()) && $options["show_custom_header_in_front"])
+    if((is_home() || is_front_page()) && !$options["show_custom_header_in_front"])
         return;
 
 
