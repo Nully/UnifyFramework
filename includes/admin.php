@@ -17,6 +17,14 @@ function uf_admin_save_options() {
                 "post_thumbnail"    => $_POST["post_thumbnail"],
             ),
         ));
+
+        $option = uf_get_option("theme_options");
+        if($option["commen_required_name"]) {
+            update_option("required_name_email", false);
+        }
+        else {
+            update_option("required_name_email", true);
+        }
     }
 }
 add_action("uf_init", "uf_admin_save_options", 0);
