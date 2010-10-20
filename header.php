@@ -6,6 +6,11 @@
     <title><?php uf_title(); ?></title>
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+    <?php
+        if(is_singular()) {
+            wp_enqueue_script('comment-reply');
+        }
+    ?>
     <?php uf_head(); ?>
 </head>
 <body <?php uf_body_class(); ?>>
