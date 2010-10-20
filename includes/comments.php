@@ -36,6 +36,24 @@ function uf_get_comment_count($field = null) {
 
 
 
+/**
+ * Display trackback URL
+ *
+ * @access public
+ * @return Void|String
+ */
+function uf_trackback_field() {
+    if(get_option("default_ping_status") != "open" || !uf_get_option("theme_options", "display_trackback_url", false))
+        return;
+
+    $fields = array(
+        "trackback_title" => '<h3><label for="">'. __("Trackback / Ping", "unify_framework") .'</label></h3>',
+        "trackback_field" => '<div class="trackback"><input type="text" value="'. get_trackback_url() .'" class="trackback-field" readonly="readonly" /></div>'
+    );
+    echo join(PHP_EOL, apply_filters("uf_trackback_field", $fields));
+}
+
+
 function uf_comment_form_top_tag() {
     echo "<dl>\n";
 }
