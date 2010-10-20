@@ -81,3 +81,4 @@ if ('open' == $post->comment_status) : ?>
     <?php endif; // registerd or logged in user ? ?>
 <?php endif; // if open comment_status ? ?>
 
+
