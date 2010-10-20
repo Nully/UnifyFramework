@@ -120,6 +120,12 @@ function uf_admin_custom_image_header_css() {
 function uf_custom_header() {
     global $post;
 
+    // show_custom_header_in_front option enabled not display header image.
+    $options = uf_get_option("theme_options");
+    if((is_home() || is_front_page()) && $options["show_custom_header_in_front"])
+        return;
+
+
     if(is_singular() && has_post_thumbnail($post->ID)) {
         $image = wp_get_attachment_image(get_post_thumbnail_id($post->ID), "post-thumbnail");
         if($image[1] >= HEADER_IMAGE_WIDTH) {
