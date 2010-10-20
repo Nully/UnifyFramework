@@ -1,5 +1,9 @@
 <?php
 /**
+ * UnifyFramework theme Supported Custom Post Types.
+ *
+ */
+/**
  * UnifyFramework CustomPost support
  * 
  */
