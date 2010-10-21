@@ -4,15 +4,16 @@
  *
  */
 /**
- * Action pagenavi formats
+ * Filter pagenavi formats
  *
  * @access protected
+ * @param  $formats    Array    page navigation formats.
  * @return Void
  */
-function uf_action_pagenavi_formats() {
-    do_action("pagenavi_formats");
+function uf_filter_pagenavi_formats($formats) {
+    return $formats;
 }
-add_action("uf_pagenavi_formats", "uf_action_pagenavi_formats");
+add_filter("uf_pagenavi_formats", "uf_action_pagenavi_formats");
 
 
 
