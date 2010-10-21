@@ -43,6 +43,7 @@ if(function_exists("register_nav_menus")) {
  */
 require_once TEMPLATEPATH. "/includes/core.php";
 require_once TEMPLATEPATH. "/includes/actions.php";
+require_once TEMPLATEPATH. "/includes/filters.php";
 require_once TEMPLATEPATH. "/includes/helpers.php";
 require_once TEMPLATEPATH. "/includes/theme-support.php";
 require_once TEMPLATEPATH. "/includes/template.php";
