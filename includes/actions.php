@@ -57,3 +57,160 @@ function uf_unsupported_version_notice() {
 }
 
 
+
+/**
+ * UnifyFramework Comments actions
+ *
+ */
+/**
+ * Action trackback field.
+ *   comment field enabled display trackback, do action trackback_field.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_trackback_field() {
+    do_action("trackback_field");
+}
+add_action("uf_trackback_field", "uf_action_trackback_field");
+
+
+
+/**
+ * Action comment form before.
+ *   wraped native WordPress action hook, comment_form_before
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_comment_form_before() {
+    do_action("comment_form_before");
+}
+add_action("uf_comment_form_before", "uf_action_comment_form_before");
+
+
+
+/**
+ * Action comment form Must login before.
+ *   comment_registration is enabled action hook.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_comment_form_must_log_in_before() {
+    do_action("comment_form_must_log_in_before");
+}
+add_action("uf_comment_form_must_log_in_before", "uf_action_comment_form_must_log_in_before");
+
+
+
+/**
+ * Action comment form must login after.
+ *   comment_registration is enabled action hook.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_comment_form_must_log_in_after() {
+    do_action("comment_form_must_log_in_after");
+}
+add_action("uf_comment_form_must_log_in_after", "uf_action_comment_form_must_log_in_after");
+
+
+
+/**
+ * Action comment form logged in before.
+ *   comment form already logged in before action hook.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_comment_form_logged_in_before() {
+    do_action("comment_form_logged_in_before");
+}
+add_action("uf_comment_form_logged_in_before", "uf_action_comment_form_logged_in_before");
+
+
+
+/**
+ * Action comment form logged in after.
+ *   comment form already logged in after action hook.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_comment_form_logged_in_after() {
+    do_action("comment_form_logged_in_after");
+}
+add_action("uf_comment_form_logged_in_after", "uf_action_comment_form_logged_in_after");
+
+
+
+/**
+ * Action comment form top.
+ *   start comment form action hook.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_comment_form_top() {
+    do_action("comment_form_top");
+}
+add_action("uf_comment_form_top", "uf_action_comment_form_top");
+
+
+
+/**
+ * Action comment form before input fields.
+ *   comment form before display fields action hook.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_comment_form_before_fields() {
+    do_action("comment_form_before_fields");
+}
+add_action("uf_comment_form_before_fields", "uf_action_comment_form_before_fields");
+
+
+
+/**
+ * Action comment form after input fields.
+ *   wraped comment_form_after_fields action hook.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_comment_form_after_fields() {
+    do_action("comment_form_after_fields");
+}
+add_action("uf_comment_form_after_fields", "uf_action_comment_form_after_fields");
+
+
+
+/**
+ * Action comment form bottom.
+ *  comment form fields bottom aciton hook.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_comment_form_bottom() {
+    do_action("comment_form_bottom");
+}
+add_action("uf_comment_form_bottom", "uf_action_comment_form_bottom");
+
+
+
+/**
+ * Action comment form after.
+ *   comment form closing form tag action hook.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_comment_form_after() {
+    do_action("comment_form_after");
+}
+add_action("uf_comment_form_after", "uf_action_comment_form_after");
+
