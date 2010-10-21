@@ -403,8 +403,9 @@ function uf_pagenavi_pager($args = null) {
     if(($end_page - $start_page) != $show_page_number)
         $start_page += ($end_page - $start_page)- $show_page_number + 1;
 
-    // @TODO: theme admin pnale setting display pagenavi prefix [Page 1 of (Max)]
-    echo str_replace(array("%current", "%max"), array($paged, $max_pages), $args["page_of_format"]);
+    // display Page of meta box.
+    if(uf_get_option("theme_options", "pagenavi_show_metabox"))
+        echo str_replace(array("%current", "%max"), array($paged, $max_pages), $args["page_of_format"]);
 
     // for first page link text.
     if($paged != 1)
