@@ -54,6 +54,13 @@ function uf_trackback_field() {
 }
 
 
+
+/**
+ * UnifyFramework comment form top DL tag marking.
+ *
+ * @access protected
+ * @return Void
+ */
 function uf_comment_form_top_tag() {
     echo "<dl>\n";
 }
@@ -61,6 +68,12 @@ add_action("uf_comment_form_top", "uf_comment_form_top_tag");
 
 
 
+/**
+ * UnifyFrmaework comment form bottom DL tag marking.
+ *
+ * @access public
+ * @return Void
+ */
 function uf_comment_form_bottom_tag() {
     echo "</dl>\n";
 }
