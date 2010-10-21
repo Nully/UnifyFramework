@@ -332,6 +332,7 @@ function uf_pagenavi($args = null) {
  * @param  $args    Array|String|Null
  *   next_post_link_text: next post link text. %link is replace to link tag.
  *   prev_post_link_text: prev post link text. %link is replace to link tag.
+ *   link_text_format: anchor to innerHTML Text format.
  * @return Void
  */
 function uf_pagenavi_singular($args = null) {
@@ -354,9 +355,12 @@ function uf_pagenavi_singular($args = null) {
  *
  * @access protected
  * @param  $args      Array|String|Null
- *   first_page_link_text:
- *   last_page_link_text:
- *   pages_link_format:
+ *   page_of_format: [Page (n)  of (Max)] template format text. %current replace to current page number, %max replace to max_num_pages.
+ *   first_page_link_text: move to first page link format text.
+ *   last_page_link_text: move to last page link format text.
+ *   next_page_link_format: move to next page link format text.
+ *   prev_page_link_format: move to prev page link format text.
+ *   pages_link_format: repeat page numbers format. %page replace to pagenumber, %current replace to current page class, %title replace to page number.
  * @return Void
  */
 function uf_pagenavi_pager($args = null) {
@@ -369,7 +373,6 @@ function uf_pagenavi_pager($args = null) {
         "next_page_link_format"  => '<a href="%link"><span class="uf-pagenavi uf-pagenavi-next-page">&gt;</span></a>'. "\n",
         "prev_page_link_format"  => '<a href="%link"><span class="uf-pagenavi uf-pagenavi-prev-page">&lt;</span></a>'. "\n",
         "pages_link_format"      => '<span class="uf-pagenavi uf-pagenumber uf-pagenumber-%page%current">%title</span>',
-        "pages_dot"              => '<span class="uf-pagenavi uf-pagenavi-dot">...</span>'
     );
     $args = wp_parse_args($args, $defaults);
     $args = apply_filters("uf_pagenavi_formats", $args);
