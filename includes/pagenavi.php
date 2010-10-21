@@ -11,6 +11,7 @@
  * @param  $after    String         page navigation suffix
  * @return Void
  */
+/*
 function uf_pagenavi($before = '', $after = '') {
     if(!function_exists("wp_pagenavi")) {
         _uf_pagenavi($before);
@@ -20,7 +21,7 @@ function uf_pagenavi($before = '', $after = '') {
     }
     do_action("uf_pagenavi");
 }
-
+*/
 
 /**
  * uf_pagenavi privatemethod
@@ -29,6 +30,7 @@ function uf_pagenavi($before = '', $after = '') {
  * @param  $args   Array   page navigation prefix
  * @return Void
  */
+/*
 function _uf_pagenavi($args = array()) {
     $defaults = array(
         "next_link_format"      => '<div class="next-post">%link &raquo;</div>',
@@ -46,12 +48,13 @@ function _uf_pagenavi($args = array()) {
         next_post_link($args["next_link_format"], $args["next_permalink_format"]);
     }
 }
-
+*/
 
 /**
  * display pagenumbers
  *
  */
+/*
 function _uf_pagenumber() {
     global $wp_query;
 
@@ -142,5 +145,5 @@ function _uf_pagenumber() {
     $out = apply_filters("uf_pagenavi", $out);
     echo $out;
 }
-
+*/
 
