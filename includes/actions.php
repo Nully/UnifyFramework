@@ -42,24 +42,6 @@ add_action("init", "uf_activate_theme");
 
 /**
  * display notice message
- *   failed database table creating.
- *
- * @access protected
- * @return Void
- */
-function uf_notice_table_create_failed() {
-?>
-<div class="error fade">
-    <p><strong><?php _e("Error!!", "unify_framework"); ?></strong></p>
-    <p><?php _e("database creating failed. retry theme activate.", "unify_framework"); ?></p>
-</div>
-<?php
-}
-
-
-
-/**
- * display notice message
  *   unsupported WordPress version
  *
  * @access protected
