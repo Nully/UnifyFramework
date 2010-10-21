@@ -48,7 +48,6 @@ require_once TEMPLATEPATH. "/includes/theme-support.php";
 require_once TEMPLATEPATH. "/includes/template.php";
 require_once TEMPLATEPATH. "/includes/posts.php";
 require_once TEMPLATEPATH. "/includes/comments.php";
-require_once TEMPLATEPATH. "/includes/pagenavi.php";
 require_once TEMPLATEPATH. "/includes/widget.php";
 
 
