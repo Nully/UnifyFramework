@@ -16,7 +16,8 @@ function uf_admin_save_options() {
                 "custom_taxonomies" => $_POST["custom_taxonomies"],
                 "post_thumbnail"    => $_POST["post_thumbnail"],
             ),
-            "pagenavi_show_count" => $_POST["pagenavi_show_count"]
+            "pagenavi_show_count"   => $_POST["pagenavi_show_count"],
+            "pagenavi_show_metabox" => $_POST["pagenavi_show_metabox"],
         ));
 
         $option = uf_get_option("theme_options");
@@ -205,6 +206,14 @@ function uf_admin_setting() {
                 "label" => __("Show max page numbers.", "unify_framework"),
                 "field" => uf_form_input("text", $options["pagenavi_show_count"], array(
                     "id" => "uf_pagenavi_show_count", "name" => "pagenavi_show_count",
+                ), false)
+            ),
+            array(
+                "label" => __("display page of meta box", "unify_framework"),
+                "field" => uf_form_checkbox(1, array(
+                    "id" => "uf_pagenavi_metabox_show", "name" => "pagenavi_show_metabox",
+                    "label" => __("display page of metabox.", "unify_framework"),
+                    "checked" => !!$options["pagenavi_show_metabox"]
                 ), false)
             )
         )) ?>
