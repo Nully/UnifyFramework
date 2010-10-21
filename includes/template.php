@@ -302,6 +302,134 @@ function uf_get_template_part($template_name, $sub_name = null) {
 
 
 
+/**
+ * UnifyFramework original page navigation.
+ *
+ * @access public
+ * @param  $args    Array|String|Null   page navigation arguments
+ * @return Void
+ */
+function uf_pagenavi($args = null) {
+    if(function_exists("wp_pagenavi")) {
+        wp_pagenavi();
+        return;
+    }
+
+    if(is_singular()) {
+        uf_pagenavi_singular();
+    }
+    else {
+        uf_pagenavi_pager();
+    }
+}
+
+
+
+/**
+ * is_singular post page navigation.
+ *
+ * @access protected
+ * @param  $args    Array|String|Null
+ *   next_post_link_text: next post link text. %link is replace to link tag.
+ *   prev_post_link_text: prev post link text. %link is replace to link tag.
+ * @return Void
+ */
+function uf_pagenavi_singular($args = null) {
+    $defaults = array(
+        "next_post_link_text" => '<p class="next-post">&raquo; %link</p>',
+        "prev_post_link_text" => '<p class="prev-post">&laquo; %link</p>',
+        "link_text_format"    => "%title"
+    );
+    $args = wp_parse_args($args, $defaults);
+    $args = apply_filters("uf_pagenavi_formats", $args);
+
+    previous_post_link($args["prev_post_link_text"], $args["link_text_format"]);
+    next_post_link($args["next_post_link_text"], $args["link_text_format"]);
+}
+
+
+
+/**
+ * Display pagenavi.
+ *
+ * @access protected
+ * @param  $args      Array|String|Null
+ *   first_page_link_text:
+ *   last_page_link_text:
+ *   pages_link_format:
+ * @return Void
+ */
+function uf_pagenavi_pager($args = null) {
+    global $wp_query;
+
+    $defaults = array(
+        "page_of_format"         => '<span class="uf-page-of">Page %current of %max</span>'. "\n",
+        "first_page_link_format" => '<a href="%link"><span class="uf-pagenavi uf-pagenavi-to-first">&laquo;</span></a>'. "\n",
+        "last_page_link_format"  => '<a href="%link"><span class="uf-pagenavi uf-pagenavi-to-last">&raquo;</span></a>'. "\n",
+        "next_page_link_format"  => '<a href="%link"><span class="uf-pagenavi uf-pagenavi-next-page">&gt;</span></a>'. "\n",
+        "prev_page_link_format"  => '<a href="%link"><span class="uf-pagenavi uf-pagenavi-prev-page">&lt;</span></a>'. "\n",
+        "pages_link_format"      => '<span class="uf-pagenavi uf-pagenumber uf-pagenumber-%page%current">%title</span>',
+        "pages_dot"              => '<span class="uf-pagenavi uf-pagenavi-dot">...</span>'
+    );
+    $args = wp_parse_args($args, $defaults);
+    $args = apply_filters("uf_pagenavi_formats", $args);
+
+    $paged = get_query_var("paged");
+    $posts_per_page = get_query_var("posts_per_page");
+    if(empty($paged))
+        $paged = 1;
+
+    $max_pages = $wp_query->max_num_pages;
+    if($max_pages <= 1)
+        return;
+
+    $show_page_number = 5; // @TODO: admin theme setting show_page_number.
+
+    // start page number
+    $start_page = $paged - floor(($show_page_number - 1) / 2);
+    if($start_page <= 0)
+        $start_page = 1;
+
+    // end page number
+    $end_page = $start_page + $show_page_number - 1;
+    if($end_page >= $max_pages)
+        $end_page = $max_pages;
+
+    if(($end_page - $start_page) != $show_page_number)
+        $start_page += ($end_page - $start_page)- $show_page_number + 1;
+
+    // @TODO: theme admin pnale setting display pagenavi prefix [Page 1 of (Max)]
+    echo str_replace(array("%current", "%max"), array($paged, $max_pages), $args["page_of_format"]);
+
+    // for first page link text.
+    if($paged != 1)
+        echo str_replace("%link", get_pagenum_link (1), $args["first_page_link_format"]);
+
+    // for previous page link.
+    if($paged > 1)
+        echo str_replace("%link", get_pagenum_link($paged - 1), $args["prev_page_link_format"]);
+
+    // display number pages.
+    for($i = $start_page; $i <= $end_page; $i ++) {
+        $current = " uf-page-current";
+        $link_tpl = $args["pages_link_format"];
+        if($i != $paged) {
+            $current = "";
+            $link_tpl = '<a href="'. get_pagenum_link($i) .'">'. $link_tpl. "</a>";
+        }
+
+        echo str_replace(array("%page", "%current", "%title"), array($i, $current, $i), $link_tpl);
+    }
+
+    // for next page link.
+    if($paged < $max_pages)
+         echo str_replace("%link", get_pagenum_link($paged + 1), $args["next_page_link_format"]);
+
+    // for last page link text.
+    if($paged != $max_pages)
+        echo str_replace("%link", get_pagenum_link($max_pages), $args["last_page_link_format"]);
+}
+
 
 
 
