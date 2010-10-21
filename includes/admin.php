@@ -16,6 +16,7 @@ function uf_admin_save_options() {
                 "custom_taxonomies" => $_POST["custom_taxonomies"],
                 "post_thumbnail"    => $_POST["post_thumbnail"],
             ),
+            "pagenavi_show_count" => $_POST["pagenavi_show_count"]
         ));
 
         $option = uf_get_option("theme_options");
@@ -198,7 +199,17 @@ function uf_admin_setting() {
             )
         )); ?>
 
-        <p><input type="submit" name="save_option" value="<?php _e("Save options"); ?>" class="button-primary" /></p>
+
+        <?php uf_admin_postbox(__("Pagenavigation setting", "unify_framework"), array(
+            array(
+                "label" => __("Show max page numbers.", "unify_framework"),
+                "field" => uf_form_input("text", $options["pagenavi_show_count"], array(
+                    "id" => "uf_pagenavi_show_count", "name" => "pagenavi_show_count",
+                ), false)
+            )
+        )) ?>
+
+        <p class="clear"><input type="submit" name="save_option" value="<?php _e("Save options"); ?>" class="button-primary" /></p>
     </form>
 <!-- End wrap --></div>
 <?php
