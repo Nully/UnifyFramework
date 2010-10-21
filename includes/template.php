@@ -386,7 +386,9 @@ function uf_pagenavi_pager($args = null) {
     if($max_pages <= 1)
         return;
 
-    $show_page_number = 5; // @TODO: admin theme setting show_page_number.
+    $show_page_number = (int)uf_get_option("theme_options", "pagenavi_show_count");
+    if(empty($show_page_number))
+        $show_page_number = 5;
 
     // start page number
     $start_page = $paged - floor(($show_page_number - 1) / 2);
