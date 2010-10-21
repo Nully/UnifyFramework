@@ -13,7 +13,7 @@
 function uf_filter_pagenavi_formats($formats) {
     return $formats;
 }
-add_filter("uf_pagenavi_formats", "uf_action_pagenavi_formats");
+add_filter("uf_pagenavi_formats", "uf_filter_pagenavi_formats");
 
 
 
