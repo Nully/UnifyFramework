@@ -25,6 +25,33 @@ function uf_footer() {
 }
 
 
+
+/**
+ * Action custom header before.
+ * custom header image before action.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_custom_header_before() {
+}
+add_action("uf_custom_header_before", "uf_action_custom_header_before");
+
+
+
+/**
+ * Action custom header after.
+ * custom header image after action.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_action_custom_header_after() {
+}
+add_action("uf_custom_header_after", "uf_action_custom_header_after");
+
+
+
 /**
  * activated UnifyFramework theme action
  *
@@ -215,4 +242,28 @@ function uf_action_comment_form_after() {
     do_action("comment_form_after");
 }
 add_action("uf_comment_form_after", "uf_action_comment_form_after");
+
+
+
+
+
+/**
+ * UnifyFramework admin action hooks.
+ *
+ */
+/**
+ * admin page custom header style
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_admin_custom_image_header_css() {
+?>
+<style type="text/css" media="all">
+    .appearance_page_custom-header #headimg {
+        border: 1px solid #CECECE !important;
+    }
+</style>
+<?php
+}
 
