@@ -81,7 +81,7 @@ function uf_get_title() {
         $title[] = get_bloginfo("name");
     }
 
-    return apply_filters("uf_title", $title);
+    return apply_filters("uf_get_title", $title);
 }
 
 
