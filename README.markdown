@@ -149,6 +149,22 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
  * uf_comment_form_logged_in_before
    * すでにログインしている場合にコメントフォームに表示されるログイン済みのユーザーを表示する際に呼び出されるアクションフック
    * 初期登録されている uf_action_comment_form_logged_in_before関数 は内部で comment_form_logged_in_before アクションフックを起動している
+ * uf_comment_form_logged_in_after
+   * すでにログインしている場合にコメントフォームに表示されるログイン済みのユーザーを表示した後に呼び出されるアクションフック
+   * 初期登録されている uf_action_comment_form_logged_in_after関数 は内部で comment_form_logged_in_after アクションフックを起動している
+ * uf_comment_form_top
+   * コメントフォームの入力フィールドを表示する前に呼び出されるアクションフック
+   * 初期登録されている uf_comment_form_top_tag関数 は内部で dlタグの開始 を表示している
+ * uf_comment_form_before_fields
+   * コメントフォームの入力フィールドを表示する直前に呼び出されるアクションフック
+   * 初期登録されている comment_form_before_fields関数 は内部で comment_form_before_fields アクションフックを起動している
+ * uf_comment_form_after_fields
+   * コメントフォームの入力フィールドを表示した直後に呼び出されるアクションフック
+   * 初期登録されている uf_action_comment_form_after_fields関数 は内部で comment_form_after_fields アクションフックを起動している
+ * uf_comment_form_bottom
+   * コメントフォームの入力フィールドを表示した後に呼び出されるアクションフック
+   * 初期登録されている uf_action_comment_form_after関数 は内部で comment_form_after アクションフックを起動している
+
 
 
 
