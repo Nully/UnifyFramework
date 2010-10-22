@@ -22,17 +22,6 @@ function uf_load_extensions() {
         if(file_exists(TEMPLATEPATH. "/includes/extensions/{$extension}.php")) {
             require_once TEMPLATEPATH. "/includes/extensions/{$extension}.php";
         }
-
-        /*
-        $class_name = str_replace("_", " ", $extension);
-        $class_name = str_replace(" ", "", ucwords($class_name));
-        $class_name = "UF_". $class_name;
-        if(class_exists($class_name)) {
-            $uf_extensions[$class_name] = &new $class_name();
-            if(method_exists($uf_extensions[$class_name], "init")) {
-                call_user_func(array(&$uf_extensions[$class_name], "init"));
-            }
-        }*/
     }
 }
 add_action("uf_init", "uf_load_extensions");

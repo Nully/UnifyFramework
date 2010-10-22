@@ -4,35 +4,6 @@ class UF_Core {}
 
 
 /**
- * Load UnifyFramework extended Extensions
- *
- * @access public
- * @return Void
- */
-/*
-function uf_load_extensions() {
-    $theme_options = uf_get_theme_option();
-
-    // enable CustomPost
-    if($theme_options["extensions"]["extension_custom_post"]) {
-        if(!isset($uf_custompost)) {
-            global $uf_custompost;
-            $uf_custompost = &new UF_CustomPost();
-        }
-    }
-
-    // enable PostThumbnail
-    if($theme_options["extensions"]["extension_post_thumbnail"]) {
-        if(!isset($uf_postthumbnail)) {
-            global $uf_postthumbnail;
-            $uf_postthumbnail = &new UF_PostThumbnail();
-        }
-    }
-}
-add_action("uf_init", "uf_load_extensions");
-*/
-
-/**
  * get UnifyFramework options
  *
  * @access public
