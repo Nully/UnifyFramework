@@ -58,48 +58,48 @@ UnifyFrameworkのファイル構成は以下のとおりです。
 
 >
 >    UnifyFramework
->    |- css/
->    |  |- admin.css
->    |  |- layout.css
->    |  `- unify.css
->    |- images/
->    |- includes/
->    |  |- extensions/
->    |  |   |- custom_post.php
->    |  |   |- custom_taxonomies.php
->    |  |   `- post_thumbnail.php
->    |  |- js
->    |  |- actions.php
->    |  |- admin.php
->    |  |- comments.php
->    |  |- core.php
->    |  |- custom-functions.php
->    |  |- filters.php
->    |  |- helpers.php
->    |  |- posts.php
->    |  |- template.php
->    |  |- theme-support.php
->    |  `- widget.php
->    |- langs/
->    |- 404.php
->    |- archive.php
->    |- category.php
->    |- comments.php
->    |- editor-style.css
->    |- footer-sidebar.php
->    |- footer.php
->    |- functions.php
->    |- header.php
->    |- index.php
->    |- page.php
->    |- search.php
->    |- searchform.php
->    |- sidebar-left.php
->    |- sidebar-right.php
->    |- single.php
->    |- style.css
->    `- tag.php
->    
+>     |- css/
+>     |  |- admin.css
+>     |  |- layout.css
+>     |  `- unify.css
+>     |- images/
+>     |- includes/
+>     |  |- extensions/
+>     |  |   |- custom_post.php
+>     |  |   |- custom_taxonomies.php
+>     |  |   `- post_thumbnail.php
+>     |  |- js
+>     |  |- actions.php
+>     |  |- admin.php
+>     |  |- comments.php
+>     |  |- core.php
+>     |  |- custom-functions.php
+>     |  |- filters.php
+>     |  |- helpers.php
+>     |  |- posts.php
+>     |  |- template.php
+>     |  |- theme-support.php
+>     |  `- widget.php
+>     |- langs/
+>     |- 404.php
+>     |- archive.php
+>     |- category.php
+>     |- comments.php
+>     |- editor-style.css
+>     |- footer-sidebar.php
+>     |- footer.php
+>     |- functions.php
+>     |- header.php
+>     |- index.php
+>     |- page.php
+>     |- search.php
+>     |- searchform.php
+>     |- sidebar-left.php
+>     |- sidebar-right.php
+>     |- single.php
+>     |- style.css
+>     `- tag.php
+>     
 
 
 ## フィルタ、アクションフックポイントについて
