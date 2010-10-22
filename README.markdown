@@ -111,7 +111,10 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
 ### フィルタフック一覧
 
  * uf_title
-   * uf_title関数のフィルタフック　uf_titleに初期登録されている uf_filter_the_title関数 は内部で the_title のフィルタを実行している
+   * uf_title関数のフィルタフック
+   * uf_titleに初期登録されている uf_filter_the_title関数 は内部で the_title のフィルタを実行している
+ * uf_get_body_class
+   * body タグに付与するためのクラス属性を取得する際に
  * uf_header_image_width
    * カスタムヘッダーイメージの画像幅フィルタフック
  * uf_header_image_height
@@ -126,6 +129,12 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
 
  * uf_head
    * HTMLヘッダ部分でのアクションフック
+ * uf_css
+   * CSSファイルを表示する際に起動するアクションフック
+   * init アクションとして登録されており、テーマのCSSなどを表示する際に利用する
+ * uf_javascript
+   * JavaScript ファイルを表示する際に起動するアクションフック
+   * init アクションとして登録されており、テーマのJavaScriptを表示する際に利用する
  * uf_footer
    * HTMLフッター部分でのアクションフック
  * uf_custom_header_before
@@ -164,7 +173,9 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
  * uf_comment_form_bottom
    * コメントフォームの入力フィールドを表示した後に呼び出されるアクションフック
    * 初期登録されている uf_action_comment_form_after関数 は内部で comment_form_after アクションフックを起動している
-
+ * uf_comment_form_after
+   * コメントフォームの表示が完了した際に起動するアクションフック
+   * 初期登録されている uf_action_comment_form_after関数 は内部で comment_form_after アクションフックを起動している
 
 
 
