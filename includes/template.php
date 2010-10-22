@@ -29,9 +29,10 @@ $uf_support_separators = array(
  */
 function uf_title() {
     global $uf_support_separators;
-    $separator = $uf_support_separators[get_option("uf_doctitle_separator", 2)];
+    $separator = $uf_support_separators[uf_get_option("theme_options", "uf_doctitle_separator", 2)];
     echo apply_filters("uf_title", join($separator, uf_get_title()));
 }
+
 
 
 /**
