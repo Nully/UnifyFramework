@@ -98,22 +98,6 @@ if(function_exists("register_default_headers")) {
 
 
 /**
- * admin page custom header style
- *
- */
-function uf_admin_custom_image_header_css() {
-?>
-<style type="text/css" media="all">
-    .appearance_page_custom-header #headimg {
-        border: 1px solid #CECECE !important;
-    }
-</style>
-<?php
-}
-
-
-
-/**
  * display custom header image by setting.
  *
  */
@@ -121,6 +105,7 @@ function uf_custom_header() {
     global $post;
 
 
+    do_action("uf_custom_header_before");
     // show_custom_header_in_front option enabled not display header image.
     $options = uf_get_option("theme_options");
     if((is_home() || is_front_page()) && !$options["show_custom_header_in_front"])
@@ -137,8 +122,8 @@ function uf_custom_header() {
 ?>
 <img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH ?>" height="<?php echo HEADER_IMAGE_HEIGHT ?>" alt="" />
 <?php
-        do_action("uf_custom_header");
     }
+    do_action("uf_custom_header_after");
 }
 
 
@@ -180,7 +165,7 @@ function uf_theme_support_override_css($mce_css) {
     $url = get_bloginfo("template_url");
     $url = rtrim($url, "/"). "/editor-style.css";
 
-    $url = apply_filters("uf_overload_mce_css", $url);
+    $url = apply_filters("uf_override_mce_css", $url);
 
     return $url;
 }
