@@ -108,6 +108,50 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
 
 そのフックポイントを以下に示します。
 
+### フィルタフック一覧
+
+ * uf_title
+   * uf_title関数のフィルタフック　uf_titleに初期登録されている uf_filter_the_title関数 は内部で the_title のフィルタを実行している
+ * uf_header_image_width
+   * カスタムヘッダーイメージの画像幅フィルタフック
+ * uf_header_image_height
+   * カスタムヘッダーイメージの画像高フィルタフック
+ * uf_pagenavi_formats
+   * uf_pagenavi関数で定義されているリンクテキストフォーマットのフィルタフック
+ * uf_override_mce_css
+   * エディタスタイルが有効に鳴っている場合にエディタCSSファイルのURLをフィルタするフック
+
+
+### アクションフック一覧
+
+ * uf_head
+   * HTMLヘッダ部分でのアクションフック
+ * uf_footer
+   * HTMLフッター部分でのアクションフック
+ * uf_custom_header_before
+   * カスタムヘッダーイメージを表示する前のアクションフック
+ * uf_custom_header_after
+   * カスタムヘッダーイメージを表示した後のアクションフック
+ * uf_theme_activated
+   * UnifyFramework テーマが有効化されたときに呼び出されるアクションフック
+ * uf_trackback_field
+   * コメントフォームに表示されるトラックバックURLが表示されるさいに呼び出されるアクションフック
+   * 初期登録されている uf_action_trackback_field関数 は内部で trackback_field アクションフックを起動している
+ * uf_comment_form_before
+   * コメントフォームを表示する前に呼び出されるアクションフック
+   * 初期登録されている uf_action_comment_form_before関数 は内部で comment_form_before アクションフックを起動している
+ * uf_comment_form_must_log_in_before
+   * コメントフォームからコメントする為にはログインしている必要がある場合に呼び出されるアクションフック
+   * 初期登録されている uf_action_comment_form_must_log_in_before関数 は内部で comment_form_must_log_in_before アクションフックを起動している
+ * uf_comment_form_must_log_in_after
+   * コメントフォームからコメントする為にはログインしている必要がある場合に呼び出されるアクションフック
+   * 初期登録されている uf_action_comment_form_must_log_in_after関数 は内部で comment_form_must_log_in_after アクションフックを起動している
+ * uf_comment_form_logged_in_before
+   * すでにログインしている場合にコメントフォームに表示されるログイン済みのユーザーを表示する際に呼び出されるアクションフック
+   * 初期登録されている uf_action_comment_form_logged_in_before関数 は内部で comment_form_logged_in_before アクションフックを起動している
+
+
+
  * uf_get_current_page_to_string : uf_get_current_page_to_string() 関数のフィルタフックです
  * uf_title : uf_title() 関数のフィルタフックです
  * uf_body_class : uf_body_class() 関数のフィルタフックです
