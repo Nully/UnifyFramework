@@ -1,50 +1,59 @@
->
-> WordPress Theme 'UnifyFramework' Version 1.0-DEV
->
---------------------------------------------------------------------------------
-
+# WordPress Theme 'UnifyFramework' Version 1.0-DEV
 
 ========================= !! 現在は開発バージョンです !! ==========================
 
 
-## UnifyFrameworkとは:
-UnifyFramework は WordPress (http://wordpress.org/) の専用テーマです。
-テーマをもっと統合的に（Unify）作成しよう！をモットーに作成されているテーマです。
-レイアウトに利用しているCSSは960 GridSystemを利用しているので、カラム割はもちろん、多彩なレイアウトを表現できると思います。
+## UnifyFrameworkとは
 
+UnifyFramework は WordPress (http://wordpress.org/) の専用テーマです。
+
+テーマをもっと統合的に（Unify）作成しよう！をモットーに作成されているテーマです。
+
+レイアウトに利用しているCSSは960 GridSystemを利用しているので、カラム割はもちろん、多彩なレイアウトを表現できると思います。
 
 最新のリビジョンを閲覧、取得する場合は、
 
- URL: http://github.com/Nully/UnifyFramework
+>
+>    URL: http://github.com/Nully/UnifyFramework
+>
 
 から御覧ください。
 
 
-## ライセンスについて:
+## ライセンスについて
+
 基本的に画像やCSSファイル以外については、WordPress と同じ GPL ライセンスを適用しています。
+
 詳しくは LICENSE.txt をお読みください。
 
 
-## 免責事項:
+## 免責事項
+
 UnifyFramework を利用したことで発生した損害や、障害などにつきましては一切の責任を負いかねます。
+
 自己責任で利用してください。
 
 
-## インストール:
+## インストール
+
 UnifyFramework のインストールは以下のとおりです。
 
-    1. ダウンロードしたファイルを解凍する
-    2. 解凍したファイルを 「WordPressInstallDir/wp-content/themes/」 にコピー又は移動する
-    3. WordPress 管理画面にログインし、「外観」 -> 「テーマ」から UnifyFramework を有効化してください。
+    * ダウンロードしたファイルを解凍する
+    * 解凍したファイルを 「WordPressInstallDir/wp-content/themes/」 にコピー又は移動する
+    * WordPress 管理画面にログインし、「外観」 -> 「テーマ」から UnifyFramework を有効化してください。
 
 
-## サポートするWordPressバージョン:
+## サポートするWordPressバージョン
+
 UnifyFramework は WordPress バージョン2.9以降から利用出来ます。
+
 将来的に下位バージョンとなる WordPress のサポートを撃ち切る可能性がありますので予めご理解ください。
 
 
-## フィルタ、アクションフックポイントについて:
+## フィルタ、アクションフックポイントについて
+
 UnifiFramework はフィルタ、及びアクションフックポイントを多数盛り込んでいます。
+
 そのフックポイントを以下に示します。
 
  * uf_get_current_page_to_string : uf_get_current_page_to_string() 関数のフィルタフックです
@@ -60,8 +69,10 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
  * uf_custom_header : uf_custom_header() 関数のフックポイントです
 
 
-## オリジナル提供関数:
+## オリジナル提供関数
+
 UnifyFramework は独自で定義した関数がいくつか存在します。
+
 この関数を利用することで下位バージョンの WordPress を極力サポートすることが出来ます。
 
  * uf_get_current_page_to_string 関数 : 現在ユーザーが閲覧しているページを文字列として返却します
@@ -77,7 +88,9 @@ UnifyFramework は独自で定義した関数がいくつか存在します。
  * uf_custom_header 関数 : カスタムヘッダを出力します
 
 
-## お問い合わせ等:
+## お問い合わせ等
+
 メールにて連絡を受け付けています。
+
 nully.nl < at > gmail.com
 
