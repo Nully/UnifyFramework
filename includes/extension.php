@@ -21,6 +21,7 @@ function uf_load_extensions() {
 
         if(file_exists(TEMPLATEPATH. "/includes/extensions/{$extension}.php")) {
             require_once TEMPLATEPATH. "/includes/extensions/{$extension}.php";
+            do_action("uf_extension_load_{$extension}");
         }
     }
 }
