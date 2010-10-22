@@ -115,6 +115,8 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
    * uf_titleに初期登録されている uf_filter_the_title関数 は内部で the_title のフィルタを実行している
  * uf_get_body_class
    * body タグに付与するためのクラス属性を取得する際に
+ * uf_nav_menu
+   * カスタムメニューやグローバルナビゲーションを表示する際に起動するアクションフック
  * uf_header_image_width
    * カスタムヘッダーイメージの画像幅フィルタフック
  * uf_header_image_height
@@ -143,6 +145,12 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
    * カスタムヘッダーイメージを表示した後のアクションフック
  * uf_theme_activated
    * UnifyFramework テーマが有効化されたときに呼び出されるアクションフック
+ * get_template_part_(slug)
+   * テンプレートパーシャルを呼び出す際に起動するアクションフック
+   * (slug)は呼び出すパーシャル名に置き換わり、アクションが起動する
+ * uf_extension_load_(extension)
+   * テーマ拡張の読み込みが完了した際に呼び出されるアクションフック
+   * (extension)は読み込まれるテーマ拡張のファイル名に置き換えられる
  * uf_trackback_field
    * コメントフォームに表示されるトラックバックURLが表示されるさいに呼び出されるアクションフック
    * 初期登録されている uf_action_trackback_field関数 は内部で trackback_field アクションフックを起動している
@@ -176,8 +184,6 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
  * uf_comment_form_after
    * コメントフォームの表示が完了した際に起動するアクションフック
    * 初期登録されている uf_action_comment_form_after関数 は内部で comment_form_after アクションフックを起動している
-
-
 
  * uf_get_current_page_to_string : uf_get_current_page_to_string() 関数のフィルタフックです
  * uf_title : uf_title() 関数のフィルタフックです
