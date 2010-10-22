@@ -11,6 +11,8 @@ UnifyFramework は WordPress (http://wordpress.org/) の専用テーマです。
 
 レイアウトに利用しているCSSは960 GridSystemを利用しているので、カラム割はもちろん、多彩なレイアウトを表現できると思います。
 
+※将来的に978.gsを採用する予定です。また初期デザインも変更する予定です。
+
 最新のリビジョンを閲覧、取得する場合は、
 
 >
@@ -48,6 +50,56 @@ UnifyFramework のインストールは以下のとおりです。
 UnifyFramework は WordPress バージョン2.9以降から利用出来ます。
 
 将来的に下位バージョンとなる WordPress のサポートを撃ち切る可能性がありますので予めご理解ください。
+
+
+## ディレクトリ構成
+
+UnifyFrameworkのファイル構成は以下のとおりです。
+
+>
+>    UnifyFramework
+>    |- css/
+>    |  |- admin.css
+>    |  |- layout.css
+>    |  `- unify.css
+>    |- images/
+>    |- includes/
+>    |  |- extensions/
+>    |  |   |- custom_post.php
+>    |  |   |- custom_taxonomies.php
+>    |  |   `- post_thumbnail.php
+>    |  |- js
+>    |  |- actions.php
+>    |  |- admin.php
+>    |  |- comments.php
+>    |  |- core.php
+>    |  |- custom-functions.php
+>    |  |- filters.php
+>    |  |- helpers.php
+>    |  |- posts.php
+>    |  |- template.php
+>    |  |- theme-support.php
+>    |  `- widget.php
+>    |- langs/
+>    |- 404.php
+>    |- archive.php
+>    |- category.php
+>    |- comments.php
+>    |- editor-style.css
+>    |- footer-sidebar.php
+>    |- footer.php
+>    |- functions.php
+>    |- header.php
+>    |- index.php
+>    |- page.php
+>    |- search.php
+>    |- searchform.php
+>    |- sidebar-left.php
+>    |- sidebar-right.php
+>    |- single.php
+>    |- style.css
+>    `- tag.php
+>    
 
 
 ## フィルタ、アクションフックポイントについて
