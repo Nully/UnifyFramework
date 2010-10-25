@@ -214,12 +214,14 @@ add_filter("uf_body_class", "uf_get_body_class");
  * @return String    grid class
  */
 function uf_get_contents_class() {
-    $class = "grid_16";
-    if(uf_has_sidebar("left-sidebar") && uf_has_sidebar("right-sidebar")) {
+    // $class = "grid_16";
+    $class = "grid_12";
+/*    if(uf_has_sidebar("left-sidebar") && uf_has_sidebar("right-sidebar")) {
         $class = "grid_8";
     }
-    elseif (uf_has_sidebar("left-sidebar") || uf_has_sidebar("right-sidebar")) {
-        $class = "grid_12";
+    else*/
+    if (uf_has_sidebar("left-sidebar") || uf_has_sidebar("right-sidebar")) {
+        $class = "grid_8";
     }
 
     return $class;
