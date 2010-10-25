@@ -68,6 +68,36 @@ add_action("init", "uf_activate_theme");
 
 
 /**
+ * do Action, theme activated save default theme options.
+ *
+ * @access protected
+ * @return Void
+ */
+function uf_activate_theme_save_default_options() {
+    $options = get_option("uf_theme_options", array());
+    if(!empty($options))
+        return;
+
+    uf_update_option("theme_options", array(
+        "allow_editor_css"      => true,
+        "comment_required_name" => false,
+        "comment_for_page"      => false,
+        "comment_allowd_pages"  => null,
+        "show_custom_header_in_front" => true,
+        "extensions" => array(
+            "custom_post"       => false,
+            "custom_taxonomies" => false,
+            "post_thumbnail"    => false,
+        ),
+        "pagenavi_show_count"   => 5,
+        "pagenavi_show_metabox" => true,
+    ));
+}
+add_action("uf_theme_activated", "uf_activate_theme_save_default_options");
+
+
+
+/**
  * display notice message
  *   unsupported WordPress version
  *
