@@ -1,10 +1,4 @@
 <?php /* unifyFramework right sidebar template. */ ?>
-<?php
-/**
- * if right sidebar registerd, shown right sidebar.
- *
- */
-?>
 <div id="right-sidebar" class="grid_4">
 <?php if(!dynamic_sidebar("right-sidebar")): ?>
     <div class="widget widget_search">
