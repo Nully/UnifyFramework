@@ -11,7 +11,6 @@
  * @return String
  */
 function uf_check_comment_author_name($author) {
-    $author = "";
     if(empty($author) && uf_get_option("theme_options", "comment_required_name")) {
         wp_die(__(
             "Comment author is required.<br />Please comment author field.", "unify_framework"
