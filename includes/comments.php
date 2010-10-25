@@ -3,6 +3,28 @@
  * UnifyFramework utility support
  */
 /**
+ * do Action, comment post.
+ * checking comment_author meta data.
+ *
+ * @access protected
+ * @param  $author    String    comment author name.
+ * @return String
+ */
+function uf_check_comment_author_name($author) {
+    $author = "";
+    if(empty($author) && uf_get_option("theme_options", "comment_required_name")) {
+        wp_die(__(
+            "Comment author is required.<br />Please comment author field.", "unify_framework"
+        ), __("Comment Author is required field.", "unify_framework"));
+    }
+
+    return $author;
+}
+add_filter("pre_comment_author_name", "uf_check_comment_author_name");
+
+
+
+/**
  * check PHP script file direct access ?
  *
  * @param  $filename   check target file name
