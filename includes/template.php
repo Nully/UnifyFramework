@@ -406,6 +406,10 @@ function uf_pagenavi_pager($args = null) {
     if(($end_page - $start_page) != $show_page_number)
         $start_page += ($end_page - $start_page)- $show_page_number + 1;
 
+    if($start_page <= 0)
+        $start_page = 1;
+
+
     // display Page of meta box.
     if(uf_get_option("theme_options", "pagenavi_show_metabox"))
         echo str_replace(array("%current", "%max"), array($paged, $max_pages), $args["page_of_format"]);
