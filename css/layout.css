@@ -306,3 +306,14 @@ ol.commentlist li.thread-odd {}
 #respond #commentform #submit { color: #FFF; padding: 10px; border-top: 1px solid #9f9f9f; border-left: 1px solid #9f9f9f; border-right: 1px solid #3f3f3f; border-bottom: 1px solid #3f3f3f; background: #bfbfbf; font-size: 1.8em; cursor: pointer; }
 #respond #commentform #submit:hover { background: #0f2b4d; }
 
+
+
+/* --------------------------------------------------------------- UFPagenavi */
+#uf-pagenavi {}
+#uf-pagenavi .uf-pagenavi {}
+#uf-pagenavi .uf-pagenavi a { border: 1px solid #999; margin: 0 5px; padding: 3px 5px; }
+#uf-pagenavi .uf-pagenumber {}
+#uf-pagenavi .uf-pagenumber a { border: 1px solid #999; margin: 0 5px; padding: 3px 5px; }
+#uf-pagenavi .uf-page-current { border: 1px solid #0f2b4c; margin: 0 5px; padding: 3px 5px; }
+
+
