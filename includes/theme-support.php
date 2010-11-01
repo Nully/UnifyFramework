@@ -46,7 +46,13 @@
  * Add custom menu.
  *
  */
-add_theme_support("nav-menus");
+if(function_exists("register_nav_menu")) {
+    // for WordPress 3.0 supported.
+    add_theme_support("nav-menus");
+    # register_nav_menu("Global menu", "Global navigation.");
+    # register_nav_menu("FooterNav", "Footer navigation");
+    # unregister_nav_menu("Primary nav menu");
+}
 
 
 
