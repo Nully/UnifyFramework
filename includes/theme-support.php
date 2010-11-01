@@ -42,6 +42,11 @@
  *     ));
  * }
  */
+/**
+ * Add custom menu.
+ *
+ */
+add_theme_support("nav-menus");
 
 
 
