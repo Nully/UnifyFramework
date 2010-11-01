@@ -371,10 +371,10 @@ function uf_pagenavi_pager($args = null) {
 
     $defaults = array(
         "page_of_format"         => '<span class="uf-page-of">Page %current of %max</span>'. "\n",
-        "first_page_link_format" => '<a href="%link"><span class="uf-pagenavi uf-pagenavi-to-first">&laquo;</span></a>'. "\n",
-        "last_page_link_format"  => '<a href="%link"><span class="uf-pagenavi uf-pagenavi-to-last">&raquo;</span></a>'. "\n",
-        "next_page_link_format"  => '<a href="%link"><span class="uf-pagenavi uf-pagenavi-next-page">&gt;</span></a>'. "\n",
-        "prev_page_link_format"  => '<a href="%link"><span class="uf-pagenavi uf-pagenavi-prev-page">&lt;</span></a>'. "\n",
+        "first_page_link_format" => '<span class="uf-pagenavi uf-pagenavi-to-first"><a href="%link">&laquo;</a></span>'. "\n",
+        "last_page_link_format"  => '<span class="uf-pagenavi uf-pagenavi-to-last"><a href="%link">&raquo;</a></span>'. "\n",
+        "next_page_link_format"  => '<span class="uf-pagenavi uf-pagenavi-next-page"><a href="%link">&gt;</a></span>'. "\n",
+        "prev_page_link_format"  => '<span class="uf-pagenavi uf-pagenavi-prev-page"><a href="%link">&lt;</a></span>'. "\n",
         "pages_link_format"      => '<span class="uf-pagenavi uf-pagenumber uf-pagenumber-%page%current">%title</span>',
     );
     $args = wp_parse_args($args, $defaults);
@@ -425,13 +425,13 @@ function uf_pagenavi_pager($args = null) {
     // display number pages.
     for($i = $start_page; $i <= $end_page; $i ++) {
         $current = " uf-page-current";
-        $link_tpl = $args["pages_link_format"];
+        $title = $i;
         if($i != $paged) {
             $current = "";
-            $link_tpl = '<a href="'. get_pagenum_link($i) .'">'. $link_tpl. "</a>";
+            $title = '<a href="'. get_pagenum_link($i) .'">'. $i. "</a>";
         }
 
-        echo str_replace(array("%page", "%current", "%title"), array($i, $current, $i), $link_tpl);
+        echo str_replace(array("%page", "%current", "%title"), array($i, $current, $title), $args["pages_link_format"]);
     }
 
     // for next page link.
