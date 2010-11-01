@@ -7,6 +7,7 @@ function uf_admin_save_options() {
     if($_POST["save_option"]) {
         uf_update_option("theme_options", array(
             "allow_editor_css"      => $_POST["allow_editor_css"],
+            "editor_buttons"        => $_POST["editor_buttons"],
             "comment_required_name" => $_POST["comment_required_name"],
             "comment_for_page"      => $_POST["comment_for_page"],
             "comment_allowd_pages"  => $_POST["comment_allowd_pages"],
@@ -126,15 +127,17 @@ function uf_admin_setting() {
     <form action="" method="post">
         <?php wp_nonce_field(); ?>
 
-        <?php uf_admin_postbox(__("Editor style setting"), array(array(
-            "label" => __("Editor style setting.", "unify_framework"),
-            "field" => uf_form_checkbox(1, array(
-                "id" => "uf_allow_editor_css", "name" => "allow_editor_css",
-                "label" => __("Allow custom editor style", "unify_framework"),
-                "checked" => $options["allow_editor_css"],
-            ), false),
-            "extra" => sprintf(__("* custom editor style file path: %s"), get_bloginfo("template_directory"). "/editor-style.css")
-        ))); ?>
+        <?php uf_admin_postbox(__("Editor style setting"), array(
+            array(
+                "label" => __("Editor style setting.", "unify_framework"),
+                "field" => uf_form_checkbox(1, array(
+                    "id" => "uf_allow_editor_css", "name" => "allow_editor_css",
+                    "label" => __("Allow custom editor style", "unify_framework"),
+                    "checked" => $options["allow_editor_css"],
+                ), false),
+                "extra" => sprintf(__("* custom editor style file path: %s"), get_bloginfo("template_directory"). "/editor-style.css")
+            ),
+        )); ?>
 
 
         <?php uf_admin_postbox(__("Comment post setting.", "unify_framework"), array(
@@ -240,6 +243,12 @@ function uf_admin_setting() {
 function uf_admin_postbox($title, $data = array()) {
     if(!is_array($data))
         $data = (array)$data;
+
+    if($data["field"])
+        $data["fields"] = (array)$data["field"];
+
+    if(!isset($data["fields"]))
+        $data["fields"] = array();
 ?>
 <div class="postbox">
     <h3 class="hndle"><?php echo $title; ?></h3>
@@ -248,7 +257,8 @@ function uf_admin_postbox($title, $data = array()) {
             <?php foreach($data as $pair): ?>
             <tr>
                 <th><?php echo $pair["label"]; ?></th>
-                <td><?php echo $pair["field"]; ?>
+                <td><?php $fields = (is_array($pair["field"]) ? $pair["field"]: (array)$pair["field"]); ?>
+                    <?php foreach($fields as $field): echo $field. "<br />"; endforeach; ?>
                     <?php if($pair["extra"]): ?>
                     <br />
                     <span class="caution"><?php echo $pair["extra"]; ?></span>
