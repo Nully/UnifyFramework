@@ -1,219 +1,926 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: UnifyFramework ver 1.0\n"
+"Project-Id-Version: UnifyFramework 1.0 BETA\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-08 15:35+0900\n"
-"PO-Revision-Date: 2010-09-08 15:36+0900\n"
+"POT-Creation-Date: 2010-11-01 14:04+0900\n"
+"PO-Revision-Date: 2010-11-02 13:54+0900\n"
 "Last-Translator: Nully <nully.nl@gmail.com>\n"
 "Language-Team: Nully <nully.nl@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: ../\n"
+"X-Poedit-Basepath: /Users/hayasaka/Sites/wp/3.0/\n"
 "X-Poedit-Language: Japanese\n"
 "X-Poedit-Country: JAPAN\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-0: wp-content/themes/unify_framework\n"
 
-#: ../unify_framework/404.php:7
+#: wp-content/themes/unify_framework/404.php:7
 msgid "Post are not found."
 msgstr "投稿は見つかりませんでした。"
 
-#: ../unify_framework/404.php:8
+#: wp-content/themes/unify_framework/404.php:8
 msgid "the request post is not found. try, search might find it."
-msgstr "要求されたリクエストは見つかりませんでした。検索ならば見つかるかもしれません。"
+msgstr "指定された記事は見つかりませんでした。<br />キーワード検索を試してください。"
 
-#: ../unify_framework/archive.php:6
+#: wp-content/themes/unify_framework/archive.php:6
 #, php-format
 msgid "Daily posts : <span>%s</span>"
 msgstr "日別投稿：<span>%s</span>"
 
-#: ../unify_framework/archive.php:8
+#: wp-content/themes/unify_framework/archive.php:8
 #, php-format
 msgid "Monthly posts : <span>%s</span>"
 msgstr "月別投稿：<span>%s</span>"
 
-#: ../unify_framework/archive.php:10
+#: wp-content/themes/unify_framework/archive.php:10
 #, php-format
 msgid "Yearly posts : <span>%s</span>"
 msgstr "年別投稿：<span>%s</span>"
 
-#: ../unify_framework/archive.php:12
+#: wp-content/themes/unify_framework/archive.php:12
 msgid "Blog Archives"
 msgstr "ブログアーカイブ"
 
-#: ../unify_framework/category.php:4
+#: wp-content/themes/unify_framework/category.php:4
 #, php-format
 msgid "Category : <span>%s</span>"
 msgstr "カテゴリー：<span>%s</span>"
 
-#: ../unify_framework/comments.php:5
+#: wp-content/themes/unify_framework/comments.php:5
 msgid "Please do not load this page directly. Thanks!"
-msgstr "このページへの直接アクセスは禁止されています。"
+msgstr "ダイレクトアクセスは禁止されています。"
 
-#: ../unify_framework/comments.php:9
+#: wp-content/themes/unify_framework/comments.php:9
 msgid "This post is password protected. Enter the password to view comments."
-msgstr "この投稿はパスワードで保護されています。パスワードを入力してください。"
+msgstr "この記事はパスワードで保護されています。<br />パスワードを入力してください。"
 
-#: ../unify_framework/comments.php:21
+#: wp-content/themes/unify_framework/comments.php:21
 msgid "No Comments"
 msgstr "コメントはありません。"
 
-#: ../unify_framework/comments.php:21
+#: wp-content/themes/unify_framework/comments.php:21
 msgid "1 Comment"
-msgstr "1 件のコメント"
+msgstr "1件のコメント"
 
-#: ../unify_framework/comments.php:21
-msgid "% Comments"
+#: wp-content/themes/unify_framework/comments.php:21
+#, php-format
+msgid "%s Comments"
 msgstr "%s 件のコメント"
 
-#: ../unify_framework/comments.php:36
+#: wp-content/themes/unify_framework/comments.php:34
+msgid "Trackbacks / Pings"
+msgstr "トラックバック/ピンバック"
+
+#: wp-content/themes/unify_framework/comments.php:43
 msgid "Comments are closed."
-msgstr "コメントは受け付けていません。"
+msgstr "コメントは閉じられています。"
 
-#: ../unify_framework/comments.php:48
-msgid "Please Comment"
-msgstr "コメントをどうぞ"
-
-#: ../unify_framework/comments.php:48
-#, php-format
-msgid "Reply to %s"
-msgstr "%s へ返信"
-
-#: ../unify_framework/comments.php:54
-#, php-format
-msgid "You must be <a href=\"%s/wp-login.php?redirect_to=%s\">logged in</a> to post a comment."
-msgstr "この記事へコメントするには「<a href=\"%s/wp-login.php?redirect_to=%s\">ログイン</a>」が必要です。"
-
-#: ../unify_framework/comments.php:60
-#, php-format
-msgid "logged in as <a href=\"%s/wp-admin/profile.php\">%s</a>. (<a href=\"%s\" title=\"Log out of this account\">logged out</a>)"
-msgstr "現在「<a href=\"%s/wp-admin/profile.php\">%s</a>」としてログインしています。（ログアウトは<a href=\"%s\" title=\"Log out of this account\">こちら</a>から）"
-
-#: ../unify_framework/comments.php:65
-#: ../unify_framework/comments.php:69
-msgid "Name"
-msgstr "お名前"
-
-#: ../unify_framework/comments.php:66
-#: ../unify_framework/comments.php:68
-msgid "Required"
-msgstr "必須項目"
-
-#: ../unify_framework/comments.php:67
-msgid "Email"
-msgstr "メールアドレス"
-
-#: ../unify_framework/comments.php:74
-msgid "Valid tags are"
-msgstr "許可されているタグ"
-
-#: ../unify_framework/comments.php:77
-msgid "Submit comment"
-msgstr "コメントを送信"
-
-#: ../unify_framework/search.php:4
-#, php-format
-msgid "Search of : <span>%s</span>"
-msgstr "<span>%s</span> を検索"
-
-#: ../unify_framework/search.php:6
-#, php-format
-msgid "Search results of : <span>%s</span>"
-msgstr "<span>%s</span> 件の検索結果"
-
-#: ../unify_framework/search.php:25
-msgid "Search not Found."
-msgstr "検索結果がありませんでした。"
-
-#: ../unify_framework/search.php:26
-msgid "Sorry, but nothing matched your search criteria. Please try again with some different keywords."
-msgstr "指定されたキーワードでは見つかりませんでした。キーワードを変えて再度検索を試してください。"
-
-#: ../unify_framework/searchform.php:2
-#: ../unify_framework/searchform.php:5
-msgid "Search"
-msgstr "検索"
-
-#: ../unify_framework/tag.php:4
-#, php-format
-msgid "Tag : <span>%s</span>"
-msgstr "タグ：<span>%s</span>"
-
-#: ../unify_framework/library/initialize.php:9
+#: wp-content/themes/unify_framework/functions.php:16
 #, php-format
 msgid ""
 "this WordPress version unsupported UnifyFramework.<br />\n"
 "WordPress Version: %s<br />UnifyFramework Version: %s<br />"
-msgstr "お使いの WordPress バージョンでは UnifyFramework はご利用になれません。<br />WordPress Version: %s<br />UnifyFramework Version: %s<br />"
+msgstr ""
+"ご利用中のWordPressのバージョン %s では UnifyFramework はサポートされていません。<br />\n"
+"WordPressバージョン：%s<br />UnifyFramework バージョン：%s<br />"
 
-#: ../unify_framework/library/functions/uf_custom-header.php:25
+#: wp-content/themes/unify_framework/search.php:4
+#, php-format
+msgid "Search of : <span>%s</span>"
+msgstr "検索：<span>%s</span>"
+
+#: wp-content/themes/unify_framework/search.php:6
+#, php-format
+msgid "Search results of : <span>%s</span>"
+msgstr "検索結果：<span>%s</span>"
+
+#: wp-content/themes/unify_framework/search.php:25
+msgid "Search not Found."
+msgstr "検索結果がありませんでした。"
+
+#: wp-content/themes/unify_framework/search.php:26
+msgid "Sorry, but nothing matched your search criteria. Please try again with some different keywords."
+msgstr "指定されたキーワードで記事は見つかりませんでした。<br />キーワードを変更し再度検索してください。"
+
+#: wp-content/themes/unify_framework/searchform.php:2
+#: wp-content/themes/unify_framework/searchform.php:5
+msgid "Search"
+msgstr "検索"
+
+#: wp-content/themes/unify_framework/sidebar-right.php:9
+msgid "Calendar"
+msgstr "カレンダー"
+
+#: wp-content/themes/unify_framework/sidebar-right.php:14
+msgid "Archive"
+msgstr "アーカイブ"
+
+#: wp-content/themes/unify_framework/sidebar-right.php:21
+msgid "Categories"
+msgstr "カテゴリー"
+
+#: wp-content/themes/unify_framework/sidebar-right.php:26
+msgid "TagCloud"
+msgstr "タグクラウド"
+
+#: wp-content/themes/unify_framework/tag.php:4
+#, php-format
+msgid "Tag : <span>%s</span>"
+msgstr "タグ：<span>%s</span>"
+
+#: wp-content/themes/unify_framework/includes/actions.php:110
+#, php-format
+msgid "UnifyFramework is not supported this WordPress version %s."
+msgstr "UnifyFramework はご利用中の WordPress バージョン %s には未対応です。"
+
+#: wp-content/themes/unify_framework/includes/actions.php:112
+msgid "Upgrade your WordPress version."
+msgstr "WordPressをアップグレードしてください。"
+
+#: wp-content/themes/unify_framework/includes/admin.php:61
+msgid "UnifyFramework setting pages"
+msgstr "UnifyFramework 設定ページ"
+
+#: wp-content/themes/unify_framework/includes/admin.php:61
+#: wp-content/themes/unify_framework/includes/admin.php:62
+msgid "Theme Options"
+msgstr "テーマオプション"
+
+#: wp-content/themes/unify_framework/includes/admin.php:126
+msgid "setting UnifyFramework theme options."
+msgstr "UnifyFramework のテーマオプション設定ページ"
+
+#: wp-content/themes/unify_framework/includes/admin.php:130
+msgid "Editor style setting"
+msgstr "エディタスタイルの設定"
+
+#: wp-content/themes/unify_framework/includes/admin.php:132
+msgid "Editor style setting."
+msgstr "エディタスタイルの設定"
+
+#: wp-content/themes/unify_framework/includes/admin.php:135
+msgid "Allow custom editor style"
+msgstr "カスタムエディタスタイルを有効にします"
+
+#: wp-content/themes/unify_framework/includes/admin.php:138
+#, php-format
+msgid "* custom editor style file path: %s"
+msgstr "カスタムエディタスタイルは %s にあります"
+
+#: wp-content/themes/unify_framework/includes/admin.php:143
+msgid "Comment post setting."
+msgstr "コメント投稿設定"
+
+#: wp-content/themes/unify_framework/includes/admin.php:145
+msgid "Required field setting"
+msgstr "必須項目設定"
+
+#: wp-content/themes/unify_framework/includes/admin.php:148
+msgid "name only required."
+msgstr "名前のみを必須項目とします"
+
+#: wp-content/themes/unify_framework/includes/admin.php:153
+msgid "Comment allowd page setting"
+msgstr "ページ投稿のコメント設定"
+
+#: wp-content/themes/unify_framework/includes/admin.php:156
+msgid "Comment allwod page ?"
+msgstr "ページでコメントを有効にしますか？"
+
+#: wp-content/themes/unify_framework/includes/admin.php:162
+msgid "* separated 'comma' for page ID"
+msgstr "* コンマでページIDを区切ることで、指定したページのみコメントの可否が設定出来ます"
+
+#: wp-content/themes/unify_framework/includes/admin.php:167
+msgid "Custom Image header setting"
+msgstr "カスタムイメージヘッダー設定"
+
+#: wp-content/themes/unify_framework/includes/admin.php:169
+msgid "Custom ImageHeader"
+msgstr "カスタムイメージヘッダー"
+
+#: wp-content/themes/unify_framework/includes/admin.php:172
+msgid "display custom header in the home page or front page ?"
+msgstr "ホームページ及びフロントページでカスタムイメージを表示しますか？"
+
+#: wp-content/themes/unify_framework/includes/admin.php:179
+msgid "Extensions"
+msgstr "テーマ拡張"
+
+#: wp-content/themes/unify_framework/includes/admin.php:181
+msgid "CustomPost extension"
+msgstr "カスタム投稿タイプ拡張"
+
+#: wp-content/themes/unify_framework/includes/admin.php:184
+msgid "Enable theme support custom post type."
+msgstr "カスタム投稿タイプを有効にします"
+
+#: wp-content/themes/unify_framework/includes/admin.php:187
+msgid "* is installed Custom Post Type UI, this extension always disable."
+msgstr "* Custom Post Type UI が有効の場合は、優先的に Custom Post Type UIが利用されます"
+
+#: wp-content/themes/unify_framework/includes/admin.php:190
+msgid "CustomTaxonomies extension"
+msgstr "カスタムタクソノミー拡張"
+
+#: wp-content/themes/unify_framework/includes/admin.php:193
+msgid "Enable theme support custom taxonomies."
+msgstr "カスタムタクソノミーを有効化します"
+
+#: wp-content/themes/unify_framework/includes/admin.php:198
+msgid "PostThumbnail extension"
+msgstr "投稿サムネイル拡張"
+
+#: wp-content/themes/unify_framework/includes/admin.php:200
+msgid "Enable theme support post thumbnail."
+msgstr "投稿サムネイル拡張を有効にします"
+
+#: wp-content/themes/unify_framework/includes/admin.php:207
+msgid "Pagenavigation setting"
+msgstr "ページナビ設定"
+
+#: wp-content/themes/unify_framework/includes/admin.php:209
+msgid "Show max page numbers."
+msgstr "表示するページ件数"
+
+#: wp-content/themes/unify_framework/includes/admin.php:215
+msgid "display page of meta box"
+msgstr "ページャのメタボックスを表示"
+
+#: wp-content/themes/unify_framework/includes/admin.php:218
+msgid "display page of metabox."
+msgstr "ページャメタボックスを表示します"
+
+#: wp-content/themes/unify_framework/includes/admin.php:224
+msgid "Save options"
+msgstr "設定を保存"
+
+#: wp-content/themes/unify_framework/includes/comments.php:16
+msgid "Comment author is required.<br />Please comment author field."
+msgstr "コメント投稿者名は必須項目です。<br />コメント投稿者名を入力してください。"
+
+#: wp-content/themes/unify_framework/includes/comments.php:17
+msgid "Comment Author is required field."
+msgstr "コメント投稿者名は必須項目です。"
+
+#: wp-content/themes/unify_framework/includes/comments.php:71
+msgid "Trackback / Ping"
+msgstr "トラックバック/ピンバック"
+
+#: wp-content/themes/unify_framework/includes/comments.php:130
+msgid "Author"
+msgstr "投稿者"
+
+#: wp-content/themes/unify_framework/includes/comments.php:130
+#: wp-content/themes/unify_framework/includes/comments.php:132
+msgid "Required"
+msgstr "必須項目"
+
+#: wp-content/themes/unify_framework/includes/comments.php:132
+msgid "Email"
+msgstr "メールアドレス"
+
+#: wp-content/themes/unify_framework/includes/comments.php:134
+msgid "Website"
+msgstr "ウェブサイト"
+
+#: wp-content/themes/unify_framework/includes/comments.php:140
+#, php-format
+msgid "Required fields are marked %s"
+msgstr "%s マークが付いている箇所は必須項目です"
+
+#: wp-content/themes/unify_framework/includes/comments.php:144
+#, php-format
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr "許可されたHTMLタグは %s です"
+
+#: wp-content/themes/unify_framework/includes/comments.php:146
+#, php-format
+msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
+msgstr "コメントをするには<a href=\"%s\">ログイン</a> してください。"
+
+#: wp-content/themes/unify_framework/includes/comments.php:147
+#, php-format
+msgid "Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of this account\">Log out?</a>"
+msgstr "<a href=\"%1$s\">%2$s</a>としてログインしています。 <a href=\"%3$s\" title=\"Log out of this account\">ログアウト</a>しますか？"
+
+#: wp-content/themes/unify_framework/includes/comments.php:148
+msgid "Your email address will not be published."
+msgstr "メールアドレスは公開されません"
+
+#: wp-content/themes/unify_framework/includes/comments.php:152
+msgid "Leave a Reply"
+msgstr "返信"
+
+#: wp-content/themes/unify_framework/includes/comments.php:153
+#, php-format
+msgid "Leave a Reply to %s"
+msgstr "%s へ返信"
+
+#: wp-content/themes/unify_framework/includes/comments.php:154
+msgid "Cancel reply"
+msgstr "返信をキャンセル"
+
+#: wp-content/themes/unify_framework/includes/comments.php:155
+msgid "Post Comment"
+msgstr "コメント"
+
+#: wp-content/themes/unify_framework/includes/extension.php:91
+#, php-format
+msgid "%s is override method ! your class extended this class."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/template.php:57
+msgid "Page not found."
+msgstr "ページは見つかりませんでした。"
+
+#: wp-content/themes/unify_framework/includes/template.php:72
+#, php-format
+msgid "Search results %s"
+msgstr "%s の検索結果"
+
+#: wp-content/themes/unify_framework/includes/template.php:79
+#, php-format
+msgid "Page %s"
+msgstr "ページ %s"
+
+#: wp-content/themes/unify_framework/includes/theme-support.php:89
 msgid "Maiko"
-msgstr ""
+msgstr "舞妓"
 
-#: ../unify_framework/library/functions/uf_custom-header.php:30
+#: wp-content/themes/unify_framework/includes/theme-support.php:94
 msgid "Cherryblossom"
-msgstr ""
+msgstr "桜"
 
-#: ../unify_framework/library/functions/uf_custom-header.php:35
+#: wp-content/themes/unify_framework/includes/theme-support.php:99
 msgid "Fern"
-msgstr ""
+msgstr "フェーン"
 
-#: ../unify_framework/library/functions/uf_custom-header.php:40
+#: wp-content/themes/unify_framework/includes/theme-support.php:104
 msgid "Path"
-msgstr ""
+msgstr "パス"
 
-#: ../unify_framework/library/functions/uf_title.php:26
-#, php-format
-msgid "Search result for : %s"
-msgstr ""
-
-#: ../unify_framework/library/functions/uf_title.php:29
-#: ../unify_framework/library/functions/uf_title.php:61
-#, php-format
-msgid " %s Page of %s"
-msgstr ""
-
-#: ../unify_framework/library/functions/uf_title.php:54
-msgid "404 - Page not found"
-msgstr "404 - ページが見つかりませんでした。"
-
-#: ../unify_framework/library/functions/uf_utility.php:206
-msgid "Next"
-msgstr "次へ"
-
-#: ../unify_framework/library/functions/uf_utility.php:209
-msgid "Previous"
-msgstr "前へ"
-
-#: ../unify_framework/library/functions/uf_utility.php:271
-#, php-format
-msgid "Pages %s Of %s : "
-msgstr "ページ %s / %s"
-
-#: ../unify_framework/library/widgets/uf_widgets-register.php:8
+#: wp-content/themes/unify_framework/includes/widget.php:9
 msgid "Left Sidebar"
 msgstr "左サイドバー"
 
-#: ../unify_framework/library/widgets/uf_widgets-register.php:10
+#: wp-content/themes/unify_framework/includes/widget.php:11
 msgid "UnifyFramework left sidebar."
 msgstr "UnifyFramework の左サイドバー"
 
-#: ../unify_framework/library/widgets/uf_widgets-register.php:19
+#: wp-content/themes/unify_framework/includes/widget.php:20
 msgid "Right Sidebar"
 msgstr "右サイドバー"
 
-#: ../unify_framework/library/widgets/uf_widgets-register.php:21
+#: wp-content/themes/unify_framework/includes/widget.php:22
 msgid "UnifyFramework right sidebar."
 msgstr "UnifyFramework の右サイドバー"
 
-#: ../unify_framework/library/widgets/uf_widgets-register.php:30
+#: wp-content/themes/unify_framework/includes/widget.php:31
 #, php-format
 msgid "Footer Sidebar %s"
 msgstr "フッターサイドバー %s"
 
-#: ../unify_framework/library/widgets/uf_widgets-register.php:32
+#: wp-content/themes/unify_framework/includes/widget.php:33
 msgid "for Footer widgets"
-msgstr "フッターウィジェット"
+msgstr "フッターのためのウィジェット"
+
+#: wp-content/themes/unify_framework/includes/widget.php:60
+#, php-format
+msgid "Sidebar %s"
+msgstr "サイドバー %s"
+
+#: wp-content/themes/unify_framework/includes/widget.php:63
+msgid "Sidebar"
+msgstr "サイドバー"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:72
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:75
+msgid "Add Custom Post"
+msgstr "カスタム投稿の追加"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:73
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:76
+msgid "Edit Custom Post"
+msgstr "カスタム投稿の編集"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:136
+msgid "Success. CustomPost saved"
+msgstr "カスタム投稿タイプの保存が完了しました"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:143
+msgid "required field CustomPost type name"
+msgstr "カスタム投稿タイプ名は必須項目です"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:144
+msgid "Custom post type name is Digits and underscore (_) and hyphen (-)."
+msgstr "カスタム投稿タイプ名は英数字、アンダースコア（_）、ハイフン（-）のみで構成してください。"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:233
+msgid "Custom Post type name setting."
+msgstr "カスタム投稿タイプ名の設定"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:235
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:245
+msgid "Custom post type name"
+msgstr "カスタム投稿タイプ名"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:243
+msgid "CustomPost description"
+msgstr "カスタム投稿タイプの説明"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:248
+msgid "unique custom post name"
+msgstr "ユニークなカスタムポスト名"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:254
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:273
+msgid "Labels"
+msgstr "ラベル"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:256
+msgid "unique name."
+msgstr "ユニーク名"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:260
+msgid "singular name."
+msgstr "単一記事"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:264
+msgid "add new label."
+msgstr "新規追加"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:268
+msgid "add new item label."
+msgstr "記事の追加"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:272
+msgid "edit item label."
+msgstr "編集"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:276
+msgid "new item label."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:280
+msgid "view item label."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:284
+msgid "search items label."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:288
+msgid "not found label."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:292
+msgid "not found in trush label."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:296
+msgid "parent label."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:317
+msgid "Custom Post other options"
+msgstr "カスタム投稿タイプその他の設定"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:319
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:391
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:404
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:206
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:394
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:408
+msgid "Public"
+msgstr "公開"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:320
+msgid "Public."
+msgstr "公開"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:323
+msgid "Search form"
+msgstr "検索フォーム"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:324
+msgid "exclude custom post type in search form."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:327
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:222
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:396
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:410
+msgid "Show UI"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:328
+msgid "Whether to generate a default UI for managing this post type."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:331
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:393
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:406
+msgid "Capability Type"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:332
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:94
+msgid "Page"
+msgstr "ページ"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:332
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:94
+msgid "Post"
+msgstr "投稿"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:334
+msgid "The post type to use for checking read, edit, and delete capabilities."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:339
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:394
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:407
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:214
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:395
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:409
+msgid "Hierarchical"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:340
+msgid "this post type have a hieralchical."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:343
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:395
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:408
+msgid "Supports"
+msgstr "サポート"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:347
+msgid "Export"
+msgstr "書き出し"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:348
+msgid "this post type including WPExport ?"
+msgstr "このカスタム投稿タイプをWordPressのエクスポートで書き出しますか？"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:351
+msgid "Nav Menus"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:352
+msgid "this custom post type including custom nav menus ?"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:356
+msgid "Save as custom post"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:376
+msgid "Delete. remove selected CustomPost"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:385
+msgid "Edit custom post."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:389
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:402
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:389
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:403
+msgid "ID"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:390
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:403
+msgid "CustomPost type name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:392
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:405
+msgid "Exclude SearchForm"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:396
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:409
+msgid "Can Exports"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:397
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:410
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:397
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:411
+msgid "Show in Nav Menus"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:416
+msgid "Not registerd CustomPosts yet."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:426
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:420
+msgid "Edit"
+msgstr "編集"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:427
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:421
+msgid "Delete"
+msgstr "削除"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:430
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:431
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:433
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:435
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:436
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:425
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:426
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:427
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:428
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:429
+msgid "Yes"
+msgstr "はい"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:430
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:431
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:433
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:435
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:436
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:425
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:426
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:427
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:428
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:429
+msgid "No"
+msgstr "いいえ"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_post.php:443
+msgid ""
+"Delete '%title%'. \\n"
+" this action can't cancel."
+msgstr ""
+"'%title%' を削除します。\\n"
+"この操作はキャンセル出来ません。"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:129
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:131
+msgid "Add Custom Taxonomies"
+msgstr "カスタムタクソノミーを追加"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:130
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:132
+msgid "Edit Custom Taxonomies"
+msgstr "カスタムタクソノミーを編集"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:164
+msgid "do set first CustomPost extension enable."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:169
+msgid "Error: checking for required input fields."
+msgstr "エラー：必須項目を確認してください"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:179
+msgid "Custom Taxonomy settings."
+msgstr "カスタムタクソノミー設定"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:183
+msgid "Taxonomy base setting"
+msgstr "タクソノミー基本設定"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:185
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:390
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:404
+msgid "Taxonomy name"
+msgstr "タクソノミー名"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:189
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:268
+msgid "* Required field"
+msgstr "* 必須項目"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:192
+msgid "Custom Query var"
+msgstr "カスタム QueryVar"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:196
+msgid "* Custom query var no set use Taxonomy name."
+msgstr "* カスタムQueryVarを指定しない場合は入力されたタクソノミー名が入ります"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:199
+msgid "Custom rewrite slug"
+msgstr "カスタムリライトスラッグ"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:203
+msgid "* Custom rewrite slug is no set use to Taxonomy name."
+msgstr "* カスタムリライトスラッグは指定しない場合は入力されたタクソノミー名が入ります"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:209
+msgid "Publically in this taxonomy ?"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:218
+msgid "Custom Taxonomy has hierarchical ?"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:226
+msgid "Custom Taxonomy show UI ?"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:231
+msgid "Show in nav menus"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:234
+msgid "Show in custom Nav Menus ?"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:239
+msgid "Tag Cloud"
+msgstr "タグクラウド"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:242
+msgid "Show this taxonomy in Tag Cloud ?"
+msgstr "タクソノミーをタグクラウドに表示しますか？"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:264
+msgid "Uses Post type"
+msgstr "タクソノミーを設定する投稿タイプ"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:266
+msgid "select this custom taxonomy uses post type."
+msgstr "タクソノミーを利用する投稿名を指定してください"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:275
+msgid "Label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:281
+msgid "Singular label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:287
+msgid "Search items label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:293
+msgid "Pupular items label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:299
+msgid "All items label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:305
+msgid "Parent item label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:311
+msgid "Parent item colon label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:317
+msgid "Edit item label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:323
+msgid "Update item label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:329
+msgid "Add new item label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:335
+msgid "New item name label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:341
+msgid "Separate items width commas label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:347
+msgid "Add or remove items label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:353
+msgid "Choose from most used label name"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:359
+msgid "Save taxonomy"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:383
+msgid "Custom taxonomies not registerd."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:385
+msgid "registerd custom taxonomies."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:391
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:405
+msgid "Taxonomy type"
+msgstr "タクソノミータイプ"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:392
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:406
+msgid "Query var"
+msgstr "QueryVar"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:393
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:407
+msgid "Rewrite"
+msgstr "リライト"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:398
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:412
+msgid "Show tag cloud"
+msgstr "タグクラウドに表示"
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:423
+msgid "No set Query var"
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/custom_taxonomies.php:424
+msgid "No set rewrite slug."
+msgstr ""
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:59
+msgid "Edit Post Thumbnail setting"
+msgstr "投稿サムネイルの設定編集"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:59
+msgid "Post Thumbnail setting"
+msgstr "投稿サムネイル設定"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:60
+msgid "Post Thumbnail"
+msgstr "投稿サムネイル"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:77
+msgid "setting post thumbnail options."
+msgstr "投稿サムネイル設定"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:80
+msgid "Post Thumbnail enable setting."
+msgstr "投稿サムネイル設定"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:82
+msgid "Enable PostThumbnail"
+msgstr "投稿サムネイルの有効化"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:85
+msgid "Enable PostThumbnail support."
+msgstr "投稿サムネイルの有効化"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:91
+msgid "Support type setting."
+msgstr "有効にする設定を選択"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:93
+msgid "Support post type"
+msgstr "投稿サムネイルにを有効化する投稿タイプ"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:94
+msgid "All"
+msgstr "全て"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:96
+msgid "Choice a support post type"
+msgstr "投稿タイプを選択してください"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:102
+msgid "Thumbnail sizes"
+msgstr "サムネイルサイズ"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:104
+msgid "Thumbnail height"
+msgstr "サムネイルの高さ"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:107
+msgid "set image height is 'px'."
+msgstr "高さは 'px' で指定してください"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:111
+msgid "Thumbnail width"
+msgstr "サムネイルの幅"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:114
+msgid "set image width is 'px'."
+msgstr "幅は 'px' で指定してください"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:118
+msgid "Thumbnail crop"
+msgstr "切り抜き"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:121
+msgid "upload image crop ?"
+msgstr "アップロードされた画像を切り抜きますか？"
+
+#: wp-content/themes/unify_framework/includes/extensions/post_thumbnail.php:127
+msgid "Save post thumbnail options"
+msgstr "投稿サムネイル設定を保存"
 
