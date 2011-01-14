@@ -1,5 +1,6 @@
 <?php
 /**
+ * UnifyFramework theme admin General options
  * 
  */
 function uf_admin_general_admin() {
