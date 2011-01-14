@@ -9,7 +9,7 @@ if(is_admin()) {
     require_once UF_LIB_PATH. "/admin.php";
     require_once UF_LIB_PATH. "/admin/Abstract.php";
     require_once UF_LIB_PATH. "/admin/General.php";
-    require_once UF_LIB_PATH. "/admin/Widgets.php";
+    require_once UF_LIB_PATH. "/admin/CustomMenu.php";
     require_once UF_LIB_PATH. "/admin/Widgets.php";
     require_once UF_LIB_PATH. "/admin/Widgets.php";
     require_once UF_LIB_PATH. "/admin/Widgets.php";
