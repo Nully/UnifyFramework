@@ -21,6 +21,7 @@ function uf_admin_add_menu() {
     if(function_exists("add_submenu_page")) {
         add_submenu_page("uf-admin", __("UnifyFramework thtme admin General", UF_TEXTDOMAIN), __("General"), 10, "uf-admin-general", "uf_admin_general_admin");
         add_submenu_page("uf-admin", __("UnifyFramework thtme admin Widgets", UF_TEXTDOMAIN), __("Widgets"), 10, "uf-admin-widgets", "uf_admin_widgets_admin");
+        add_submenu_page("uf-admin", __("UnifyFramework thtme admin CustomMenu", UF_TEXTDOMAIN), __("Custom Menu"), 10, "uf-admin-custom-menu", "uf_admin_custom_menu_admin");
     }
 }
 
