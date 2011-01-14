@@ -15,4 +15,9 @@ define("UF_SUPPORT_VERSION", "3.0");
  * UF_LIB_PATH
  */
 define("UF_LIB_PATH", dirname(__FILE__));
+/**
+ * HEADER_TEXTCOLOR
+ */
+define("HEADER_TEXTCOLOR", "FFFFFF");
+
 
