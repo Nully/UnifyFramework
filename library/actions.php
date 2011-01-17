@@ -85,3 +85,25 @@ function uf_action_widget_register() {
     }
 }
 
+
+/**
+ * register custom menu locations.
+ * 
+ * @return Void
+ * @action init
+ */
+add_action("init", "uf_action_custom_menu_register");
+function uf_action_custom_menu_register() {
+    register_nav_menus(array(
+        "global_navi" => __("Global navigation custom menu.", UF_TEXTDOMAIN),
+        "footer_navi" => __("Footer navigation custom menu.", UF_TEXTDOMAIN)
+    ));
+
+    $menus = get_option(UF_OPTION_CUSTOM_MENU, array());
+    if(!is_array($menus))
+        $menus = (array)$menus;
+
+    foreach($menus as $menu) {
+        register_nav_menu($menu["location"], $menu["description"]);
+    }
+}
