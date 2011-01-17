@@ -32,7 +32,7 @@ function uf_admin_widgets_save_widget() {
     if(!isset($_POST["save_widget_item"]))
         return;
 
-    $widgets = get_option("uf_widgets", array());
+    $widgets = get_option(UF_OPTION_WIDGET, array());
     if(empty($widgets))
         $max = 1;
     else
@@ -43,7 +43,7 @@ function uf_admin_widgets_save_widget() {
     $widget["description"] ? $widget["description"]: "for ". $widget["name"];
 
     $widgets[] = $widget;
-    if(update_option("uf_widgets", $widgets))
+    if(update_option(UF_OPTION_WIDGET, $widgets))
         $state = "success";
     else
         $state = "error";
@@ -69,14 +69,14 @@ function uf_admin_widget_delete_widget() {
         return;
 
     $id = $_GET["id"];
-    $widgets = get_option("uf_widgets", array());
+    $widgets = get_option(UF_OPTION_WIDGET, array());
 
     if(!isset($widgets[$id]))
         $state = "error";
 
     unset($widgets[$id]);
 
-    if(update_option("uf_widgets", $widgets))
+    if(update_option(UF_OPTION_WIDGET, $widgets))
         $state = "success";
     else
         $state = "error";
@@ -94,7 +94,7 @@ function uf_admin_widget_delete_widget() {
  */
 function uf_admin_widgets_admin() {
     global $plugin_page;
-    $widgets = get_option("uf_widgets", array());
+    $widgets = get_option(UF_OPTION_WIDGET, array());
 ?>
 <div class="wrap">
 <?php screen_icon("themes"); ?>
