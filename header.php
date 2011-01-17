@@ -4,7 +4,7 @@
 <meta charset="<?php get_bloginfo("charset"); ?>" />
 <title><?php wp_title(); ?></title>
 
-<link href="<?php echo get_template_directory_uri(); ?>/css/978gs.css" type="text/css" rel="stylesheet" />
+<link href="<?php echo get_template_directory_uri(); ?>/css/unify.css" type="text/css" rel="stylesheet" />
 <link href="<?php bloginfo("stylesheet_url"); ?>" type="text/css" rel="stylesheet" />
 
 <link rel="alternate" type="application/rss+xml" href="<?php bloginfo("rss2_url"); ?>" title="<?php printf( __( '%s latest posts', 'arras' ), wp_specialchars( get_bloginfo('name'), ENT_NOQUOTES ) ); ?>" />
