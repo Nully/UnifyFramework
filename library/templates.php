@@ -51,3 +51,33 @@ function uf_get_body_class($class = null) {
     return apply_filters("uf_body_class", $classes);
 }
 
+
+/**
+ * get Custom header image
+ * 
+ * @return  Void
+ * @action  uf_before_custom_header, uf_after_custom_header
+ * @filters uf_custom_header_attribs
+ */
+function uf_get_header_image() {
+    global $post;
+
+    do_action("uf_before_custom_header");
+
+    if(current_theme_supports("custom-header") && is_singular() && has_post_thumbnail($post->ID)) {
+        $image = wp_get_attachment_image(get_post_thumbnail_id($post->ID), "post-thumbnail");
+        if($image[1] >= HEADER_IMAGE_WIDTH) {
+            echo get_the_post_thumbnail($post->ID, "post-thumbnail", apply_filters("uf_custom_header_attribs", array(
+                "alt" => apply_filters("the_title", $post->post_title),
+                "title" => apply_filters("the_title", $post->post_title),
+            )));
+        }
+    }
+    else {
+?>
+<img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" />
+<?php
+        do_action("uf_after_custom_header");
+    }
+}
+
