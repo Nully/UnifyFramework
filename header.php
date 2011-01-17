@@ -31,7 +31,10 @@ wp_head(); ?>
         </div>
 
         <div id="header_search">
-            <?php wp_nav_menu(array( "theme_location" => "global_navigation", "menu_id" => "global-nav" )); ?>
+            <?php wp_nav_menu(array(
+                "theme_location" => "global_navigation",
+                "menu_id"        => "global-nav"
+            )); ?>
             <?php get_search_form(); ?>
         </div>
 
@@ -52,7 +55,9 @@ wp_head(); ?>
     <!-- End contents --></div>
 
     <div id="footer">
-        <?php wp_nav_menu(array( "theme_location" => "footer_navigation" )); ?>
+        <?php wp_nav_menu(array(
+            "theme_location" => "footer_navigation"
+        )); ?>
         <address><?php printf(__('Copyright &copy; %s %s, Theme by <a href="https://github.com/Nully/UnifyFramework">UnifyFramework</a>'), date("Y"), get_bloginfo("name")); ?></address>
     <!-- End footer --></div>
 <!-- End container --></div>
