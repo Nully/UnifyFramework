@@ -8,5 +8,24 @@ Author: Nully
 Author URI:
 Tags: white, one-column, two-columns, three-columns, fixed-width, custom-colors, custom-header, theme-options, left-sidebar, right-sidebar, threaded-comments
 */
+/* ========================================================== Default styles */
+body { color: #444444; line-height: 1.4; }
+a, a:link, a:visited { color: #1F68CC; text-decoration: none; }
+a:hover { color: #CC1F4A; }
+h1 a, h2 a { color: #444; }
+address { color: #5A5A5A; text-decoration: italic; }
+address a:hover { text-decoration: underline; }
+
+
+/* ============================================================ Layout Styles */
+
+
+
+
+
+
+
+
+
 
 
