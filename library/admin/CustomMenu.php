@@ -32,7 +32,7 @@ function uf_admin_custom_menu_save() {
     if(!isset($_POST["register_custom_menu"]))
         return;
 
-    $menus = get_option("uf_custom_menus", array());
+    $menus = get_option(UF_OPTION_CUSTOM_MENU, array());
     if(empty($menus))
         $max = 1;
     else
@@ -68,13 +68,13 @@ function uf_admin_custom_menu_delete() {
         return;
 
     $id = $_GET["id"];
-    $menus = get_option("uf_custom_menus", array());
+    $menus = get_option(UF_OPTION_CUSTOM_MENU, array());
     if(!isset($menus[$id])) {
         $state = "error";
     }
     else {
         unset($menus[$id]);
-        if(update_option("uf_custom_menus", $menus))
+        if(update_option(UF_OPTION_CUSTOM_MENU, $menus))
             $state = "success";
         else
             $state = "error";
@@ -93,7 +93,7 @@ function uf_admin_custom_menu_delete() {
  */
 function uf_admin_custom_menu_admin() {
     global $plugin_page;
-    $menus = get_option("uf_custom_menus", array());
+    $menus = get_option(UF_OPTION_CUSTOM_MENU, array());
 ?>
 <div class="wrap">
 <?php screen_icon("themes"); ?>
