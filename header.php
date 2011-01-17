@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html<?php language_attributes(); ?>>
+<html <?php language_attributes(); ?>>
 <head>
-<meta charset="<?php get_bloginfo("charset"); ?>" />
+<meta charset="<?php bloginfo("charset"); ?>" />
 <title><?php wp_title(); ?></title>
 
 <link href="<?php echo get_template_directory_uri(); ?>/css/unify.css" type="text/css" rel="stylesheet" />
@@ -19,30 +19,34 @@ if(is_singular()) {
 wp_head(); ?>
 </head>
 <body <?php uf_body_class("unify_framework"); ?>>
-<div id="container">
+<div id="container" class="container">
     <div id="header">
-        <?php if(is_home() || is_front_page()): ?>
-        <h1><?php bloginfo("name"); ?></h1>
-        <?php else: ?>
-        <h2><?php bloginfo("name"); ?></h2>
-        <?php endif; ?>
-        <p><?php bloginfo("description"); ?></p>
+        <div id="header_logo">
+            <?php if(is_home() || is_front_page()): ?>
+            <h1 id="site_name"><?php bloginfo("name"); ?></h1>
+            <?php else: ?>
+            <h2 id="site_name"><?php bloginfo("name"); ?></h2>
+            <?php endif; ?>
+            <p id="site_description"><?php bloginfo("description"); ?></p>
+        </div>
 
-        <?php wp_nav_menu(array( "theme_location" => "global_navigation" )); ?>
+        <div id="header_search">
+            <?php wp_nav_menu(array( "theme_location" => "global_navigation", "menu_id" => "global-nav" )); ?>
+            <?php get_search_form(); ?>
+        </div>
+
+        <div id="header_image"><?php uf_get_header_image(); ?></div>
     <!-- End header --></div>
 
     <div id="contents">
-        <div id="left_sidebar">
-            <?php get_sidebar("left"); ?>
-        <!-- End left_sidebar --></div>
-
-        <div id="main_contents">
+        <div id="main_contents" class="grid9">
             <?php if(have_posts()): while(have_posts()): the_post(); ?>
+            <?php the_content(); ?>
             <?php endwhile; else: ?>
             <?php endif; ?>
         <!-- End main_contents --></div>
 
-        <div id="right_sidebar">
+        <div id="right_sidebar" class="grid3 last">
             <?php get_sidebar("right"); ?>
         <!-- End right_sidebar --></div>
     <!-- End contents --></div>
