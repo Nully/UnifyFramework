@@ -19,5 +19,13 @@ define("UF_LIB_PATH", dirname(__FILE__));
  * HEADER_TEXTCOLOR
  */
 define("HEADER_TEXTCOLOR", "FFFFFF");
+/**
+ * UF_OPTION_WIDGET
+ */
+define("UF_OPTION_WIDGET", "uf_widgets");
+/**
+ * UF_OPTION_CUSTOM_MENU
+ */
+define("UF_OPTION_CUSTOM_MENU", "uf_custom_menus");
 
 
