@@ -10,22 +10,310 @@ Tags: white, one-column, two-columns, three-columns, fixed-width, custom-colors,
 */
 /* ========================================================== Default styles */
 body { color: #444444; line-height: 1.4; }
-a, a:link, a:visited { color: #1F68CC; text-decoration: none; }
+a:link, a:visited { color: #1F68CC; text-decoration: none; }
 a:hover { color: #CC1F4A; }
-h1 a, h2 a { color: #444; }
-address { color: #5A5A5A; text-decoration: italic; }
+h1 a:link, h1 a:visited, h2 a:link, h2 a:visited { color: #444; }
+h1 a:hover, h2 a:hover { color: #CC1F4A; }
+address { color: #5A5A5A; font-style: italic; }
 address a:hover { text-decoration: underline; }
 
 
 /* ============================================================ Layout Styles */
+#container {
+	width: 1018px;
+	margin: 0 auto;
+	background: #FFF;
+	padding: 20px 0 0 0;
+}
+#inner_container {}
+
+#header {
+	zoom: 1;
+	margin-bottom: 30px;
+}
+#header:after {
+	content: ".";
+	display: block;
+	height: 0;
+	line-height: 0;
+	clear: both;
+	visibility: hidden;
+}
+#header #header_logo {
+	float: left;
+}
+#header #header_search {
+	width: 260px;
+	float: right;
+}
+#header #header_search .menu {
+	zoom: 1;
+	margin-bottom: 5px;
+}
+#header #header_search .menu:after {
+	content: ".";
+	display: block;
+	height: 0;
+	line-height: 0;
+	clear: both;
+	visibility: hidden;
+}
+#header #header_search .menu li {
+	float: left;
+	margin-right: 8px;
+}
+#header #header_search .menu li a {
+	font-size: 1.3em;
+}
+
+#header #site_name {
+	font-size: 3.2em;
+	font-weight: bold;
+}
+#header #site_description {
+	font-size: 1.4em;
+	color: #777;
+}
+#header_image {
+	border:  5px solid #404040;
+	border-left: none;
+	border-right: none;
+	margin-bottom: 30px;
+}
+
+#contents {
+	zoom: 1;
+}
+#contents:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	line-height: 0;
+	visibility: hidden;
+}
+#main_contents {}
+#right_sidebar {}
+
+#footer {
+	border-top: 5px solid #404040;
+	margin-top: 30px;
+	padding-top: 30px;
+	padding-bottom: 20px;
+}
+#footer address {
+	font-size: 1.3em;
+	text-align: right;
+	font-style: italic;
+}
+#footer #footer_nav {
+	padding-top: 20px;
+	clear: both;
+	zoom: 1;
+}
+#footer #footer_nav:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	line-height: 0;
+	visibility: hidden;
+}
+/* Footer custom menu */
+#footer #footer_nav .menu {
+	float: left;
+	zoom: 1;
+}
+#footer #footer_nav .menu:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	line-height: 0;
+	visibility: hidden;
+}
+#footer #footer_nav .menu li {
+	float: left;
+	margin-right: 10px;
+}
+#footer #footer_nav .menu li a {
+	font-size: 1.3em;
+}
+#footer #footer_nav address {
+	float: right;
+}
 
 
+/* =================================================================== .Posts */
+.posts {}
 
 
+/* ==================================================================== .Post */
+.post {
+	border-bottom: 1px solid #404040;
+	padding-bottom: 30px;
+	margin-bottom: 30px;
+}
+.post .post-title {
+	font-size: 2.4em;
+	font-weight: bold;
+	border-left: 3px solid #404040;
+	margin-bottom: 20px;
+	padding-left: 10px;
+}
+.post .post-title a { color: #444; }
+.post .post-title a:hover { color: #cc1f4a ; }
+.post .post-content {
+	margin-bottom: 20px;
+	line-height: 1.5;
+}
+.post .posted-on a, .post .post-meta a { color: #808080; text-decoration: underline; }
+.post .posted-on a:hover, .post .post-meta a:hover { color: #404040; text-decoration: underline; }
+.post .posted-on {
+	margin-bottom: 20px;
+	color: #808080;
+}
+.post .post-meta {}
 
 
+/* post content tags. */
+.post .post-content h1, .post .post-content h2, .post .post-content h3,
+.post .post-content h4, .post .post-content h5, .post .post-content h6 {
+	font-weight: bold;
+}
+.post .post-content h1 a, .post .post-content h2 a, .post .post-content h3 a,
+.post .post-content h4 a, .post .post-content h5 a, .post .post-content h6 a {
+	color: #404040;
+}
+.post .post-content h1 a, .post .post-content h2 a, .post .post-content h3 a,
+.post .post-content h4 a, .post .post-content h5 a, .post .post-content h6 a {
+	color: #404040;
+}
+.post .post-content h1 {
+	font-size: 2.4em;
+	margin-bottom: 12px;
+}
+.post .post-content h2 {
+	font-size: 2.2em;
+	margin-bottom: 14px;
+}
+.post .post-content h3 {
+	font-size: 1.8em;
+	margin-bottom: 16px;
+}
+.post .post-content h4 {
+	font-size: 1.6em;
+	margin-bottom: 16px;
+}
+.post .post-content h5 {
+	font-size: 1.2em;
+	margin-bottom: 16px;
+}
+.post .post-content h6 {
+	font-size: 1em;
+	margin-bottom: 16px;
+}
+.post .post-content p {
+	font-size: 1.2em;
+	/*line-height: 1.4;
+	margin-bottom: 8px;*/
+}
+.post .post-content ul, .post .post-content ol {
+	margin: 15px 18px;
+	font-size: 1.2em;
+}
+.post .post-content ul {
+	list-style-type: disc;
+}
+.post .post-content ol {
+	list-style-type: decimal;
+}
+.post .post-content pre {
+	margin: 10px;
+	font-size: 1.2em;
+}
+.post .post-content address {
+	margin: 10px;
+	font-size: 1.2em;
+}
+.post .post-content blockquote {
+	margin: 10px;
+	padding: 15px 20px;
+	font-size: 1em;
+	border: 1px solid #999;
+	font-style: italic;
+	color: #777;
+}
+.size-thumbnail, .size-medium,.size-full {
+	margin: 10px 20px 10px 0;
+}
 
 
+/* ================================================================== Widgets */
+.widget {
+	margin-bottom: 30px;
+}
+.widget .widget-title {
+	font-size: 1.6em;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.widget ul {
+	list-style-type: disc;
+	margin: 0 0 0 15px;
+}
+.widget ul li {
+	margin-bottom: 5px;
+}
+.widget ul li a {
+	font-size: 1.3em;
+}
+.widget table {
+	width: 90%;
+	border-top: 1px solid #999;
+	border-right: 1px solid #999;
+}
+.widget table caption {
+	font-size: 1.4em;
+}
+.widget table th, .widget table td {
+	border-bottom: 1px solid #999;
+	border-left: 1px solid #999;
+	padding: 2px;
+}
+.widget table th {}
+.widget table td {}
+.widget table thead th {
+	background: #EEE;
+}
+.widget table tfoot #prev {
+	text-align: left;
+}
+.widget table tfoot #next {
+	text-align: right;
+}
+.widget table tbody td {
+	text-align: center;
+}
+.widget table tbody #today {
+	background: #EEE;
+}
 
+
+/* =============================================================== SearchForm */
+.search-form .search-form-text {
+	border: 1px solid #999;
+	padding: 2px 5px;
+	width: 180px;
+	font-size: 1.3em;
+}
+.search-form .search-form-submit {
+	border: 1px solid #999;
+	padding: 2px 15px;
+	background: #FFF;
+	font-size: 1.2em;
+	cursor: pointer;
+}
+.search-form {}
 
 
