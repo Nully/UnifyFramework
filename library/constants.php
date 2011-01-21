@@ -31,5 +31,15 @@ define("HEADER_TEXTCOLOR", "FFFFFF");
  * HEADER_IMAGE
  */
 define("HEADER_IMAGE", "%s/img/headers/cherryblossom.jpg");
-
-
+/**
+ * HEADER_IMAGE_WIDTH
+ */
+define("HEADER_IMAGE_WIDTH", apply_filters("header_image_width", 978));
+/**
+ * HEADER_IMAGE_HEIGHT
+ */
+define("HEADER_IMAGE_HEIGHT", apply_filters("header_image_height", 240));
+/**
+ * BACKGROUND_COLOR
+ */
+define("BACKGROUND_COLOR", "f7f7f7");
