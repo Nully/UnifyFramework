@@ -25,5 +25,9 @@ add_custom_image_header($header_callback, $admin_header_callback, $admin_image_d
  * 
  */
 add_editor_style("editor-style.css");
-
+/**
+ * Theme support PostThumbnail
+ */
+add_theme_support("post-thumbnails", array( "page", "post" ));
+set_post_thumbnail_size(HEADER_IMAGE_WIDTH, HEADER_IMAGE_HEIGHT, false);
 
