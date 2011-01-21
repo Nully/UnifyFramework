@@ -72,6 +72,14 @@ function uf_action_widget_register() {
         "after_title"   => "</h3>"
     ));
 
+    register_sidebars(4, array(
+        "name" => 'footer-sidebar%1$s',
+        "before_widget" => '<div class="widget %1$s">',
+        "after_widget"  => "</div>",
+        "before_title"   => '<h3 class="widget-title">',
+        "after_title"  => '</h3>'
+    ));
+
     $widgets = get_option("uf_widgets", array());
     foreach($widgets as $widget) {
         register_sidebar(array(
@@ -107,3 +115,38 @@ function uf_action_custom_menu_register() {
         register_nav_menu($menu["location"], $menu["description"]);
     }
 }
+
+
+/**
+ * register default header images
+ * 
+ * @return Void
+ * @action init
+ */
+add_action("init", "uf_register_default_headers");
+function uf_register_default_headers() {
+    register_default_headers(array(
+        "maiko" => array(
+            'url' => '%s/img/headers/maiko.jpg',
+            'thumbnail_url' => '%s/img/headers/maiko-thumb.jpg',
+            'description' => __("Maiko", UF_TEXTDOMAIN)
+        ),
+        "cerryblossom" => array(
+            'url' => '%s/img/headers/cherryblossom.jpg',
+            'thumbnail_url' => '%s/img/headers/cherryblossom-thumb.jpg',
+            'description' => __("CherryBlossom", UF_TEXTDOMAIN)
+        ),
+        "fern" => array(
+            'url' => '%s/img/headers/fern.jpg',
+            'thumbnail_url' => '%s/img/headers/fern-thumb.jpg',
+            'description' => __("Fern", UF_TEXTDOMAIN)
+        ),
+        "path" => array(
+            'url' => '%s/img/headers/path.jpg',
+            'thumbnail_url' => '%s/img/headers/path-thumb.jpg',
+            'description' => __("Path", UF_TEXTDOMAIN)
+        ),
+    ));
+}
+
+
