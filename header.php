@@ -19,47 +19,63 @@ if(is_singular()) {
 wp_head(); ?>
 </head>
 <body <?php uf_body_class("unify_framework"); ?>>
-<div id="container" class="container">
-    <div id="header">
-        <div id="header_logo">
-            <?php if(is_home() || is_front_page()): ?>
-            <h1 id="site_name"><?php bloginfo("name"); ?></h1>
-            <?php else: ?>
-            <h2 id="site_name"><?php bloginfo("name"); ?></h2>
-            <?php endif; ?>
-            <p id="site_description"><?php bloginfo("description"); ?></p>
-        </div>
+<div id="container" >
+    <div id="inner_container" class="container">
+        <div id="header">
+            <div id="header_logo">
+                <?php if(is_home() || is_front_page()): ?>
+                <h1 id="site_name"><a href="<?php bloginfo("home"); ?>"><?php bloginfo("name"); ?></a></h1>
+                <?php else: ?>
+                <h2 id="site_name"><a href="<?php bloginfo("home"); ?>"><?php bloginfo("name"); ?></a></h2>
+                <?php endif; ?>
+                <p id="site_description"><?php bloginfo("description"); ?></p>
+            <!-- End header_logo --></div>
 
-        <div id="header_search">
-            <?php wp_nav_menu(array(
-                "theme_location" => "global_navigation",
-                "menu_id"        => "global-nav"
-            )); ?>
-            <?php get_search_form(); ?>
-        </div>
+            <div id="header_search">
+                <?php wp_nav_menu(array(
+                       "theme_location" => "global_navi",
+                   )); ?>
+                <?php get_search_form(); ?>
+            <!-- End header_search --></div>
+        <!-- End header --></div>
 
         <div id="header_image"><?php uf_get_header_image(); ?></div>
-    <!-- End header --></div>
+        <div id="contents">
+            <div id="main_contents" class="grid9">
+                <?php if(have_posts()): while(have_posts()): the_post(); ?>
+                <div id="post_<?php the_ID(); ?>" class="post">
+                    <h2 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                    <?php uf_posted_on(); ?>
+                    <div class="post-content">
+                        <?php if(has_excerpt()): ?>
+                        <?php the_excerpt(); ?>
+                        <?php else: ?>
+                        <?php the_content(__("Read more &raquo;", UF_TEXTDOMAIN)); ?>
+                        <?php endif; ?>
+                    </div>
+                    <?php uf_post_meta(); ?>
+                <!-- End post_<?php the_ID(); ?> --></div>
+                <?php endwhile; else: ?>
+                <?php endif; ?>
+                <?php get_template_part("pagenav"); ?>
+            <!-- End main_contents --></div>
 
-    <div id="contents">
-        <div id="main_contents" class="grid9">
-            <?php if(have_posts()): while(have_posts()): the_post(); ?>
-            <?php the_content(); ?>
-            <?php endwhile; else: ?>
-            <?php endif; ?>
-        <!-- End main_contents --></div>
+            <div id="right_sidebar" class="grid3 last">
+                <?php get_sidebar("right"); ?>
+            <!-- End right_sidebar --></div>
+        <!-- End contents --></div>
 
-        <div id="right_sidebar" class="grid3 last">
-            <?php get_sidebar("right"); ?>
-        <!-- End right_sidebar --></div>
-    <!-- End contents --></div>
-
-    <div id="footer">
-        <?php wp_nav_menu(array(
-            "theme_location" => "footer_navigation"
-        )); ?>
-        <address><?php printf(__('Copyright &copy; %s %s, Theme by <a href="https://github.com/Nully/UnifyFramework">UnifyFramework</a>'), date("Y"), get_bloginfo("name")); ?></address>
-    <!-- End footer --></div>
+        <div id="footer" class="clearfix">
+            <?php get_sidebar("footer"); ?>
+            <div id="footer_nav">
+                <?php wp_nav_menu(array(
+                      "container"       => false,
+                      "theme_location" => "footer_navi",
+                  )); ?>
+                <address><?php printf(__('Copyright &copy; %s %s, Theme by <a href="https://github.com/Nully/UnifyFramework">UnifyFramework</a>'), date("Y"), get_bloginfo("name")); ?></address>
+            </div>
+        <!-- End footer --></div>
+    <!-- End inner_container --></div>
 <!-- End container --></div>
 <?php wp_footer(); ?>
 </body>
