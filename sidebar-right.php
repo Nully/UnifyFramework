@@ -5,10 +5,29 @@
         <?php get_search_form(); ?>
     <!-- End widget --></div>
 
+    <div class="widget widget-archive">
+        <h3 class="widget-title"><?php _e("Archive"); ?></h3>
+        <ul>
+        <?php wp_get_archives(); ?>
+        </ul>
+    <!-- End widget --></div>
+
+    <div class="widget widget-categories">
+        <h3 class="widget-title"><?php _e("Category"); ?></h3>
+        <ul>
+        <?php wp_list_categories("title_li="); ?>
+        </ul>
+    <!-- End widget --></div>
+
+    <div class="widget widget-calendar">
+        <h3 class="widget-title"><?php _e("Calendar"); ?></h3>
+        <?php get_calendar(); ?>
+    <!-- End widget --></div>
+
     <div class="widget widget-bookmark">
         <h3 class="widget-title"><?php _e("Links"); ?></h3>
         <ul class="bookmarks">
-        <?php wp_list_bookmarks(); ?>
+        <?php wp_list_bookmarks("title_li=&categorize=0"); ?>
         </ul>
     <!-- End widget --></div>
 
