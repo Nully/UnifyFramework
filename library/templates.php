@@ -81,3 +81,46 @@ function uf_get_header_image() {
     }
 }
 
+
+/**
+ * posted on template method.
+ * 
+ * @return Void
+ */
+function uf_posted_on() {
+    global $post;
+    $now_date = $post->post_date;
+
+    if(empty($now_date))
+        return;
+
+    $ts = strtotime($now_date);
+    $year = date("Y", $ts);
+    $month = date("m", $ts);
+    $day = date("j", $ts);
+?>
+<div class="posted-on">
+    <span class="post-date"><?php _e("Posted On", UF_TEXTDOMAIN); ?>&nbsp;<a href="<?php echo get_day_link($year, $month, $day); ?>"><?php echo get_the_date(); ?></a></span>
+    <span class="post-author">|&nbsp;<?php _e("Post Author", UF_TEXTDOMAIN); ?>&nbsp;<?php the_author_posts_link();?></span>
+<!-- End posted on --></div>
+<?php
+}
+
+
+/**
+ * get post meta block.
+ * 
+ * @return Void
+ */
+function uf_post_meta() {
+?>
+<div class="post-meta">
+    <span class="post-category"><?php _e("Category"); ?>&nbsp;<?php the_category("|"); ?></span>
+    <span class="comments-link">|&nbsp;<?php comments_popup_link(__("No Comment (0)"), __("Comment (1)"), __("Comments (%s)")); ?></span>
+    <?php if(is_user_logged_in()): ?>
+    <span class="edit-link">|&nbsp;<a href="<?php echo get_edit_post_link(); ?>"><?php _e("Edit");?></a></span>
+    <?php endif; ?>
+</div>
+<?php
+}
+
