@@ -162,3 +162,19 @@ table > tr > td.show, table > tr > th.show { display: table-cell; }
 .clearfix:after {content: ".";display: block;height: 0;clear: both;line-height: 0;visibility: hidden;}
 
 
+/* ================================================================== Editors */
+.alignright { float: right; }
+.aligncenter { text-align: center; }
+.alignleft { float: left; }
+.alignnone { float: none; text-align: left; }
+.size-thumbnail, .size-medium, .size-full {
+	padding: 5px;
+	border: 1px solid #CCC;
+}
+
+.size-thumbnail {}
+.size-medium {}
+.size-full {}
+
+
+
