@@ -55,6 +55,10 @@ wp_head(); ?>
                     </div>
                     <?php uf_post_meta(); ?>
                 <!-- End post_<?php the_ID(); ?> --></div>
+
+                <?php if(is_singular()): ?>
+                <?php comments_template(); ?>
+                <?php endif; ?>
                 <?php endwhile; else: ?>
                 <?php endif; ?>
                 <?php get_template_part("pagenav"); ?>
