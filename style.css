@@ -314,6 +314,157 @@ address a:hover { text-decoration: underline; }
 	font-size: 1.2em;
 	cursor: pointer;
 }
-.search-form {}
+
+
+/* =========================================================== CommentPostBox */
+#comment_post_box {}
+#comment_post_box .comment-post-title {
+	font-size: 2em;
+	margin-bottom: 10px;
+}
+#comment_post_box #comments_list {
+	margin-bottom: 30px;
+}
+#comment_post_box #comments_list .comment, #comment_post_box #trackback_list .comment {
+}
+#comment_post_box #comments_list .comment {
+	border-bottom: 1px dotted #999;
+	border-left: 5px solid #444;
+	padding: 10px;
+	zoom: 1;
+}
+#comment_post_box #comments_list .comment:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	line-height: 0;
+	visibility: hidden;
+}
+#comment_post_box #comments_list .byuser {}
+#comment_post_box #comments_list .comment-author {}
+#comment_post_box #comments_list .comment-author-admin {}
+#comment_post_box #comments_list .bypostauthor {}
+#comment_post_box #comments_list .odd {
+	background: #F6F6F6;
+}
+#comment_post_box #comments_list .even {
+	background: #F0F0F0;
+}
+#comment_post_box #comments_list .thread-alt {}
+#comment_post_box #comments_list .thread-even {}
+#comment_post_box #comments_list .thread-odd {}
+#comment_post_box #comments_list .bypostauthor {}
+#comment_post_box #comments_list .depth-1 {}
+#comment_post_box #comments_list .depth-2 {}
+#comment_post_box #comments_list .depth-3 {}
+#comment_post_box #comments_list .depth-4 {}
+#comment_post_box #comments_list .depth-5 {}
+/* Avatar image */
+#comment_post_box #comments_list .comment .avatar {
+	float: left;
+	margin-right: 15px;
+}
+#comment_post_box #comments_list .comment .comment-avatar {}
+#comment_post_box #comments_list .comment .avatar-32 {}
+#comment_post_box #comments_list .comment .avatar img {}
+/* Inner Comment */
+#comment_post_box #comments_list .comment .inner-comment {
+	margin-left: 48px;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-meta {
+	margin-bottom: 5px;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-meta .comment-author {
+	font-size: 1.5em;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-meta .comment-meta-link {
+	font-size: 1.3em;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-meta .comment-edit {}
+#comment_post_box #comments_list .comment .inner-comment .comment-body {
+	background: #FFF;
+	padding: 12px 8px;
+	margin-bottom: 5px;
+	font-size: 1.4em;
+	border-radius: 6px;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-reply {
+	font-size: 1.3em;
+	text-align: right;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-reply a {}
+/* Children */
+#comment_post_box #comments_list .comment .children {
+	margin-top: 15px;
+	margin-left: 48px;
+}
+#comment_post_box #comments_list .comment .children .comment {}
+#comment_post_box #comments_list .comment .children .byuser {}
+#comment_post_box #comments_list .comment .children .comment-author-admin {}
+#comment_post_box #comments_list .comment .children .bypostauthor {}
+#comment_post_box #comments_list .comment .children .alt {}
+#comment_post_box #comments_list .comment .children .depth-2 {}
+#comment_post_box #comments_list .comment .children .depth-3 {}
+#comment_post_box #comments_list .comment .children .depth-4 {}
+#comment_post_box #comments_list .comment .children .depth-5 {}
+/* Respond */
+#respond {}
+#respond #reply_title {
+	font-size: 1.6em;
+	margin-bottom: 10px;
+}
+#respond #comment_fields {
+	zoom: 1;
+}
+#respond #comment_fields:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	line-height: 0;
+	visibility: hidden;
+}
+#respond #comment_fields #logged_in_as {
+	margin: 0;
+	padding: 5px;
+	border: 1px solid #CCCC66;
+	background: #FFFFCC;
+	margin-bottom: 20px;
+	font-size: 1.4em;
+}
+#respond #comment_fields dt {
+	float: left;
+	width: 10em;
+	margin-bottom: 5px;
+	font-weight: bold;
+	font-size: 1.4em;
+}
+#respond #comment_fields dd {
+	margin-left: 13em;
+	margin-bottom: 5px;
+}
+#respond #comment_fields #author,
+#respond #comment_fields #email,
+#respond #comment_fields #url,
+#respond #comment_fields #comment {
+	border: 1px solid #666;
+	padding: 5px 3px;
+	font-size: 1.4em;
+}
+#respond #comment_fields #author {
+	width: 40%;
+}
+#respond #comment_fields #email {
+	width: 55%;
+}
+#respond #comment_fields #url {
+	width: 60%;
+}
+#respond #comment_fields #comment {
+	padding: 5px;
+	width: 80%;
+}
+#respond #submit {}
 
 
