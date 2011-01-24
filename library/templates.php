@@ -124,3 +124,44 @@ function uf_post_meta() {
 <?php
 }
 
+
+/**
+ * Comments list callback, display comments list.
+ * 
+ * @param $comment comment Object
+ * @param $args    comment callback arguments
+ * @param $depth   comment resnponse depth
+ * @return Void
+ */
+function uf_list_comments($comment, $args, $depth) {
+    $GLOBALS["comment"] = $comment;
+?>
+<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+<div cass="avatar comment-avatar avatar-<?php echo $args["avatar_size"] ?>"><?php echo get_avatar($comment, $args["avatar_size"]); ?></div>
+<div class="inner-comment">
+<div class="comment-meta">
+    <span class="comment-author"><?php printf(__("%s says:"), get_comment_author_link($comment->comment_ID)); ?></span><br />
+    <span class="comment-meta-link"><a href="<?php echo get_comment_link($comment->comment_ID); ?>">
+    <?php printf('%1$s at %2$s', get_comment_date(), get_comment_time()); ?></a><?php edit_comment_link(__("(Edit)"), ' <span class="comment-edit">', '</span>'); ?></span>
+<!-- End comment meta --></div>
+<div class="comment-body"><?php comment_text(); ?></div>
+<div class="comment-reply"><?php comment_reply_link(array_merge( $args, array( "depth" => $depth, "max_depth" => $args["max_depth"] ) )) ?></div>
+<!-- End inner comment --></div>
+<?php
+}
+
+
+/**
+ * Pingbacks list callback, display ping list
+ * 
+ * @param $comment  comment Object
+ * @param $args     callback arguments
+ * @param $depth    comment response depth
+ */
+function uf_list_trackback($comment, $args, $depth) {
+    $GLOBALS["comment"] = $comment;
+?>
+<p <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>"><?php comment_author_link(); ?><?php edit_comment_link(__("(Edit)"), '<span class=comment-edit">', "</span>"); ?></p>
+<?php
+}
+
