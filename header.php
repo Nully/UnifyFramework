@@ -61,7 +61,7 @@ wp_head(); ?>
                 <?php endif; ?>
                 <?php endwhile; else: ?>
                 <?php endif; ?>
-                <?php get_template_part("pagenav"); ?>
+                <?php get_template_part("partial/pagenav"); ?>
             <!-- End main_contents --></div>
 
             <div id="right_sidebar" class="grid3 last">
