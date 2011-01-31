@@ -42,7 +42,7 @@ function uf_admin_general_notices() {
  * @action admin_menu
  */
 function uf_admin_general_admin() {
-    $separators = uf_admin_general_get_title_seps();
+    $separators = _uf_admin_general_get_title_seps();
 ?>
 <div class="wrap">
 <?php screen_icon("themes"); ?>
