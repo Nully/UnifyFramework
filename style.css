@@ -292,8 +292,30 @@ address a:hover {
 }
 .post table td {}
 
+
+/* ============================================================== Image Sizes */
 .size-thumbnail, .size-medium,.size-full {
 	margin: 10px 20px 10px 0;
+}
+
+
+/* ==================================================================== Pager */
+.pager {
+    zoom: 1;
+}
+.pager:after {
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.pager .previous-page {
+    float: left;
+}
+.pager .next-page {
+    float: right;
 }
 
 
