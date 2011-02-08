@@ -1,5 +1,4 @@
 <!-- End contents --></div>
-
 <div id="footer" class="clearfix">
 <?php get_sidebar("footer"); ?>
 <div id="footer_nav">

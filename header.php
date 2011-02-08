@@ -26,7 +26,7 @@ wp_head(); ?>
 <?php if(is_home() || is_front_page()): ?>
 <h1 id="site_name"><a href="<?php bloginfo("home"); ?>"><?php bloginfo("name"); ?></a></h1>
 <?php else: ?>
-<h2 id="site_name"><a href="<?php bloginfo("home"); ?>"><?php bloginfo("name"); ?></a></h2>
+<p id="site_name"><a href="<?php bloginfo("home"); ?>"><?php bloginfo("name"); ?></a></p>
 <?php endif; ?>
 <p id="site_description"><?php bloginfo("description"); ?></p>
 <!-- End header_logo --></div>
@@ -41,6 +41,5 @@ wp_head(); ?>
 
 <div id="header_image"><?php uf_get_header_image(); ?></div>
 <div id="contents">
-<div id="main_contents" class="grid9">
 
 
