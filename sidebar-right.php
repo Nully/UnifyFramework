@@ -1,4 +1,5 @@
-<div id="right_sidebar">
+<!-- End main_contents --></div>
+<div id="right_sidebar" class="grid3 last">
 <?php if(!dynamic_sidebar("right-sidebar")): ?>
     <div class="widget widget-searchform">
         <h3 class="widget-title"><?php _e("Search"); ?></h3>
