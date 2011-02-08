@@ -110,6 +110,14 @@ address a:hover {
 	visibility: hidden;
 }
 #main_contents {}
+#main_contents .page-title { /* Contents page title */
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+#main_contents .page-title em {
+    font-style: normal;
+    font-weight: bold;
+}
 #right_sidebar {}
 
 #footer {
@@ -161,8 +169,44 @@ address a:hover {
 }
 
 
-/* =================================================================== .Posts */
-.posts {}
+/* ============================================================= Body Classes */
+/* WordPress default */
+.rtl {}
+.home {}
+.blog {}
+.search {}
+.paged {}
+.attachment {}
+.error404 {}
+.single {}
+/*
+Single post number clas name base
+.single-## {} */
+.search-results {}
+.archive {}
+.category {}
+.category-uncategorized {}
+/* Category number class name base
+.category-## {} */
+.date {}
+.logged-in {}
+.admin-bar {}
+/* UnifyFramework Defined */
+.unify_framework {}
+.ie {}
+.iis {}
+.ns4 {}
+.apache {}
+.chrome {}
+.gecko {}
+.iis7 {}
+.iphone {}
+.lynx {}
+.mac-ie {}
+.opera {}
+.trash {}
+.win-ie {}
+.main-site {}
 
 
 /* ==================================================================== .Post */
@@ -292,6 +336,11 @@ address a:hover {
 }
 .post table td {}
 
+.post .post-format-link {
+    text-align: right;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
 
 /* ============================================================== Image Sizes */
 .size-thumbnail, .size-medium,.size-full {
