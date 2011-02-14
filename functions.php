@@ -34,5 +34,3 @@ set_post_thumbnail_size(HEADER_IMAGE_WIDTH, HEADER_IMAGE_HEIGHT, false);
  * Theme support for PostFormats
  */
 add_theme_support("post-formats", array( "aside", "gallery", "link", "image", "quote", "status", "video", "audio", "chat" ));
-
-
