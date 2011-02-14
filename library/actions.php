@@ -48,6 +48,15 @@ function uf_action_unsupport_version() {
 }
 
 
+/**
+ * init Widget Classes
+ */
+add_action("widgets_init", "uf_action_init_widgets");
+function uf_action_init_widgets() {
+    register_widget("UnifyFramework_Widget_SimpleQueryPosts");
+    register_widget("UnifyFramework_Widget_ImageGallery");
+}
+
 
 /**
  * init widgets
@@ -59,14 +68,14 @@ add_action("init", "uf_action_widget_register");
 function uf_action_widget_register() {
     register_sidebar(array(
         "name" => "left-sidebar",
-        "before_widget" => '<div class="widget %1$s">',
+        "before_widget" => '<div id="%1$s" class="widget %2$s">',
         "after_widget"  => "</div>",
         "before_title"  => '<h3 class="widget-title">',
         "after_title"   => "</h3>"
     ));
     register_sidebar(array(
         "name" => "right-sidebar",
-        "before_widget" => '<div class="widget %1$s">',
+        "before_widget" => '<div id="%1$s" class="widget %2$s">',
         "after_widget"  => "</div>",
         "before_title"  => '<h3 class="widget-title">',
         "after_title"   => "</h3>"
@@ -74,7 +83,7 @@ function uf_action_widget_register() {
 
     register_sidebars(4, array(
         "name" => 'footer-sidebar%1$s',
-        "before_widget" => '<div class="widget %1$s">',
+        "before_widget" => '<div id="%1$s" class="widget %2$s">',
         "after_widget"  => "</div>",
         "before_title"   => '<h3 class="widget-title">',
         "after_title"  => '</h3>'
@@ -85,7 +94,7 @@ function uf_action_widget_register() {
         register_sidebar(array(
             "name" => $widget["name"],
             "description" => $widget["description"],
-            "before_widget" => '<'. $widget["container_tag"].' class="widget %1$s">',
+            "before_widget" => '<'. $widget["container_tag"].' id="%1$s" class="widget %2$s">',
             "after_widget"  => '</'.$widget["container_tag"].'>',
             "before_title"  => '<'. $widget["title_tag"] .' class="widget-title">',
             "after_title"   => '</'.$widget["title_tag"] .'>'
