@@ -12,17 +12,17 @@
 
 <?php if(is_archive()): ?>
 <?php if(is_day()): ?>
-<p class="page-title"><?php printf(__('Day archives: <em>%s</em>'), get_the_date()); ?></p>
+    <p class="page-title"><?php printf(__('Day archives: <em>%s</em>'), get_the_date()); ?></p>
 <?php elseif(is_month()): ?>
-<p class="page-title"><?php printf(__("Month archives: <em>%s</em>"), get_the_date("Y/m")); ?></p>
+    <p class="page-title"><?php printf(__("Month archives: <em>%s</em>"), get_the_date("Y/m")); ?></p>
 <?php elseif(is_year()): ?>
-<p class="page-title"><?php printf(__("Year archives: <em>%s</em>"), get_the_date("Y")); ?></p>
+    <p class="page-title"><?php printf(__("Year archives: <em>%s</em>"), get_the_date("Y")); ?></p>
 <?php elseif(is_tag()): ?>
-<p class="page-title"><?php _e('Tag: ', UF_TEXTDOMAIN); ?><em><?php single_tag_title(); ?></em></p>
+    <p class="page-title"><?php _e('Tag: ', UF_TEXTDOMAIN); ?><em><?php single_tag_title(); ?></em></p>
 <?php elseif(is_category()): ?>
-<p class="page-title"><?php _e('Category: ', UF_TEXTDOMAIN); ?><em><?php single_cat_title(); ?></em></p>
+    <p class="page-title"><?php _e('Category: ', UF_TEXTDOMAIN); ?><em><?php single_cat_title(); ?></em></p>
 <?php else: ?>
-<p class="page-title"><?php _e("Blog archives", UF_TEXTDOMAIN); ?></p>
+    <p class="page-title"><?php _e("Blog archives", UF_TEXTDOMAIN); ?></p>
 <?php endif; ?>
 <?php endif; ?>
 
@@ -72,11 +72,11 @@
 <h2 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 <?php uf_posted_on(); ?>
 <div class="post-content">
-    <?php if(has_excerpt()): ?>
+<?php if(has_excerpt()): ?>
     <?php the_excerpt(); ?>
-    <?php else: ?>
+<?php else: ?>
     <?php the_content(__("Read more &raquo;", UF_TEXTDOMAIN)); ?>
-    <?php endif; ?>
+<?php endif; ?>
 </div>
 <?php endif; ?>
 <?php uf_post_meta(); ?>
