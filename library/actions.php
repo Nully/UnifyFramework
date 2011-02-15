@@ -55,6 +55,7 @@ add_action("widgets_init", "uf_action_init_widgets");
 function uf_action_init_widgets() {
     register_widget("UnifyFramework_Widget_SimpleQueryPosts");
     register_widget("UnifyFramework_Widget_ImageGallery");
+    register_widget("UnifyFramework_Widget_PostThumbnail");
 }
 
 
