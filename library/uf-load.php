@@ -7,6 +7,7 @@ require_once UF_LIB_PATH. "/templates.php";
 require_once UF_LIB_PATH. "/widgets/WidgetBase.php";
 require_once UF_LIB_PATH. "/widgets/QueryPosts.php";
 require_once UF_LIB_PATH. "/widgets/ImageGallery.php";
+require_once UF_LIB_PATH. "/widgets/PostThumbnail.php";
 #require_once UF_LIB_PATH. "";
 
 
