@@ -17,7 +17,8 @@ class UnifyFramework_Widget_ImageGallery extends UnifyFramework_Widget_WidgetBas
         "title_pos"  => self::POS_AFTER,
         "order"      => "DESC",
         "orderby"    => self::ORDER_ID_MENU_ORDER,
-        "image_type" => "medium",
+        "image_type" => "thumbnail",
+        "effect"     => "fade",
         "anim_speed" => 600,
         "interval"   => 2000,
     );
@@ -46,6 +47,10 @@ class UnifyFramework_Widget_ImageGallery extends UnifyFramework_Widget_WidgetBas
         parent::__construct(false, "UF ImageGallery", array(
             "desciprition" => __("view in simply image gallery.", UF_TEXTDOMAIN)
         ));
+
+        if(!is_admin()) {
+            wp_enqueue_script("jquery-cycle-plugin", get_template_directory_uri(). "/js/jquery.cycle.all.min.js", array("jquery"), UF_VERSION, true);
+        }
     }
 
 
@@ -75,14 +80,30 @@ class UnifyFramework_Widget_ImageGallery extends UnifyFramework_Widget_WidgetBas
         );
 
         $images = get_posts($r);
-
         echo $args->before_widget, $args->before_title, $instance->title, $args->after_title;
 ?>
 
 <?php if(count($images) > 0): ?>
+<div class="jquery-cycle-box">
 <?php foreach($images as $key => $image): ?>
 <?php echo wp_get_attachment_image($image->ID, $instance->image_type); ?>
 <?php endforeach; ?>
+</div>
+<script type="text/javascript">
+jQuery(function(){
+    try {
+        jQuery('#<?php echo esc_attr($this->id); ?> .jquery-cycle-box').cycle({
+            "fx": "<?php echo esc_attr($instance->effect); ?>",
+            "speed": "<?php echo esc_attr($instance->anim_speed); ?>",
+            "timeout": "<?php echo esc_attr($instance->interval); ?>"
+        });
+    }
+    catch(e) {
+        if(console)
+            console.log(e);
+    }
+});
+</script>
 <?php else: ?>
 <p><?php _e("Image Not found.", UF_TEXTDOMAIN); ?></p>
 <?php endif; ?>
@@ -94,10 +115,10 @@ class UnifyFramework_Widget_ImageGallery extends UnifyFramework_Widget_WidgetBas
 
 
     public function update($new_instance, $old_instance) {
-        $new_instance = array_filter("esc_attr", $new_instance);
+        $new_instance = array_filter($new_instance, "esc_attr");
 
-        if((int)$new_instance["anim_time"] < 50)
-            $new_instance["anim_time"] = 50;
+        if((int)$new_instance["anim_speed"] < 50)
+            $new_instance["anim_speed"] = 50;
 
         if((int)$new_instance["interval"] < 50)
             $new_instance["interval"] = 50;
@@ -112,7 +133,7 @@ class UnifyFramework_Widget_ImageGallery extends UnifyFramework_Widget_WidgetBas
 ?>
 <p>
 <label for="<?php echo $this->get_field_id("title"); ?>"><?php _e("Title", UF_TEXTDOMAIN); ?></label><br />
-<input class="widefat" type="text" id="<?php echo $this->get_field_id("title"); ?>" name="<?php echo $this->get_field_id("title"); ?>" value="<?php echo esc_attr($instance->title); ?>" />
+<input class="widefat" type="text" id="<?php echo $this->get_field_id("title"); ?>" name="<?php echo $this->get_field_name("title"); ?>" value="<?php echo esc_attr($instance->title); ?>" />
 </p>
 
 <p>
@@ -136,9 +157,9 @@ class UnifyFramework_Widget_ImageGallery extends UnifyFramework_Widget_WidgetBas
 
 <p>
 <label for="<?php echo $this->get_field_id("effect"); ?>"><?php _e("Image Effect", UF_TEXTDOMAIN); ?></label><br />
-<select class="widefat" id="<?php echo $this->get_field_id("effetct"); ?>" name="<?php echo $this->get_field_name("effetct"); ?>">
+<select class="widefat" id="<?php echo $this->get_field_id("effect"); ?>" name="<?php echo $this->get_field_name("effect"); ?>">
 <?php foreach($this->slide_effects as $eff): ?>
-<option value="<?php echo $eff; ?>"><?php echo $eff; ?></option>
+<option value="<?php echo $eff; ?>"<?php echo ($instance->effect == $eff) ? ' selected="selected"': ""; ?>><?php echo $eff; ?></option>
 <?php endforeach; ?>
 </select><br />
 <small><?php _e(sprintf("Effect type detail is show %s", '<a href="http://www.malsup.com/jquery/cycle/">jQuery Cycle Plugin</a>'), UF_TEXTDOMAIN); ?></small>
@@ -147,14 +168,27 @@ class UnifyFramework_Widget_ImageGallery extends UnifyFramework_Widget_WidgetBas
 
 <p>
 <label for="<?php echo $this->get_field_id("anim_speed"); ?>"><?php _e("Animation Speed", UF_TEXTDOMAIN); ?></label><br />
-<input class="widefat" type="text" id="<?php echo $this->get_field_id("anim_speed"); ?>" name="<?php echo $this->get_field_id("anim_speed"); ?>" value="<?php echo esc_attr($instance->anim_speed); ?>" /><br />
+<input class="widefat" type="text" id="<?php echo $this->get_field_id("anim_speed"); ?>" name="<?php echo $this->get_field_name("anim_speed"); ?>" value="<?php echo esc_attr($instance->anim_speed); ?>" /><br />
 <small><?php _e("Animation speed is over the <em>50ms</em>.", UF_TEXTDOMAIN); ?></small>
 </p>
 
 <p>
 <label for="<?php echo $this->get_field_id("interval"); ?>"><?php _e("Interval Time", UF_TEXTDOMAIN); ?></label><br />
-<input class="widefat" type="text" id="<?php echo $this->get_field_id("interval"); ?>" name="<?php echo $this->get_field_id("interval"); ?>" value="<?php echo esc_attr($instance->interval); ?>" /><br />
+<input class="widefat" type="text" id="<?php echo $this->get_field_id("interval"); ?>" name="<?php echo $this->get_field_name("interval"); ?>" value="<?php echo esc_attr($instance->interval); ?>" /><br />
 <small><?php _e("Interval time is over the <em>50ms</em>."); ?></small>
+</p>
+
+<p>
+<label for="<?php echo $this->get_field_id("orderby"); ?>"><?php _e("Order by", UF_TEXTDOMAIN); ?></label><br />
+<input type="radio" id="<?php echo $this->get_field_id("orderby_id"); ?>" name="<?php echo $this->get_field_name("orderby"); ?>" value="<?php echo self::ORDER_ID; ?>"<?php echo ($instance->orderby == self::ORDER_ID ? ' checked="checked"': ""); ?> />
+<label for="<?php echo $this->get_field_id("orderby_id"); ?>"><?php _e("Order by ID.", UF_TEXTDOMAIN); ?></label><br />
+
+<input type="radio" id="<?php echo $this->get_field_id("orderby_menu_order"); ?>" name="<?php echo $this->get_field_name("orderby"); ?>" value="<?php echo self::ORDER_MENU_ORDER; ?>"<?php echo ($instance->orderby == self::ORDER_MENU_ORDER ? ' checked="checked"': ""); ?> />
+<label for="<?php echo $this->get_field_id("orderby_menu_order"); ?>"><?php _e("Order by menu order.", UF_TEXTDOMAIN); ?></label><br />
+
+<input type="radio" id="<?php echo $this->get_field_id("orderby_id_menu_order"); ?>" name="<?php echo $this->get_field_name("orderby"); ?>" value="<?php echo self::ORDER_ID_MENU_ORDER; ?>"<?php echo ($instance->orderby == self::ORDER_ID_MENU_ORDER ? ' checked="checked"': ""); ?> />
+<label for="<?php echo $this->get_field_id("orderby_id_menu_order"); ?>"><?php _e("Order by ID and menu order.", UF_TEXTDOMAIN); ?></label>
+
 </p>
 <?php
     }
