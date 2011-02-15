@@ -20,10 +20,10 @@ a:link, a:visited {
 a:hover {
     color: #CC1F4A;
 }
-h1 a:link, h1 a:visited, h2 a:link, h2 a:visited {
+#site_name a:link, #site_name a:visited, h2 a:link, h2 a:visited {
     color: #444;
 }
-h1 a:hover, h2 a:hover {
+#site_name a:hover, h2 a:hover {
     color: #CC1F4A;
 }
 address {
@@ -109,7 +109,9 @@ address a:hover {
 	line-height: 0;
 	visibility: hidden;
 }
-#main_contents {}
+#main_contents {
+    margin-bottom: 60px;
+}
 #main_contents .page-title { /* Contents page title */
     font-size: 2em;
     margin-bottom: 20px;
@@ -125,6 +127,7 @@ address a:hover {
 	margin-top: 30px;
 	padding-top: 30px;
 	padding-bottom: 20px;
+    clear: both;
 }
 #footer address {
 	font-size: 1.3em;
