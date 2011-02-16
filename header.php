@@ -2,7 +2,7 @@
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo("charset"); ?>" />
-<title><?php wp_title(); ?></title>
+<title><?php uf_title(); ?></title>
 
 <link href="<?php echo get_template_directory_uri(); ?>/css/unify.css" type="text/css" rel="stylesheet" />
 <link href="<?php bloginfo("stylesheet_url"); ?>" type="text/css" rel="stylesheet" />
