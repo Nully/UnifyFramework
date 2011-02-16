@@ -17,6 +17,7 @@
     <?php uf_post_meta(); ?>
 <!-- End post_<?php the_ID(); ?> --></div>
 
+<?php comments_template(); ?>
 
 <?php if(get_the_author_meta("description")): ?>
     <div id="author_<?php echo get_the_author_meta("user_login"); ?>" class="author-detail">
