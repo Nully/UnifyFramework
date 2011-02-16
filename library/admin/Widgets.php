@@ -32,7 +32,7 @@ function uf_admin_widgets_save_widget() {
     if(!isset($_POST["save_widget_item"]))
         return;
 
-    $widgets = get_option(UF_OPTION_WIDGET, array());
+    $widgets = get_option("uf_widgets", array());
     if(empty($widgets))
         $max = 1;
     else
@@ -43,13 +43,8 @@ function uf_admin_widgets_save_widget() {
     $widget["description"] ? $widget["description"]: "for ". $widget["name"];
 
     $widgets[] = $widget;
-    if(update_option(UF_OPTION_WIDGET, $widgets))
-        $state = "success";
-    else
-        $state = "error";
-
-    $uri = admin_url("admin.php?page={$plugin_page}&widget_{$state}=1");
-
+    update_option("uf_widgets", $widgets);
+    $uri = admin_url("admin.php?page={$plugin_page}&widget_success=1");
     wp_redirect($uri);
     exit;
 }
@@ -69,17 +64,16 @@ function uf_admin_widget_delete_widget() {
         return;
 
     $id = $_GET["id"];
-    $widgets = get_option(UF_OPTION_WIDGET, array());
+    $widgets = get_option("uf_widgets", array());
 
-    if(!isset($widgets[$id]))
+    if(!isset($widgets[$id])) {
         $state = "error";
-
-    unset($widgets[$id]);
-
-    if(update_option(UF_OPTION_WIDGET, $widgets))
+    }
+    else {
+        unset($widgets[$id]);
+        update_option("uf_widgets", $widgets);
         $state = "success";
-    else
-        $state = "error";
+    }
 
     $uri = admin_url("admin.php?page={$plugin_page}&widget_{$state}=1");
     wp_redirect($uri);
@@ -94,7 +88,7 @@ function uf_admin_widget_delete_widget() {
  */
 function uf_admin_widgets_admin() {
     global $plugin_page;
-    $widgets = get_option(UF_OPTION_WIDGET, array());
+    $widgets = get_option("uf_widgets", array());
 ?>
 <div class="wrap">
 <?php screen_icon("themes"); ?>
