@@ -126,6 +126,45 @@ function uf_action_custom_menu_register() {
     }
 }
 
+/**
+ * register post formats
+ *
+ * @return Void
+ * @action after_setup_theme
+ */
+add_action("init", "uf_action_post_formats");
+function uf_action_post_formats() {
+    $formats = (array)get_option("uf_post_formats", array());
+
+    if(empty($formats))
+        return;
+
+    add_theme_support("post-formats", $formats);
+}
+
+
+/**
+ * add Theme support PostThumbnail
+ *
+ * @return Void
+ * @action after_setup_theme, uf_setup_post_thumbnail
+ */
+add_action("after_setup_theme", "uf_action_post_thumbnail");
+function uf_action_post_thumbnail() {
+    $options = get_option("uf_post_thumbnail", array());
+    if(empty($options) || $options["which"] == "no")
+        return;
+
+    do_action("uf_setup_post_thumbnail");
+    $support = explode(",", $options["support"]);
+    $width = $options["width"] ? $options["width"]: HEADER_IMAGE_WIDTH;
+    $height = $options["height"] ? $options["height"]: HEADER_IMAGE_HEIGHT;
+    $isCrop = $options["crop"] == "yes" ? true: false;
+
+    add_theme_support("post-thumbnails", $support);
+    set_post_thumbnail_size($width, $height, $isCrop);
+}
+
 
 /**
  * register default header images
@@ -133,9 +172,9 @@ function uf_action_custom_menu_register() {
  * @return Void
  * @action init
  */
-add_action("init", "uf_register_default_headers");
-function uf_register_default_headers() {
-    register_default_headers(array(
+add_action("init", "uf_register_header_images");
+function uf_register_header_images() {
+    register_default_headers(apply_filters("uf_register_header_images", array(
         "maiko" => array(
             'url' => '%s/img/headers/maiko.jpg',
             'thumbnail_url' => '%s/img/headers/maiko-thumb.jpg',
@@ -156,7 +195,7 @@ function uf_register_default_headers() {
             'thumbnail_url' => '%s/img/headers/path-thumb.jpg',
             'description' => __("Path", UF_TEXTDOMAIN)
         ),
-    ));
+    )));
 }
 
 
