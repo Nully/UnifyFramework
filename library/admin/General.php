@@ -14,8 +14,8 @@ function uf_admin_general_init() {
     else
         $formats = $_POST["uf_post_format"];
 
-    set_theme_mod("title_set", $_POST["uf_title_sep"]);
-    set_theme_mod("post_formats", $formats);
+    update_option("uf_title_sep", esc_attr($_POST["uf_title_sep"]));
+    update_option("uf_post_formats", $formats);
 
     add_action("admin_notices", "uf_admin_general_notices");
 }
@@ -43,6 +43,9 @@ function uf_admin_general_notices() {
  */
 function uf_admin_general_admin() {
     $separators = _uf_admin_general_get_title_seps();
+    $now_sep = get_option("uf_title_sep", "&raquo;");
+    $formats = _uf_admin_general_get_post_formats();
+    $selected_formats = (array)get_option("uf_post_formats", array());
 ?>
 <div class="wrap">
 <?php screen_icon("themes"); ?>
@@ -56,8 +59,8 @@ function uf_admin_general_admin() {
     <h3 class="uf-admin-title hndle"><?php _e("Titles"); ?></h3>
     <div class="inside">
         <p><?php _e("Document title separator.", UF_TEXTDOMAIN); ?></p>
-        <?php foreach($separators as $sep): ?>
-        <input type="radio" id="name" name="uf_title_sep" value="<?php $sep; ?>" />&nbsp;<?php echo $sep; ?>
+        <?php foreach($separators as $key => $sep): ?>
+        <input type="radio" id="name" name="uf_title_sep" value="<?php echo $key; ?>"<?php echo ($key == $now_sep ? ' checked="checked"': ""); ?> />&nbsp;<?php echo $sep; ?>
         <?php endforeach; ?>
     <!-- End inside --></div>
 <!-- End uf-admin --></div>
@@ -68,12 +71,12 @@ function uf_admin_general_admin() {
     <div class="inside">
         <p><?php _e("Supported post format", UF_TEXTDOMAIN); ?></p>
         <p>
-        <?php foreach(_uf_admin_general_get_post_formats() as $format): ?>
+        <?php foreach($formats as $key => $format): ?>
         <input type="checkbox" id="post-format-<?php
             echo esc_attr($format);
         ?>" name="uf_post_format[<?php
             echo esc_attr($format);
-        ?>]" value="1" /><label for="post-format-<?php
+        ?>]" value="<?php echo $format; ?>"<?php echo (in_array($format, $selected_formats) ? ' checked="checked"': ""); ?> /><label for="post-format-<?php
             echo esc_attr($format);
         ?>"><?php
             _e($format, UF_TEXTDOMAIN);
@@ -99,12 +102,8 @@ function uf_admin_general_admin() {
  * @filters uf_admin_general_get_title_seps
  */
 function _uf_admin_general_get_title_seps() {
-    $separators = array(
-        "&lt;", "&gt;", "&laquo;", "&raquo;", " | "
-    );
-    $separators = apply_filters("uf_admin_general_get_title_seps", $separators);
-
-    return $separators;
+    global $uf_title_separators;
+    return $uf_title_separators;
 }
 
 
