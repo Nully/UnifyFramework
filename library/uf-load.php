@@ -12,12 +12,12 @@ require_once UF_LIB_PATH. "/widgets/PostThumbnail.php";
 
 
 if(is_admin()) {
-    require_once UF_LIB_PATH. "/admin.php";
     require_once UF_LIB_PATH. "/admin/Abstract.php";
     require_once UF_LIB_PATH. "/admin/General.php";
     require_once UF_LIB_PATH. "/admin/CustomMenu.php";
+    require_once UF_LIB_PATH. "/admin/PostThumbnail.php";
+    require_once UF_LIB_PATH. "/admin/EditorStyle.php";
     require_once UF_LIB_PATH. "/admin/Widgets.php";
-    require_once UF_LIB_PATH. "/admin/Widgets.php";
-    require_once UF_LIB_PATH. "/admin/Widgets.php";
+    require_once UF_LIB_PATH. "/admin.php";
 }
 
