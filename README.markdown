@@ -73,32 +73,6 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
 
 UnifyFrameworkが提供している[フィルタフック一覧](https://github.com/Nully/UnifyFramework/wiki/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%95%E3%83%83%E3%82%AF%E4%B8%80%E8%A6%A7)です。
 
-#### uf_title
-
-このフィルタ及び関数は削除されました。
-
-#### uf_body_class
-
-bodyタグに付与されるクラス属性のフィルタポイント。
-
-自前のクラス属性を追加・削除することが可能。
-
-#### uf_nav_menu
-
-このフィルタ及び関数は削除されました。
-
-#### uf_header_image_width
-
-カスタムヘッダーイメージの画像の幅のフィルタポイント。
-
-#### uf_header_image_height
-
-カスタムヘッダーイメージの画像の高さのフィルタポイント
-
-#### uf_custom_header_attribs
-
-カスタムヘッダーイメージに付与する属性のフィルタポイント。
-
  * uf_pagenavi_formats
    * uf_pagenavi関数で定義されているリンクテキストフォーマットのフィルタフック
  * uf_override_mce_css
@@ -108,69 +82,11 @@ bodyタグに付与されるクラス属性のフィルタポイント。
 
 UnifyFrameworkが提供している[アクションフック一覧](https://github.com/Nully/UnifyFramework/wiki/%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%95%E3%83%83%E3%82%AF%E4%B8%80%E8%A6%A7)です。
 
-#### uf_before_custom_header
-
-カスタムヘッダを表示する前のアクションポイント。
-
-#### uf_after_custom_header
-
-カスタムヘッダを表示後のアクションポイント。
-
- * uf_head
-   * HTMLヘッダ部分でのアクションフック
- * uf_css
-   * CSSファイルを表示する際に起動するアクションフック
-   * init アクションとして登録されており、テーマのCSSなどを表示する際に利用する
- * uf_javascript
-   * JavaScript ファイルを表示する際に起動するアクションフック
-   * init アクションとして登録されており、テーマのJavaScriptを表示する際に利用する
- * uf_footer
-   * HTMLフッター部分でのアクションフック
- * uf_custom_header_before
-   * カスタムヘッダーイメージを表示する前のアクションフック
- * uf_custom_header_after
-   * カスタムヘッダーイメージを表示した後のアクションフック
  * uf_theme_activated
    * UnifyFramework テーマが有効化されたときに呼び出されるアクションフック
  * get_template_part_(slug)
    * テンプレートパーシャルを呼び出す際に起動するアクションフック
    * (slug)は呼び出すパーシャル名に置き換わり、アクションが起動する
- * uf_extension_load_(extension)
-   * テーマ拡張の読み込みが完了した際に呼び出されるアクションフック
-   * (extension)は読み込まれるテーマ拡張のファイル名に置き換えられる
- * uf_trackback_field
-   * コメントフォームに表示されるトラックバックURLが表示されるさいに呼び出されるアクションフック
-   * 初期登録されている uf_action_trackback_field関数 は内部で trackback_field アクションフックを起動している
- * uf_comment_form_before
-   * コメントフォームを表示する前に呼び出されるアクションフック
-   * 初期登録されている uf_action_comment_form_before関数 は内部で comment_form_before アクションフックを起動している
- * uf_comment_form_must_log_in_before
-   * コメントフォームからコメントする為にはログインしている必要がある場合に呼び出されるアクションフック
-   * 初期登録されている uf_action_comment_form_must_log_in_before関数 は内部で comment_form_must_log_in_before アクションフックを起動している
- * uf_comment_form_must_log_in_after
-   * コメントフォームからコメントする為にはログインしている必要がある場合に呼び出されるアクションフック
-   * 初期登録されている uf_action_comment_form_must_log_in_after関数 は内部で comment_form_must_log_in_after アクションフックを起動している
- * uf_comment_form_logged_in_before
-   * すでにログインしている場合にコメントフォームに表示されるログイン済みのユーザーを表示する際に呼び出されるアクションフック
-   * 初期登録されている uf_action_comment_form_logged_in_before関数 は内部で comment_form_logged_in_before アクションフックを起動している
- * uf_comment_form_logged_in_after
-   * すでにログインしている場合にコメントフォームに表示されるログイン済みのユーザーを表示した後に呼び出されるアクションフック
-   * 初期登録されている uf_action_comment_form_logged_in_after関数 は内部で comment_form_logged_in_after アクションフックを起動している
- * uf_comment_form_top
-   * コメントフォームの入力フィールドを表示する前に呼び出されるアクションフック
-   * 初期登録されている uf_comment_form_top_tag関数 は内部で dlタグの開始 を表示している
- * uf_comment_form_before_fields
-   * コメントフォームの入力フィールドを表示する直前に呼び出されるアクションフック
-   * 初期登録されている comment_form_before_fields関数 は内部で comment_form_before_fields アクションフックを起動している
- * uf_comment_form_after_fields
-   * コメントフォームの入力フィールドを表示した直後に呼び出されるアクションフック
-   * 初期登録されている uf_action_comment_form_after_fields関数 は内部で comment_form_after_fields アクションフックを起動している
- * uf_comment_form_bottom
-   * コメントフォームの入力フィールドを表示した後に呼び出されるアクションフック
-   * 初期登録されている uf_action_comment_form_after関数 は内部で comment_form_after アクションフックを起動している
- * uf_comment_form_after
-   * コメントフォームの表示が完了した際に起動するアクションフック
-   * 初期登録されている uf_action_comment_form_after関数 は内部で comment_form_after アクションフックを起動している
 
  * uf_get_current_page_to_string : uf_get_current_page_to_string() 関数のフィルタフックです
  * uf_title : uf_title() 関数のフィルタフックです
