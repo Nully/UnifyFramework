@@ -2,25 +2,20 @@
 
 ========================= !! 現在は開発バージョンです !! ==========================
 
-
 ## UnifyFrameworkとは
 
-UnifyFramework は WordPress (http://wordpress.org/) の専用テーマです。
+UnifyFramework は [WordPress](http://wordpress.org/) の専用テーマです。
 
 テーマをもっと統合的に（Unify）作成しよう！をモットーに作成されているテーマです。
 
-レイアウトに利用しているCSSは960 GridSystemを利用しているので、カラム割はもちろん、多彩なレイアウトを表現できると思います。
+基本レイアウトは[978.gs](http://978.gs/)の978pxグリッドシステムを利用しています。
 
-※将来的に978.gsを採用する予定です。また初期デザインも変更する予定です。
+カラム割も多彩に表現できると思います。
 
-最新のリビジョンを閲覧、取得する場合は、
+ダウンロードは以下のリンクから取得できます。
 
->
->    URL: http://github.com/Nully/UnifyFramework
->
-
-から御覧ください。
-
+* [最新版](http://github.com/Nully/UnifyFramework)
+* [開発版](http://github.com/Nully/UnifyFramework/tree/dev)
 
 ## ライセンスについて
 
@@ -28,13 +23,11 @@ UnifyFramework は WordPress (http://wordpress.org/) の専用テーマです。
 
 詳しくは LICENSE.txt をお読みください。
 
-
 ## 免責事項
 
 UnifyFramework を利用したことで発生した損害や、障害などにつきましては一切の責任を負いかねます。
 
 自己責任で利用してください。
-
 
 ## インストール
 
@@ -44,63 +37,31 @@ UnifyFramework のインストールは以下のとおりです。
     * 解凍したファイルを 「WordPressInstallDir/wp-content/themes/」 にコピー又は移動する
     * WordPress 管理画面にログインし、「外観」 -> 「テーマ」から UnifyFramework を有効化してください。
 
-
 ## サポートするWordPressバージョン
 
-UnifyFramework は WordPress バージョン2.9以降から利用出来ます。
+UnifyFramework は WordPress バージョン3.1以上で利用出来ます。
 
-将来的に下位バージョンとなる WordPress のサポートを撃ち切る可能性がありますので予めご理解ください。
+将来的に下位バージョンとなるWordPressのサポートを打ち切る可能性がありますので予めご理解ください。
 
+## 現在サポートしているテーマ管理画面機能一覧
+
+UnifyFrameworkが現在サポートしているテーマ管理画面の機能は以下のとおりです。
+
+### ジェネラル設定
+
+テーマの基本挙動の設定を行います。タイトルのセパレータや投稿フォーマットのサポートなどを設定できます。
+
+### ウィジェット設定
+
+ウィジェット表示エリアの追加・削除を行えます。
+
+### カスタムメニュー設定
+
+カスタムメニュー表示領域の追加・削除を行えます。
 
 ## ディレクトリ構成
 
 UnifyFrameworkのファイル構成は以下のとおりです。
-
->
->    UnifyFramework
->     |- css/
->     |  |- admin.css
->     |  |- layout.css
->     |  `- unify.css
->     |- images/
->     |- includes/
->     |  |- extensions/
->     |  |   |- custom_post.php
->     |  |   |- custom_taxonomies.php
->     |  |   `- post_thumbnail.php
->     |  |- js
->     |  |- actions.php
->     |  |- admin.php
->     |  |- comments.php
->     |  |- core.php
->     |  |- custom-functions.php
->     |  |- filters.php
->     |  |- helpers.php
->     |  |- posts.php
->     |  |- template.php
->     |  |- theme-support.php
->     |  `- widget.php
->     |- langs/
->     |- 404.php
->     |- archive.php
->     |- category.php
->     |- comments.php
->     |- editor-style.css
->     |- footer-sidebar.php
->     |- footer.php
->     |- functions.php
->     |- header.php
->     |- index.php
->     |- page.php
->     |- search.php
->     |- searchform.php
->     |- sidebar-left.php
->     |- sidebar-right.php
->     |- single.php
->     |- style.css
->     `- tag.php
->     
-
 
 ## フィルタ、アクションフックポイントについて
 
@@ -110,24 +71,50 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
 
 ### フィルタフック一覧
 
- * uf_title
-   * uf_title関数のフィルタフック
-   * uf_titleに初期登録されている uf_filter_the_title関数 は内部で the_title のフィルタを実行している
- * uf_get_body_class
-   * body タグに付与するためのクラス属性を取得する際に
- * uf_nav_menu
-   * カスタムメニューやグローバルナビゲーションを表示する際に起動するアクションフック
- * uf_header_image_width
-   * カスタムヘッダーイメージの画像幅フィルタフック
- * uf_header_image_height
-   * カスタムヘッダーイメージの画像高フィルタフック
+UnifyFrameworkが提供している[フィルタフック一覧](https://github.com/Nully/UnifyFramework/wiki/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%95%E3%83%83%E3%82%AF%E4%B8%80%E8%A6%A7)です。
+
+#### uf_title
+
+このフィルタ及び関数は削除されました。
+
+#### uf_body_class
+
+bodyタグに付与されるクラス属性のフィルタポイント。
+
+自前のクラス属性を追加・削除することが可能。
+
+#### uf_nav_menu
+
+このフィルタ及び関数は削除されました。
+
+#### uf_header_image_width
+
+カスタムヘッダーイメージの画像の幅のフィルタポイント。
+
+#### uf_header_image_height
+
+カスタムヘッダーイメージの画像の高さのフィルタポイント
+
+#### uf_custom_header_attribs
+
+カスタムヘッダーイメージに付与する属性のフィルタポイント。
+
  * uf_pagenavi_formats
    * uf_pagenavi関数で定義されているリンクテキストフォーマットのフィルタフック
  * uf_override_mce_css
    * エディタスタイルが有効に鳴っている場合にエディタCSSファイルのURLをフィルタするフック
 
-
 ### アクションフック一覧
+
+UnifyFrameworkが提供している[アクションフック一覧](https://github.com/Nully/UnifyFramework/wiki/%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%95%E3%83%83%E3%82%AF%E4%B8%80%E8%A6%A7)です。
+
+#### uf_before_custom_header
+
+カスタムヘッダを表示する前のアクションポイント。
+
+#### uf_after_custom_header
+
+カスタムヘッダを表示後のアクションポイント。
 
  * uf_head
    * HTMLヘッダ部分でのアクションフック
@@ -198,7 +185,11 @@ UnifiFramework はフィルタ、及びアクションフックポイントを�
  * uf_custom_header : uf_custom_header() 関数のフックポイントです
 
 
-## オリジナル提供関数
+## テーマが提供する関数一覧
+
+UnifyFrameworkが提供する[関数一覧](https://github.com/Nully/UnifyFramework/wiki/UnifyFramework%E3%81%A7%E5%88%A9%E7%94%A8%E3%81%A7%E3%81%8D%E3%82%8B%E9%96%A2%E6%95%B0%E4%B8%80%E8%A6%A7)です。
+
+
 
 UnifyFramework は独自で定義した関数がいくつか存在します。
 
@@ -215,11 +206,4 @@ UnifyFramework は独自で定義した関数がいくつか存在します。
  * uf_nav_menu 関数 : グローバルナビゲーションで利用するメニューリストを出力します また、カスタムメニューが登録されていると、登録されたカスタムメニューを表示します
  * overload_mce_css 関数 : エディタスタイルを定義するCSSファイルへのURLの出力制御を行ないます
  * uf_custom_header 関数 : カスタムヘッダを出力します
-
-
-## お問い合わせ等
-
-メールにて連絡を受け付けています。
-
-nully.nl < at > gmail.com
 
