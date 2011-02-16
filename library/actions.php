@@ -117,7 +117,7 @@ function uf_action_custom_menu_register() {
         "footer_navi" => __("Footer navigation custom menu.", UF_TEXTDOMAIN)
     ));
 
-    $menus = get_option(UF_OPTION_CUSTOM_MENU, array());
+    $menus = get_option("uf_custom_menus", array());
     if(!is_array($menus))
         $menus = (array)$menus;
 
