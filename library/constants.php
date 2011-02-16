@@ -43,3 +43,14 @@ define("HEADER_IMAGE_HEIGHT", apply_filters("uf_header_image_height", 240));
  * BACKGROUND_COLOR
  */
 define("BACKGROUND_COLOR", "f7f7f7");
+/**
+ * Title separators
+ */
+$uf_title_separators = apply_filters("uf_title_separators", array(
+    "lt" => '&lt;',
+    "gt" => '&gt;',
+    "raquo" => '&raquo;',
+    "laquo" => '&raquo;',
+    "pipe"  => " | ",
+));
+
