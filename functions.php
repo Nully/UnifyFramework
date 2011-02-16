@@ -13,21 +13,17 @@ add_custom_image_header($header_callback, $admin_header_callback, $admin_image_d
 /**
  * EditorStyle
  */
-add_editor_style("editor-style.css");
+// add_editor_style("editor-style.css");
 /**
  * Theme support PostThumbnail
  */
-add_theme_support("post-thumbnails", array( "page", "post" ));
+// add_theme_support("post-thumbnails", array( "page", "post" ));
 /**
- * Theme support for PostFormats
+ * Post thumbnail size
  */
-add_theme_support("post-formats", array( "aside", "gallery", "link", "image", "quote", "status", "video", "audio", "chat" ));
+// set_post_thumbnail_size(HEADER_IMAGE_WIDTH, HEADER_IMAGE_HEIGHT, false);
 /**
  * require UnifyFramework scripts
  */
 require_once dirname(__FILE__). "/library/uf-load.php";
-/**
- * Post thumbnail size
- */
-set_post_thumbnail_size(HEADER_IMAGE_WIDTH, HEADER_IMAGE_HEIGHT, false);
 
