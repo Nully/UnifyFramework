@@ -511,6 +511,39 @@ Single post number clas name base
 	font-size: 1.4em;
 	border-radius: 6px;
 }
+#comment_post_box #comments_list .comment .inner-comment .comment-body ul {
+    list-style-type: disc;
+    margin-left: 16px;
+    margin-bottom: 8px;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-body ul li {}
+#comment_post_box #comments_list .comment .inner-comment .comment-body ol {
+    list-style-type: decimal;
+    margin-left: 19px;
+    margin-bottom: 8px;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-body ol li {}
+#comment_post_box #comments_list .comment .inner-comment .comment-body code {}
+#comment_post_box #comments_list .comment .inner-comment .comment-body del {
+    text-decoration: line-through;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-body ins {
+    text-decoration: underline;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-body strong {
+    font-weight: bold;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-body em {
+    font-style: italic;
+}
+#comment_post_box #comments_list .comment .inner-comment .comment-body blockquote {
+	margin: 10px;
+	padding: 15px 20px;
+	font-size: 1em;
+	border-left: 3px solid #999;
+	font-style: italic;
+	color: #777;
+}
 #comment_post_box #comments_list .comment .inner-comment .comment-reply {
 	font-size: 1.3em;
 	text-align: right;
@@ -531,7 +564,9 @@ Single post number clas name base
 #comment_post_box #comments_list .comment .children .depth-4 {}
 #comment_post_box #comments_list .comment .children .depth-5 {}
 /* Respond */
-#respond {}
+#respond {
+    margin-bottom: 20px;
+}
 #respond #reply_title {
 	font-size: 1.6em;
 	margin-bottom: 10px;
@@ -587,6 +622,15 @@ Single post number clas name base
 	padding: 5px;
 	width: 80%;
 }
-#respond #submit {}
+#respond #do_comment {
+    cursor: pointer;
+    font-size: 1.6em;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid #999;
+    border-bottom-color: #333;
+    border-right-color: #333;
+    background: #F3F3F3;
+}
 
 
