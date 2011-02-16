@@ -58,7 +58,7 @@ if(post_password_required()): ?>
     <dd><textarea id="comment" name="comment" cols="50" rows="10"></textarea><br />
         <p id="allowd_tags"><?php printf(__('<strong>XHTML</strong> allowd comment tags: %s'), allowed_tags()); ?></p></dd>
 </dl>
-<p><input type="submit" id="submit" name="submit" value="<?php _e("Submit Comment"); ?>" /><span id="cancel_reply"><?php cancel_comment_reply_link(); ?></span></p>
+<p class="align-right"><input type="submit" id="do_comment" name="submit" value="<?php _e("Submit Comment"); ?>" /><span id="cancel_reply"><?php cancel_comment_reply_link(); ?></span></p>
 </form>
 
 
