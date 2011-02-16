@@ -4,6 +4,19 @@
  * 
  * @package UnifyFramework
  */
+/**
+ * Display Document title
+ * 
+ * @param  return Void
+ * @action No action.
+ */
+function uf_title() {
+    global $uf_title_separators;
+    do_action("uf_title");
+    $type = get_option("uf_title_sep");
+    wp_title($uf_title_separators[$type], true, "right"); bloginfo("name");
+}
+
 
 /**
  * display body class
