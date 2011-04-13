@@ -3,16 +3,20 @@
  * UnifyFramework Theme function
  */
 /**
- * CustomBackground
+ * @UF_BASE_PATH
  */
-add_custom_background($header_callback, $admin_header_callback, $admin_image_div_callback);
+define("UF_BASE_PATH", dirname(__FILE__));
 /**
- * Custom ImageHeader
+ * @UF_INC_PATH
  */
-add_custom_image_header($header_callback, $admin_header_callback, $admin_image_div_callback);
-/**
- * EditorStyle
- */
+define("UF_INC_PATH", UF_BASE_PATH. "/inc");
+
+
+require_once UF_INC_PATH. "/class-plugin.php";
+require_once UF_INC_PATH. "/class-posttype.php";
+require_once UF_INC_PATH. "/class-widget.php";
+
+
 // add_editor_style("editor-style.css");
 /**
  * Theme support PostThumbnail
@@ -25,5 +29,3 @@ add_custom_image_header($header_callback, $admin_header_callback, $admin_image_d
 /**
  * require UnifyFramework scripts
  */
-require_once dirname(__FILE__). "/library/uf-load.php";
-
