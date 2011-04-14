@@ -8,6 +8,11 @@ class UF_Plugin
     {
         if(is_admin()) {
             wp_enqueue_style("dashboard");
+            wp_enqueue_style("postbox");
+            wp_enqueue_style("thickbox");
+            wp_enqueue_script("dashboard");
+            wp_enqueue_script("postbox");
+            wp_enqueue_script("thickbox");
         }
     }
 
@@ -75,19 +80,18 @@ class UF_Plugin
                 $desc = '<small><em>'. $opt["description"] .'</em></small>';
             }
 
-            if(isset($opt["name"])) {
-                $opt["name"] = $name. "_". $opt["name"];
-            }
-            else {
-                $opt["name"] = $name;
+            $id = $opt["name"];
+            if(isset($opt["name"]) && !empty($name)) {
+                $id = $name. "_". $opt["name"];
+                $opt["name"] = $name."[". $opt["name"] ."]";
             }
 
             $html .= sprintf(
-                '<p><label for="%2$s">%1$s</label><br />'.
-                '<input type="text" name="%2$s" value="%3$s" id="%2$s" class="widefat" />'.
-                '%4$s'.
+                '<p><label for="%3$s">%1$s</label><br />'.
+                '<input type="text" name="%2$s" value="%4$s" id="%3$s" class="widefat" />'.
+                '%5$s'.
                 '</p>'. "\n",
-                $opt["label"], $opt["name"], esc_attr($opt["var"]),
+                $opt["label"], $opt["name"], $id, esc_attr($opt["var"]),
                 $desc
             );
 
@@ -138,13 +142,40 @@ class UF_Plugin
             $html .= sprintf(
                 ' <input type="radio" name="%1$s" value="%2$s" id="%1$s_%2$s"%4$s /> %3$s'. "\n",
                 $name, $opt["var"], $opt["label"],
-                ($selected === $opt["var"] ? ' checked="checked"': "")
+                ($selected == $opt["var"] ? ' checked="checked"': "")
             );
         }
 
         $this->render_postbox($title, $html, $desc);
     }
 
+
+
+    /**
+     * render metabox layout select box
+     *
+     *
+     */
+    public function render_select_fields($title, $options, $name, $selected = null, $description = null)
+    {
+        $html = "";
+        $options = (array)$options;
+
+        $html .= sprintf(
+            '<select id="%1$s" name="%1$s">'. "\n", $name
+        );
+        foreach($options as $option) {
+            $html .= sprintf(
+                '<option value="%1$s"%3$s>%2$s</option>',
+                $option["var"], $option["label"],
+                ($selected == $option["var"] ? ' selected="selected"': "")
+
+            );
+        }
+        $html .= "</select>\n";
+
+        $this->render_postbox($title, $html, $description);
+    }
 }
 
 
