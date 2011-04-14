@@ -249,9 +249,39 @@ class UF_Posttype extends UF_Plugin
      */
     public function init()
     {
-        #$this->loadPosttypes();
     }
 
+
+    /**
+     * registerd post types register.
+     *
+     * @access public
+     */
+    public function register_post_types()
+    {
+        $types = get_option("uf_posttypes", array());
+        foreach($types as $type) {
+            $post_type = $type["post_type"];
+            if(empty($post_type)) { continue; } 
+
+            unset($type["post_type"]);
+            if(!is_callable($type["register_meta_box_cb"]))
+                $type["register_meta_box_cb"] = null;
+
+            $type["public"] = $type["public"] == 1 ? true: false;
+            $type["publicly_queryable"] = $type["publicly_queryable"] == 1 ? true: false;
+            $type["exclude_form_search"] = $type["exclude_form_search"] == 1 ? true: false;
+            $type["show_ui"] = $type["show_ui"] == 1 ? true: (
+                $type["public"] == true ? true: false
+            );
+            $type["hierarchical"] = $type["hieralchical"] == 1 ? true: false;
+            $type["menu_position"] = (int)$type["menu_position"];
+            $type["can_export"] = $type["can_export"] == 1 ? true: false;
+
+
+            register_post_type($post_type, $type);
+        }
+    }
 
 
     /**
@@ -291,13 +321,48 @@ class UF_Posttype extends UF_Plugin
             "can_export"    => $_POST["can_export"],
         );
 
+
         $posttype = wp_parse_args($posttype, $this->_defaults);
         $posttype = array_filter($posttype, "esc_attr");
         $posttypes = get_option("uf_posttypes", array());
-        array_push($posttypes, $posttype);
+
+        if($_GET["id"]) {
+            $posttypes[$_GET["id"]] = $posttype;
+        }
+        else {
+            array_push($posttypes, $posttype);
+        }
 
         if(update_option("uf_posttypes", $posttypes)) {
             $url = admin_url("themes.php?page=uf-posttype&message=1");
+            wp_redirect($url);
+            exit;
+        }
+    }
+
+
+    /**
+     * delete registerd post type
+     *
+     * @access public
+     * @return Void
+     */
+    public function delete_post_type()
+    {
+        if($_GET["action"] !== "delete") return;
+
+        if(!isset($_GET["id"])) return;
+
+        if(!wp_verify_nonce($_GET["_wpnonce"])) return;
+
+        $id = $_GET["id"];
+        $posttypes = get_option("uf_posttypes");
+
+        if(!isset($posttypes[$id])) return;
+
+        unset($posttypes[$id]);
+        if(update_option("uf_posttypes", $posttypes)) {
+            $url = admin_url("themes.php?page=uf-posttype&message=2");
             wp_redirect($url);
             exit;
         }
@@ -319,6 +384,9 @@ class UF_Posttype extends UF_Plugin
                         '</div>';
             break;
             case 2:
+                $html = '<div class="success fade updated">'.
+                        '<p>投稿タイプを削除しました。</p>'.
+                        '</div>';
             break;
         }
 
@@ -343,6 +411,7 @@ class UF_Posttype extends UF_Plugin
     public function list_posttype()
     {
         $posttypes = get_option("uf_posttypes", array());
+        $url = admin_url("themes.php");
 ?>
 <div class="wrap">
 <?php screen_icon(); ?><h2>投稿タイプの設定</h2>
@@ -355,6 +424,7 @@ class UF_Posttype extends UF_Plugin
 <tr>
 <th>投稿タイプ名</th>
 <th>説明</th>
+<th>パブリック</th>
 <th>サポート</th>
 <th>エクスポートの可否</th>
 </tr>
@@ -363,15 +433,33 @@ class UF_Posttype extends UF_Plugin
 <tr>
 <th>投稿タイプ名</th>
 <th>説明</th>
+<th>パブリック</th>
 <th>サポート</th>
 <th>エクスポートの可否</th>
 </tr>
 </tfoot>
 
-<?php foreach($posttypes as $type): ?>
+<?php foreach($posttypes as $key => $type): ?>
 <tr>
-<td><?php echo $type["post_type"]; ?></td>
+<td><?php echo $type["post_type"]; ?>
+<div class="row-actions">
+<span class="edit"><a href="<?php
+    echo $url;
+?>?page=uf-posttype-add&id=<?php
+    echo $key;
+?>">編集</a></span> |
+<span class="trash"><a href="<?php
+    echo $url;
+?>?page=uf-posttype&action=delete&id=<?php
+    echo $key;
+?>&_wpnonce=<?php
+    echo wp_create_nonce();
+?>" onclick="javascript: return confirm('投稿名: <?php
+    echo $type["post_type"];
+?>を削除します。');">削除</a></span>
+</div></td>
 <td><?php echo $type["description"]; ?></td>
+<td><?php echo $type["public"] == 1 ? 'はい': "いいえ"; ?></td>
 <td><?php echo implode(", ", $type["supports"]); ?></td>
 <td><?php echo $type["can_export"] == 1 ? 'はい': "いいえ"; ?></td>
 </tr>
@@ -394,7 +482,7 @@ $url = admin_url("themes.php?page=uf-posttype-add");
      */
     public function manage_posttype()
     {
-        $id = $_GET["posttype_id"];
+        $id = $_GET["id"];
         $posttype = array();
         if(isset($id) && is_numeric($id)) {
             $posttypes = get_option("uf_posttypes");
@@ -414,6 +502,9 @@ $url = admin_url("themes.php?page=uf-posttype-add");
 
 <form action="" method="post">
 <?php echo wp_nonce_field(); ?>
+<?php if(isset($id)): ?>
+<input type="hidden" name="id" value="<?php echo (int)$id; ?>" />
+<?php endif; ?>
 <div class="metabox-holder">
 <div class="postbox-container" style="width: 49%;">
 <div class="meta-box-sortables ui-sortable">
@@ -450,7 +541,7 @@ $url = admin_url("themes.php?page=uf-posttype-add");
 <?php
     $this->render_text_fields("説明", array(array(
         "name" => "description",
-        "var" => $desctiption,
+        "var"  => $description,
         "label" => "投稿タイプの説明",
     )));
 ?>
@@ -546,7 +637,9 @@ $url = admin_url("themes.php?page=uf-posttype-add");
 <!-- End postbox container --></div>
 <!-- End metabox holder --></div>
 
-<p style="clear: both;"><input type="submit" value="保 存" class="button-primary" /></p>
+<p style="clear: both;">
+<input type="submit" name="uf_posttype_save" value="保 存" class="button-primary" />
+</p>
 
 </form>
 
@@ -558,7 +651,9 @@ $url = admin_url("themes.php?page=uf-posttype-add");
 
 $uf_posttype = new UF_Posttype();
 add_action("init", array($uf_posttype, "init"));
+add_action("init", array($uf_posttype, "register_post_types"));
 add_action("admin_init", array($uf_posttype, "save_post_type"));
+add_action("admin_init", array($uf_posttype, "delete_post_type"));
 add_action("admin_notices", array($uf_posttype, "notices"));
 add_action("admin_menu", array($uf_posttype, "admin_menu"));
 
