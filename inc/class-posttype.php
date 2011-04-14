@@ -405,7 +405,6 @@ $url = admin_url("themes.php?page=uf-posttype-add");
         }
 
         $posttype = wp_parse_args($posttype, $this->_defaults);
-        var_dump($posttype);
         extract($posttype);
 ?>
 <div class="wrap">
