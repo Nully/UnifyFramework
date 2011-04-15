@@ -15,6 +15,7 @@ define("UF_INC_PATH", UF_BASE_PATH. "/inc");
 require_once UF_INC_PATH. "/class-plugin.php";
 require_once UF_INC_PATH. "/class-posttype.php";
 require_once UF_INC_PATH. "/class-widget.php";
+require_once UF_INC_PATH. "/class-post_thumbnail.php";
 
 
 // add_editor_style("editor-style.css");
