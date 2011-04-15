@@ -96,6 +96,8 @@ class UF_PostThumbnail extends UF_Plugin
      */
     public function admin_notices()
     {
+        if($_GET["page"] != "uf-post-thumbnail") return;
+
         $html = "";
         switch($_GET["message"]) {
             case 1:
