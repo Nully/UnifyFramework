@@ -376,6 +376,8 @@ class UF_Posttype extends UF_Plugin
      */
     public function notices()
     {
+        if($_GET["page"] != "uf-posttype") return;
+
         $html = "";
         switch($_GET["message"]) {
             case 1:
