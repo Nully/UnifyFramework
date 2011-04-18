@@ -19,6 +19,26 @@ class UF_PostThumbnail extends UF_Plugin
 
 
     /**
+     * initialize post thumbnails
+     *
+     * @access public
+     */
+    public function setup_thumbnails()
+    {
+        $thumbnails = (array)get_option("uf_thumbnails", array());
+        $types = array();
+        foreach($thumbnails as $type => $thumb) {
+            $types[] = $type;
+            $width = $thumb["width"];
+            $height = $thumb["height"];
+            $crop = (bool)(int)$thumb["crop"];
+            add_image_size($type, $width, $height, $crop);
+        }
+        add_theme_support("post-thumbnails", $types);
+    }
+
+
+    /**
      * register or update registerd post thumbnail size
      */
     public function save_size()
@@ -290,6 +310,7 @@ class UF_PostThumbnail extends UF_Plugin
 }
 
 $uf_post_thumbnail = new UF_PostThumbnail();
+add_action("init", array($uf_post_thumbnail, "setup_thumbnails"));
 add_action("admin_init", array($uf_post_thumbnail, "save_size"));
 add_action("admin_init", array($uf_post_thumbnail, "delete_size"));
 add_action("admin_notices", array($uf_post_thumbnail, "admin_notices"));
