@@ -200,7 +200,9 @@ class UF_PostThumbnail extends UF_Plugin
     echo $post_type;
 ?>&_wpnonce=<?php
     echo wp_create_nonce();
-?>">削除</a></span>
+?>" onclick="javascript: return confirm('投稿タイプ: <?php
+    echo $post_type;
+?> の投稿サムネイルを削除します。');">削除</a></span>
 </div></td>
 <td><?php echo $thumbnail["width"]; ?></td>
 <td><?php echo $thumbnail["height"]; ?></td>
