@@ -11,3 +11,166 @@ Tags: white, one-column, two-columns, three-columns, fixed-width, custom-colors,
 */
 @import "../twentyten/style.css";
 
+body {
+    background: #FFF;
+}
+
+#wrapper {
+    padding: 0;
+    width: auto;
+    background: none;
+    margin-top: 0;
+}
+
+/* ===== header */
+#header {
+    padding-top: 0;
+    width: auto;
+    margin: 0 auto;
+    background: #414141 url(images/header_bg.gif) repeat-x 0 0;
+    -webkit-box-shadow: 0 2px 3px #CCC;
+}
+#masthead {
+}
+#branding {
+    width: 940px;
+    margin: 0 auto;
+    padding-top: 15px;
+    zoom: 1;
+}
+#branding img {
+    border: none;
+    margin-top: 17px;
+}
+#branding:after {
+    content: ".";
+    height: 0;
+    line-height: 0;
+    display: block;
+    clear: both;
+    visibility: hidden;
+}
+#site-title {
+    width: auto;
+    float: left;
+    text-align: left;
+    margin: 0 15px 0 0;
+    font-size: 28px;
+}
+#site-title a {
+    color: #FFF;
+}
+#site-description {
+    width: auto;
+    float: left;
+    text-align: left;
+    margin: 0;
+    padding-top: 12px;
+    color: #FFF;
+    font-size: 13px;
+}
+#access {
+    float: right;
+    width: auto;
+    margin: 0;
+    padding-top: 5px;
+    background: none;
+}
+#access .menu-header, div.menu {
+    width: auto;
+    margin-left: 0;
+    font-size: 13px;
+}
+#access .menu-header ul, div.menu ul {
+    zoom: 1;
+}
+#access .menu-header ul:after, div.menu ul:after {
+    content: ".";
+    height: 0;
+    line-height: 0;
+    display: block;
+    clear: both;
+    visibility: hidden;
+}
+#access .menu-header li, div.menu li {
+    position: static;
+}
+#access a {
+    line-height: 28px;
+}
+
+
+/* ===== Main */
+#main {
+    padding-top: 30px;
+}
+#content {
+    margin-left: 0;
+}
+.entry-title {
+    text-shadow: #CCC 0px 1px 2px;
+}
+.entry-utility {
+    border-bottom: 1px solid #999;
+    padding-bottom: 48px;
+}
+
+
+#wp-calendar tbody .pad {
+    background: #f5f5f5;
+}
+
+
+/* ===== Sidebar */
+#primary {
+    width: 240px;
+}
+#secondary {}
+#main .widget-area ul {
+    padding: 0;
+}
+
+.widget-container {
+    background: #F0F0F0;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.widget-title {
+    background: #E3E3E3;
+    margin: -20px -20px 10px;
+    padding: 10px 20px;
+}
+
+.widget-container #wp-calendar {
+    
+}
+
+
+/* ===== Footer */
+#footer {
+    background: #000;
+    -webkit-box-shadow: 0px -2px 3px #CCC;
+    margin-bottom: 0;
+}
+#footer a {
+    color: #FFF;
+}
+#colophon {
+    margin-top: 0;
+}
+#site-info {
+    width: 615px;
+}
+#site-generator {
+    width: 325px;
+}
+#footer .widget-container {
+    background: none;
+}
+#footer .widget-container .widget-title {
+    background: none;
+    color: #FFF;
+}
+#footer .widget-container table caption, #footer .widget-container thead {
+    color: #FFF;
+}
