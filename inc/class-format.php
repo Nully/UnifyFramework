@@ -40,7 +40,7 @@ class UF_Format extends UF_Plugin
      */
     public function save_formats()
     {
-        if(!$_POST["save_formats"]) return;
+        if(!isset($_POST["save_formats"])) return;
 
         if(!wp_verify_nonce($_POST["_wpnonce"])) return;
 
@@ -63,8 +63,13 @@ class UF_Format extends UF_Plugin
      */
     public function admin_menu()
     {
-        add_theme_page("投稿フォーマット", "投稿フォーマット",
-                10, "uf-format", array( $this, "manage_formats" ));
+        add_theme_page(
+            "投稿フォーマット",
+            "投稿フォーマット",
+            "manage_options",
+            "uf-format",
+            array( $this, "manage_formats" )
+        );
     }
 
 

@@ -265,8 +265,9 @@ class UF_Posttype extends UF_Plugin
             if(empty($post_type)) { continue; } 
 
             unset($type["post_type"]);
-            if(!is_callable($type["register_meta_box_cb"]))
+            if(!is_callable($type["register_meta_box_cb"])) {
                 $type["register_meta_box_cb"] = null;
+            }
 
             $type["public"] = $type["public"] == 1 ? true: false;
             $type["publicly_queryable"] = $type["publicly_queryable"] == 1 ? true: false;
@@ -291,7 +292,7 @@ class UF_Posttype extends UF_Plugin
      */
     public function save_post_type()
     {
-        if(!$_GET["page"] || $_GET["page"] !== "uf-posttype-add") return;
+        if(!isset($_GET["page"]) || $_GET["page"] !== "uf-posttype-add") return;
 
         if(empty($_POST)) return;
 
@@ -326,7 +327,7 @@ class UF_Posttype extends UF_Plugin
         $posttype = array_filter($posttype, "esc_attr");
         $posttypes = get_option("uf_posttypes", array());
 
-        if($_GET["id"]) {
+        if(isset($_GET["id"])) {
             $posttypes[$_GET["id"]] = $posttype;
         }
         else {
@@ -349,7 +350,7 @@ class UF_Posttype extends UF_Plugin
      */
     public function delete_post_type()
     {
-        if($_GET["action"] !== "delete") return;
+        if(!isset($_GET["action"]) || $_GET["action"] !== "delete") return;
 
         if(!isset($_GET["id"])) return;
 
@@ -376,9 +377,12 @@ class UF_Posttype extends UF_Plugin
      */
     public function notices()
     {
-        if($_GET["page"] != "uf-posttype") return;
+        if(!isset($_GET["page"]) || $_GET["page"] != "uf-posttype") return;
 
         $html = "";
+
+        if(!isset($_GET["message"])) return;
+
         switch($_GET["message"]) {
             case 1:
                 $html = '<div class="success fade updated">'.
@@ -401,8 +405,20 @@ class UF_Posttype extends UF_Plugin
      */
     public function admin_menu()
     {
-        add_theme_page("投稿タイプ", "投稿タイプ", 10, "uf-posttype", array( $this, "list_posttype" ));
-        add_theme_page("投稿タイプの追加", "投稿タイプの追加", 10, "uf-posttype-add", array( $this, "manage_posttype" ));
+        add_theme_page(
+            "投稿タイプ",
+            "投稿タイプ",
+            "manage_options",
+            "uf-posttype",
+            array( $this, "list_posttype" )
+        );
+        add_theme_page(
+            "投稿タイプの追加",
+            "投稿タイプの追加",
+            "manage_options",
+            "uf-posttype-add",
+            array( $this, "manage_posttype" )
+        );
     }
 
 
@@ -484,7 +500,7 @@ $url = admin_url("themes.php?page=uf-posttype-add");
      */
     public function manage_posttype()
     {
-        $id = $_GET["id"];
+        $id = isset($_GET["id"]) ? $_GET["id"]: false;
         $posttype = array();
         if(isset($id) && is_numeric($id)) {
             $posttypes = get_option("uf_posttypes");

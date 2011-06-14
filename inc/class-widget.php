@@ -11,7 +11,7 @@ class UF_Widget extends UF_Plugin
      */
     public function save_widget()
     {
-        if(!$_POST["add_widget"]) return;
+        if(!isset($_POST["add_widget"])) return;
 
         if(!wp_verify_nonce($_POST["_wpnonce"])) return;
 
@@ -76,7 +76,7 @@ class UF_Widget extends UF_Plugin
      */
     public function delete_widget()
     {
-        if($_GET["page"] != "uf-widget") return;
+        if(!isset($_GET["page"]) || $_GET["page"] != "uf-widget") return;
 
         if($_GET["action"] != "delete") return;
 
@@ -161,7 +161,7 @@ class UF_Widget extends UF_Plugin
      */
     public function admin_notices()
     {
-        if($_GET["page"] != "uf-widget") return;
+        if(!isset($_GET["page"]) || $_GET["page"] != "uf-widget") return;
 
         $html = "";
         switch($_GET["message"]) {
@@ -192,10 +192,20 @@ class UF_Widget extends UF_Plugin
      */
     public function admin_menu()
     {
-        add_theme_page( "ウィジェット管理", "ウィジェット管理", 10,
-                "uf-widget", array( $this, "list_widgets" ));
-        add_theme_page("ウィジェットの追加", "ウィジェットの追加", 10,
-                "uf-widget-add", array( $this, "manage_widget" ));
+        add_theme_page(
+            "ウィジェット管理",
+            "ウィジェット管理",
+            "manage_options",
+            "uf-widget",
+            array( $this, "list_widgets" )
+        );
+        add_theme_page(
+            "ウィジェットの追加",
+            "ウィジェットの追加",
+            "manage_options",
+            "uf-widget-add",
+            array( $this, "manage_widget" )
+        );
     }
 
 
