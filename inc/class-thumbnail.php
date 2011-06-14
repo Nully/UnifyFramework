@@ -43,7 +43,7 @@ class UF_PostThumbnail extends UF_Plugin
      */
     public function save_size()
     {
-        if(!$_POST["save_size"]) return;
+        if(!isset($_POST["save_size"])) return;
 
         if(!wp_verify_nonce($_POST["_wpnonce"])) return;
 
@@ -83,7 +83,7 @@ class UF_PostThumbnail extends UF_Plugin
      */
     public function delete_size()
     {
-        if($_GET["page"] != "uf-post-thumbnail") return;
+        if(!isset($_GET["page"]) || $_GET["page"] != "uf-post-thumbnail") return;
 
         if($_GET["action"] != "delete") return;
 
@@ -116,7 +116,7 @@ class UF_PostThumbnail extends UF_Plugin
      */
     public function admin_notices()
     {
-        if($_GET["page"] != "uf-post-thumbnail") return;
+        if(!isset($_GET["page"]) || $_GET["page"] != "uf-post-thumbnail") return;
 
         $html = "";
         switch($_GET["message"]) {
@@ -147,10 +147,20 @@ class UF_PostThumbnail extends UF_Plugin
      */
     public function admin_menu()
     {
-        add_theme_page( "投稿サムネイル管理", "投稿サムネイル管理",
-                10, "uf-post-thumbnail", array( $this, "list_sizes" ));
-        add_theme_page("投稿サムネイルの追加", "投稿サムネイルの追加",
-                10, "uf-post-thumbnail-add", array( $this, "manage_size" ));
+        add_theme_page(
+            "投稿サムネイル管理",
+            "投稿サムネイル管理",
+            "manage_options",
+            "uf-post-thumbnail",
+            array( $this, "list_sizes" )
+        );
+        add_theme_page(
+            "投稿サムネイルの追加",
+            "投稿サムネイルの追加",
+            "manage_options",
+            "uf-post-thumbnail-add",
+            array( $this, "manage_size" )
+        );
     }
 
 
